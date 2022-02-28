@@ -1,9 +1,9 @@
 <template>
   <GoogleMap
+  class="map"
   api-key= AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78
-  style="width: 500px; height: 500px"
   :center="center"
-  :zoom="15"
+  :zoom="12"
   >
     <Marker 
       :key="marker"
@@ -53,25 +53,22 @@ async function getLatLngFromPostal(code) {
    }
 }
 getLatLngFromPostal("138598")
-
+getLatLngFromPostal("437239")
+getLatLngFromPostal("138522")
 
 
 export default defineComponent({
   components: { GoogleMap, Marker },
   setup() {
-    const center = { lat: 1.30604336, lng: 103.773900 }
-    const markers = [
-      {
-        options: {
-          position: LatLng[0], label: "L", title: "test"
-        },
-      },
-      {
-        options: {
-          position: { lat: 1.30604336, lng: 103.783900 }, label: "M", title: "test"
-        },
-      },
-    ]
+    const center = { lat: 1.339987, lng: 103.810128 }
+    const markers = [];
+      LatLng.forEach((latlng) => {
+        markers.push({
+          options: {
+            position: latlng
+          }
+        })
+      })
 
 
     return { center, markers }
@@ -85,10 +82,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.hero {
-  background-attachment: fixed;
+.map {
   position: relative;
-  height: 100vh;
+  width: 500px;
+  height: 500px;
 }
 .hero-text {
   height: 100%;
