@@ -2,13 +2,7 @@
   <div class="About">
     <section class="hero">
       <div class="hero-text container">
-        <h4>header4</h4>
-        <hr />
-        <h2>
-          Webpage <br />
-          Title
-        </h2>
-        <hr />
+        <AboutMeridi/>
       </div>
     </section>
     <section>
@@ -129,10 +123,10 @@
 
 <script>
 // @ is an alias to /src
-
+import AboutMeridi from "../components/AboutMeridi.vue";
 export default {
   name: "About",
-  components: {},
+  components: {AboutMeridi},
 };
 </script>
 
