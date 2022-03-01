@@ -26,6 +26,7 @@
             >Profile</router-link
           >
         </li>
+        <Signout/>
       </ul>
       <div class="icon">
         <i
@@ -54,14 +55,20 @@
           <li>
             <router-link class="link" :to="{ name: '' }">Profile</router-link>
           </li>
+          <Signout/>
         </ul>
       </transition>
     </nav>
   </header>
 </template>
 <script>
+import Signout from './Signout.vue';
+
 export default {
-  name: "navigation",
+  name: "CustomerNav"
+  ,components: {
+    Signout
+  },
   data() {
     return {
       scrollPosition: null,
