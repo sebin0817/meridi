@@ -2,12 +2,20 @@
   <section class="hero">
     <div class="hero-text container">
       <h4>Products Page</h4>
+      <SearchForm/>
     </div>
   </section>
 </template>
 
 <script>
-export default {};
+import SearchForm from '@/components/SearchForm.vue'
+
+export default {
+  name: 'App',
+  components: {
+    SearchForm
+  }
+};
 </script>
 
 <style scoped>
