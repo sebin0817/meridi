@@ -1,17 +1,17 @@
 <template>
   <div class="app">
-    <Navigation />
+    <DisplayNav/>
     <router-view />
   </div>
 </template>
 
 <script>
-import Navigation from "./components/Navigation.vue";
+import DisplayNav from "./components/DisplayNav.vue";
 export default {
   name: "App",
   components: {
-    Navigation,
-  },
+    DisplayNav,
+  }, 
 };
 </script>
 
