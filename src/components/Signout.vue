@@ -11,6 +11,7 @@ export default {
           const auth = getAuth();
           signOut(auth).then(() => {
             alert("You have logged out successfully.");
+            this.emitter.emit('loginas', {'userType': "undefined"})
             this.$router.push('./');
           }).catch((error) => {
               console.log(error);
