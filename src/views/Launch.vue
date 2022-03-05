@@ -37,7 +37,6 @@ export default {};
 <style scoped>
 .hero {
   background-image: url("../assets/TCM-trans.png");
-  
   background-size: cover;
   position: absolute;
   top: 0px;
