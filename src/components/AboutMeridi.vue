@@ -54,14 +54,14 @@ export default {
   justify-content: center;
   color: black;
 }
-.el-row {
-  margin-bottom: 20px;
-}
 #meridi {
   position: absolute;
   top: 300px;
   left: 0px;
   right: 0px;
+}
+.el-row {
+  margin-bottom: 20px;
 }
 #slogan {
   font-size: 40px;

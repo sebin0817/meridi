@@ -1,5 +1,4 @@
 <template>
-  <div class="About">
     <section class="hero">
       <div class="hero-text container">
         <AboutMeridi v-show="show" />
@@ -22,7 +21,6 @@
         </el-menu>
       </div>
     </section>
-  </div>
 </template>
 
 <script>
@@ -50,7 +48,6 @@ export default {
 
 <style lang="scss" scoped>
 .hero {
-  //background-image: url("../assets/hero-bg.png");
   background-attachment: fixed;
   position: relative;
   height: 100vh;
