@@ -8,7 +8,7 @@
 			<div class="cardContent">
 				<span class="text block" id="title">{{product.name}}</span>
 				<p class="text block" id="description">{{product.description}}</p>
-				<p class="text block" id="price">{{product.price}}</p>
+				<p class="text block" id="price">{{price}}</p>
 			</div>
 		</el-card>
 	</div>
@@ -21,6 +21,12 @@ export default {
 	props: {
 		product: {
 			type: Object
+		}
+	},
+
+	computed: {
+		price() {
+			return ("$" + this.product.price);
 		}
 	}
 }
@@ -67,6 +73,8 @@ el-card {
 
 #price {
 	font-size: 16px;
+	margin-top: 20px;
+	font-weight: 500;
 }
 
 </style>

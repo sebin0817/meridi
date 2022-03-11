@@ -3,13 +3,13 @@
 		<el-form :model="form">
 			<el-row>
 				<el-col :offset="11" :span="10">
-					<el-form-item>
+					<el-form-item size="large">
 						<el-input v-model="form.name" :inline="true" placeholder="Product Name"></el-input>
 					</el-form-item>
 				</el-col>	
 				<el-col :offset="1" :span="2">
 					<el-form-item>
-						<el-button id="searchBtn">Search</el-button>	
+						<el-button id="searchBtn" size="large">Search</el-button>	
 					</el-form-item>
 				</el-col>
 			</el-row>

@@ -11,11 +11,14 @@
       </section>
     </div>
   </section>
+  <ProductFilter />
 </template>
 
 <script>
 import SearchForm from '@/components/SearchForm.vue'
 import ProductsView from '@/components/ProductsView.vue'
+import ProductFilter from '@/components/ProductFilter.vue'
+
 import { getDocs, collection, getFirestore } from 'firebase/firestore'
 import firebaseApp from '@/firebase.js'
 
@@ -25,7 +28,8 @@ export default {
   name: 'Products',
   components: {
     SearchForm,
-    ProductsView
+    ProductsView,
+    ProductFilter
   },
 
   created() {
