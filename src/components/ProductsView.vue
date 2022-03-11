@@ -4,7 +4,7 @@
 				<el-col
 					v-for="product in products"
 					:key="product"
-					:span="4"
+					:span="6"
 				>
 					<ProductCard
 						:product="product"

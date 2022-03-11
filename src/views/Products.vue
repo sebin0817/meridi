@@ -1,17 +1,19 @@
 <template>
   <section class="hero">
-    <div class="hero-text">
+    <el-container class="hero-text">
       <section id="products">
-        <el-row>
-          <el-col :offset="12" :span="8" ><SearchForm /></el-col>
-        </el-row>
-        <el-row>
-          <el-col :offset="2" :span="22" ><ProductsView :products="products"/></el-col>   
-        </el-row> 
+        <el-container>
+          <el-aside width="300px"><ProductFilter /></el-aside>  
+          <el-container>
+            <el-header><SearchForm @search="filteredBySearch($event)"/></el-header>
+            <el-main><ProductsView :products="filteredProductsBySearch"/></el-main> 
+          </el-container>
+        </el-container>
+        
       </section>
-    </div>
+    </el-container>
   </section>
-  <ProductFilter />
+   
 </template>
 
 <script>
@@ -56,12 +58,25 @@ export default {
 
   data() {
     return {
-      products: []
+      products: [],
+      filteredProducts: [],
+      search: ""
     }
   },
 
   methods: {
-    
+    filteredBySearch(searchResult) {
+      this.search = searchResult;
+      console.log(`inside parentl, value is ${this.search}`)
+    }
+  },
+
+  computed: {
+    filteredProductsBySearch() {
+      return this.products.filter(product => {
+        return product.name.toLowerCase().includes(this.search.toLowerCase());
+      })
+    }
   }
 };
 </script>
@@ -74,14 +89,16 @@ export default {
 }
 
 .hero-text {
+
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction: column; 
   color: black;
 }
 
 #products {
-  margin-top: 100px
+  margin-top: 150px;
+  margin-left: 150px;
 }
 
 

@@ -1,11 +1,11 @@
 <template>
-	<div class="container categories">
+	<div class="container">
         <h3>Categories</h3>
 
 		<el-card >
-            <div v-for="cat in productCats" :key="cat.name">
-                <el-checkbox type="checkbox" :label="cat.name" v-model="checkedCats" v-bind:value="categories"></el-checkbox>
-            </div>
+            <el-row v-for="cat in productCats" :key="cat.name">
+                <el-checkbox :label="cat.name" v-model="checkedCats" v-bind:value="categories"></el-checkbox>
+            </el-row>
 		</el-card>       
 	</div>
 
@@ -13,8 +13,8 @@
         <h3>Sort by Price</h3>
 
         <el-card >
-            <el-row><el-checkbox type="checkbox" :label="ascending" v-model="isAscend">ascending</el-checkbox></el-row>
-            <el-row><el-checkbox type="checkbox" :label="descending" v-model="isDescend">descending</el-checkbox></el-row>
+            <el-row><el-checkbox class="text" :label="Ascending" v-model="isAscend">Ascending</el-checkbox></el-row>
+            <el-row><el-checkbox :label="Descending" v-model="isDescend">Descending</el-checkbox></el-row>
         </el-card>       
     </div>
 	
@@ -55,10 +55,13 @@ h3 {
 	font-size: 16px;
 }
 
-.container {
-	line-height: 5;
-	margin-bottom: 30px;
-    display: block;
+el-card {
+	padding: 0px;
+}
+
+.text {
+	font-family: "Georgia", Times, serif;
+	line-height: 1.6;
 }
 
 
