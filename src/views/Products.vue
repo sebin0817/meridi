@@ -3,10 +3,10 @@
     <el-container class="hero-text">
       <section id="products">
         <el-container>
-          <el-aside width="300px"><ProductFilter /></el-aside>  
+          <el-aside width="300px"><ProductFilter @categoryFilter="filteredByCategory($event)"/></el-aside>  
           <el-container>
             <el-header><SearchForm @search="filteredBySearch($event)"/></el-header>
-            <el-main><ProductsView :products="filteredProductsBySearch"/></el-main> 
+            <el-main><ProductsView :products="filterProducts"/></el-main> 
           </el-container>
         </el-container>
         
@@ -60,23 +60,44 @@ export default {
     return {
       products: [],
       filteredProducts: [],
-      search: ""
+      search: "",
+      checkedCats: ['pain', 'treatments', 'wellness', 'kids']
     }
   },
 
   methods: {
     filteredBySearch(searchResult) {
       this.search = searchResult;
-      console.log(`inside parentl, value is ${this.search}`)
+      // console.log(`inside parentl, value is ${this.search}`)
+    },
+
+    filteredByCategory(checkedCats) {
+      this.checkedCats = checkedCats;
+      console.log(`inside parentl, value is ${this.checkedCats}`)
+    },
+
+    filteredProductsByCategory(product) {
+      let catNames = this.checkedCats.map(cat => {
+        return cat.toLowerCase();
+      });
+      return catNames.indexOf(product.description.toLowerCase()) >= 0;
+    },
+
+    filteredProductsBySearch(product) {
+        return product.name.toLowerCase().includes(this.search.toLowerCase());
     }
   },
 
   computed: {
-    filteredProductsBySearch() {
+    filterProducts() {
       return this.products.filter(product => {
-        return product.name.toLowerCase().includes(this.search.toLowerCase());
+        return this.filteredProductsBySearch(product) && this.filteredProductsByCategory(product);       
       })
     }
+
+
+    
+
   }
 };
 </script>

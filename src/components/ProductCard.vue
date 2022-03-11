@@ -3,6 +3,7 @@
 		<el-card shadow="hover">
 			<img
 				src="@/assets/TCM.jpg"
+				alt="product img"
 				class="image"
 			/>
 			<div class="cardContent">
