@@ -1,12 +1,11 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <img id="logo" src="@/assets/meridi.png" alt="" />
-      <div id="slogan">TCM at your fingertips</div>
-      <hr />
-      <h4 id="centre">Sign up as a Customer:</h4>
-
-      <div>
+      <section>
+        <img id="logo" src="@/assets/meridi.png" alt="" />
+        <div id="slogan">TCM at your fingertips</div>
+        <hr />
+        <h4 id="centre">Sign up as a Clinic:</h4>
         <form @submit.prevent="register">
           <el-input
             type="email"
@@ -24,11 +23,35 @@
             placeholder="Postal code..."
             v-model="postalcode"
           />
+          <el-row>
+            <el-input
+              id="textarea"
+              :rows="2"
+              type="textarea"
+              placeholder="Company description..."
+              v-model="desc"
+            />
+          </el-row>
+          <el-row>
+            <el-select
+              v-model="services"
+              multiple
+              placeholder="Service(s) provided"
+            >
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </el-row>
           <div id="centre">
             <button type="submit">SIGN UP</button>
           </div>
         </form>
-      </div>
+      </section>
     </div>
   </section>
 </template>
@@ -49,6 +72,17 @@ export default {
       fullname: "",
       postalcode: "",
       password: "",
+      img: "",
+      desc: "",
+      services: [],
+      options: [
+        { value: "Accupuncture" },
+        { value: "Tunia" },
+        { value: "Herbal Medication" },
+        { value: "Gua Sha" },
+        { value: "Cupping" },
+        { value: "Device Therapy" },
+      ],
     };
   },
   created() {
@@ -59,7 +93,15 @@ export default {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
-          addUsertoFs(this.email, this.fullname, this.postalcode, this.id);
+          addUsertoFs(
+            this.email,
+            this.fullname,
+            this.postalcode,
+            this.id,
+            this.img,
+            this.desc,
+            this.services
+          );
           alert("Successfully registered!");
           if (this.id == "Customer") {
             console.log("success");
@@ -73,12 +115,23 @@ export default {
           alert(error.message);
         });
 
-      async function addUsertoFs(email, fullname, postalcode, id) {
+      async function addUsertoFs(
+        email,
+        fullname,
+        postalcode,
+        id,
+        img,
+        desc,
+        services
+      ) {
         try {
           const docRef = await setDoc(doc(db, id, email), {
             email: email,
             name: fullname,
             postalcode: postalcode,
+            img: img,
+            desc: desc,
+            services: services,
           });
           console.log(docRef);
         } catch (error) {
@@ -92,6 +145,7 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+
 .hero {
   background-image: url("../assets/TCM-trans.png");
   background-size: cover;
@@ -135,7 +189,9 @@ hr {
   margin-bottom: 10px;
   justify-content: center;
 }
-
+.el-select {
+  width: 50ch;
+}
 button {
   background-color: #ffcc00;
   border: none;

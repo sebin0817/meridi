@@ -17,7 +17,7 @@
             <el-option
               v-for="item in options"
               :key="item.value"
-              :label="item.label"
+              :label="item.value"
               :value="item.value"
             >
             </el-option>
@@ -55,30 +55,12 @@ const formInline = reactive({
   input: "",
 });
 const options = [
-  {
-    value: "Accupuncture",
-    label: "Accupuncture",
-  },
-  {
-    value: "Tunia",
-    label: "Tunia",
-  },
-  {
-    value: "Herbal Medication",
-    label: "Herbal Medication",
-  },
-  {
-    value: "Gua Sha",
-    label: "Gua Sha",
-  },
-  {
-    value: "Cupping",
-    label: "Cupping",
-  },
-  {
-    value: "Device Therapy",
-    label: "Device Therapy",
-  },
+  { value: "Accupuncture" },
+  { value: "Tunia" },
+  { value: "Herbal Medication" },
+  { value: "Gua Sha" },
+  { value: "Cupping" },
+  { value: "Device Therapy" },
 ];
 const onSubmit = () => {
   console.log("submitted!");
