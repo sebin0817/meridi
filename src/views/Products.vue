@@ -3,7 +3,7 @@
     <el-container class="hero-text">
       <section id="products">
         <el-container>
-          <el-aside width="300px"><ProductFilter @categoryFilter="filteredByCategory($event)"/></el-aside>  
+          <el-aside width="300px"><ProductFilter @categoryFilter="filteredByCategory($event)" @sortBy="sortByPrice($event)"/></el-aside>  
           <el-container>
             <el-header><SearchForm @search="filteredBySearch($event)"/></el-header>
             <el-main><ProductsView :products="filterProducts"/></el-main> 
@@ -61,14 +61,14 @@ export default {
       products: [],
       filteredProducts: [],
       search: "",
-      checkedCats: ['pain', 'treatments', 'wellness', 'kids']
+      checkedCats: ['pain', 'treatments', 'wellness', 'kids'],
+      sortBy: 0 /*sorted = 1 means high -> low, sorted = 0 means low -> high */
     }
   },
 
   methods: {
     filteredBySearch(searchResult) {
       this.search = searchResult;
-      // console.log(`inside parentl, value is ${this.search}`)
     },
 
     filteredByCategory(checkedCats) {
@@ -85,6 +85,10 @@ export default {
 
     filteredProductsBySearch(product) {
         return product.name.toLowerCase().includes(this.search.toLowerCase());
+    },
+
+    sortByPrice(sort) {
+      this.sortBy = sort;
     }
   },
 
@@ -92,12 +96,17 @@ export default {
     filterProducts() {
       return this.products.filter(product => {
         return this.filteredProductsBySearch(product) && this.filteredProductsByCategory(product);       
+      }).sort((p1, p2) => {
+        if (this.sortBy == 0) {
+          let x = (p1.name > p2.name) ? 1 : -1;
+          return x;
+        } else if (this.sortBy == 1) {
+          return p2.price - p1.price;
+        } else if (this.sortBy == 2) {
+          return p1.price - p2.price;
+        }
       })
     }
-
-
-    
-
   }
 };
 </script>
@@ -120,6 +129,7 @@ export default {
 #products {
   margin-top: 150px;
   margin-left: 150px;
+  margin-right: 150px;
 }
 
 

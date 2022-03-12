@@ -20,11 +20,15 @@
 
     <div class="container price">
         <h3>Sort by Price</h3>
-
-        <el-card >
-            <el-row><el-checkbox class="text" :label="Ascending" v-model="isAscend">Ascending</el-checkbox></el-row>
-            <el-row><el-checkbox :label="Descending" v-model="isDescend">Descending</el-checkbox></el-row>
-        </el-card>       
+        <el-select v-model="sortBy" placeholder="Select" size="large" @change="handleSortChange">
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+            >
+            </el-option>
+        </el-select>
     </div>
 	
 </template>
@@ -42,12 +46,14 @@ export default {
                 {name: 'For Wellness'},
                 {name: 'For Kids'}],
             checkedCats: [],
-            isAscend: false,
-            isDescend: false
+            options:
+                [{value: 1, label: 'Descending'},
+                 {value: 2, label: 'Ascending'}],
+            sortBy: ""
         }
     },
 
-    emits:["categoryFilter"],
+    emits:["categoryFilter", "sortBy"],
 
     methods: {
         preprocessCats(cats) {
@@ -56,7 +62,7 @@ export default {
                     return 'pain';
                 }
                 if (cat === 'For Treatments') {
-                    return 'treatment';
+                    return 'treatments';
                 }
                 if (cat === 'For Wellness') {
                     return 'wellness';
@@ -73,7 +79,6 @@ export default {
             console.log(this.productCats)
             console.log(`checked cats = ${this.checkedCats}`)
             this.isIndeterminate = false;
-            // console.log(`from child value checked cats is ${this.checkedCats}`)
             this.$emit("categoryFilter", this.preprocessCats(this.checkedCats));
         },
 
@@ -82,6 +87,12 @@ export default {
             this.checkAll = (checkedCount == this.productCats.length);
             this.isIndeterminate = (checkedCount > 0) && (checkedCount < this.productCats.length);
             this.$emit("categoryFilter", this.preprocessCats(this.checkedCats));
+        },
+
+        handleSortChange(val) {
+            this.sortBy = val;
+            console.log(`sortby = ${this.sortBy}`)
+            this.$emit("sortBy", this.sortBy);
         }
 
         
