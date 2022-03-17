@@ -13,4 +13,5 @@ const app = createApp(App);
 
 app.config.globalProperties.emitter = emitter;
 app.use(store).use(router).use(ElementPlus).mount("#app");
-getFirestore(firebaseApp);
+const db = getFirestore(firebaseApp);
+export default db;

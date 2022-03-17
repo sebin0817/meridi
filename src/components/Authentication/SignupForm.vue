@@ -11,16 +11,16 @@
           <input       
             type="text"       
             placeholder="Full name..."       
-            v-model="fullname"     
+            v-model="name"     
             />
           <input       
-            type="number"       
+            type="text"       
             placeholder="Postal code..."       
             v-model="postalcode"     
             />   
           <input       
             type="password"       
-            placeholder="password..."       
+            placeholder="Password..."       
             v-model="password"     
             />     
           <button type="submit">
@@ -34,18 +34,17 @@
 
 <script>
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import firebaseApp from '../firebase.js';
-import { getFirestore } from "firebase/firestore";
-import { doc, setDoc } from "firebase/firestore"; 
-const db = getFirestore(firebaseApp);
+import { getFirestore, doc, setDoc } from "firebase/firestore"; 
+import firebaseApp from "../../firebase.js";
 
+const db = getFirestore(firebaseApp)
 export default {
     name: 'SignupForm',
     data() { 
       return { 
         id: "Undefined User",
         email: '', 
-        fullname: '',
+        name: '',
         postalcode: '',
         password: '', 
 
@@ -59,8 +58,10 @@ export default {
         const auth = getAuth();
         createUserWithEmailAndPassword(auth,this.email,this.password)
           .then(() => {
-            addUsertoFs(this.email,this.fullname,this.postalcode,this.id);
+            addUsertoFs(this.email,this.name,this.postalcode,this.id);
             alert('Successfully registered!');
+            sessionStorage.setItem("useremail", this.email);
+            sessionStorage.setItem("usertype", this.id);
             if (this.id == "Customer") {
               console.log("success")
               this.$router.push('/Products');
@@ -73,10 +74,26 @@ export default {
             alert(error.message);
           });
 
-          async function addUsertoFs(email,fullname,postalcode,id) {
+          async function addUsertoFs(email,name,postalcode,id) {
             try {
               const docRef = await setDoc(doc(db,id,email), {
-                email: email, name: fullname, postalcode: postalcode
+                email: email, name: name, postalcode: postalcode,
+                purchasehistory: {
+                  1: {
+                    items: {
+                      item1: ["item1",1,50],
+                      item2: ["item2",1,50]
+                    },
+                    total: 100
+                  },
+                  2: {
+                    items: {
+                      item3: ["item3",1,60],
+                      item4: ["item4",1,50]
+                    },
+                    total: 110
+                  },
+                }
               })
               console.log(docRef)
             } catch (error) {

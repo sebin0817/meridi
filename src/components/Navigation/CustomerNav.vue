@@ -62,7 +62,7 @@
   </header>
 </template>
 <script>
-import Signout from './Signout.vue';
+import Signout from '../Authentication/Signout.vue';
 
 export default {
   name: "CustomerNav"

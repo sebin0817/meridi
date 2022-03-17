@@ -138,7 +138,7 @@ export default {
 
 <style lang="scss" scoped>
 .hero {
-  background-image: url("../assets/hero-bg.png");
+  background-image: url("../../assets/hero-bg.png");
   background-attachment: fixed;
   position: relative;
   height: 100vh;

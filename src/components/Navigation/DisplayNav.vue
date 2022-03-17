@@ -6,11 +6,6 @@
 <script>
 import CustomerNav from './CustomerNav.vue';
 import ClinicNav from './ClinicNav.vue';
-//import firebaseApp from "../firebase.js";
-//import { getAuth } from "firebase/auth";
-//import { getFirestore, doc, getDoc } from "firebase/firestore";
-//const db = getFirestore(firebaseApp);
-//const auth = getAuth();
 
 export default {
   name: 'DisplayNav',
@@ -20,9 +15,9 @@ export default {
   },
   data() {
     return {
-      userType: "undefined",
+      userType: sessionStorage.getItem("usertype"),
       email: {},
-}
+    }
   },
   methods: {
     loginasuser(type) {
@@ -36,5 +31,4 @@ export default {
     })
   }
 }
-//<CustomerNav v-if="userType=='Customer'" @loginasuser="loginasuser"/>
 </script>

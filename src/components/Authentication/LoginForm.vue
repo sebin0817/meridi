@@ -28,10 +28,10 @@
 
 <script>
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import firebaseApp from '../firebase.js';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-const db = getFirestore(firebaseApp);
+import firebaseApp from "../../firebase.js";
 
+const db = getFirestore(firebaseApp)
 export default {
     name: 'LoginForm',
     data() { 
@@ -52,16 +52,17 @@ export default {
         if (docSnap.exists()) {
           signInWithEmailAndPassword(auth,this.email,this.password)
           .then(() => {
+            sessionStorage.setItem("useremail", this.email);
+            sessionStorage.setItem("usertype", this.id + "s");
             if (this.id == "Customer") {
               console.log("success")
               this.$router.push('/Products');
             } else {
-              this.$router.push('/Profile')
+              this.$router.push('/ClinicProfile') 
             }
             this.emitter.emit('loginas', {'userType': this.id + "s"})
             alert('Successfully logged in');
-          })
-          .catch(error => {
+          }).catch(error => {
             alert(error.message);
           });
         } else {
@@ -69,7 +70,7 @@ export default {
         }  
       },
       goToSignup() {
-          this.$router.push( {
+          this.$router.push({
             name: "Signup",
             params: {
               id: this.id + 's'
