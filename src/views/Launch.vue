@@ -1,10 +1,7 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <Title :msg="msg" />
-      <UserType />
-      <!--section>
-        
+      <section>
         <img id="logo" src="@/assets/meridi.png" alt="" />
         <div id="slogan">
           TCM at your fingertips
@@ -17,54 +14,24 @@
               <p>
                 Get premier TCM products and quality TCM healthcare services
               </p>
-              <button @click="toCustomerLogin()">LOGIN as a Customer</button>
+              <button>LOGIN as a Customer</button>
             </div></el-col
           >
           <el-col :span="6">
             <div class="item">
               <img id="clinic" src="@/assets/hospital.png" alt="" />
               <p>Expand market reach and promote TCM products and services</p>
-              <button @click="toClinicLogin()">LOGIN as a Clinic</button>
+              <button>LOGIN as a Clinic</button>
             </div></el-col
           >
         </el-row>
-      </section-->
+      </section>
     </div>
   </section>
 </template>
 
 <script>
-import Title from "@/components/Title.vue";
-import UserType from "@/components/UserType.vue";
-export default {
-  name: "Home",
-  components: { Title, UserType },
-  data() {
-    return {
-      msg: "TCM at your fingertips",
-    };
-  },
-  /*methods: {
-      toCustomerLogin() {
-        this.$router.push({
-          name: "Login",
-          params: {
-            id: "Customer"
-          }
-        })
-        console.log("user is a Customer")
-      },
-      toClinicLogin() {
-        this.$router.push({
-          name:"Login",
-          params: {
-            id: "Clinic"
-          }
-        })
-        console.log("user is a Clinic")
-      },
-  }*/
-};
+export default {};
 </script>
 
 <style scoped>
@@ -87,7 +54,7 @@ export default {
   justify-content: center;
   color: black;
 }
-/*#logo {
+#logo {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -129,9 +96,8 @@ button {
 button:hover {
   background: #ffc400;
   color: black;
-  cursor: pointer;
 }
 button:focus {
   outline: none;
-}*/
+}
 </style>

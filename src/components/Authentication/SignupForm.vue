@@ -1,38 +1,46 @@
 <template>
-  <section class="hero">
-    <div class="hero-text container">
-      <div>   
-        <form @submit.prevent="register">     
-          <input       
-            type="email"       
-            placeholder="Email address..."       
-            v-model="email"     
-            />  
-          <input       
-            type="text"       
-            placeholder="Full name..."       
-            v-model="name"     
-            />
-          <input       
-            type="text"       
-            placeholder="Postal code..."       
-            v-model="postalcode"     
-            />   
-          <input       
-            type="password"       
-            placeholder="Password..."       
-            v-model="password"     
-            />     
-          <button type="submit">
-            SIGN UP
-          </button>   
-        </form> 
+  <div class="form">
+    <form @submit.prevent="register">
+      <h4 id="centre">Sign up as a Customer:</h4>
+      <el-input id="email" v-model="email" type="email" placeholder="Email"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><message /></el-icon> </template
+      ></el-input>
+      <el-input
+        id="password"
+        v-model="password"
+        type="password"
+        placeholder="Password"
+        show-password
+        ><template #prefix>
+          <el-icon class="el-input__icon"><lock /></el-icon>
+        </template>
+      </el-input>
+      <el-input
+        id="fullname"
+        v-model="fullname"
+        type="text"
+        placeholder="Full Name"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><avatar /></el-icon> </template
+      ></el-input>
+      <el-input
+        id="postalcode"
+        v-model="postalcode"
+        type="number"
+        placeholder="Postal Code"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><map-location /></el-icon> </template
+      ></el-input>
+      <div id="centre">
+        <button type="submit">SIGN UP</button>
       </div>
-    </div>
-  </section>
+    </form>
+  </div>
 </template>
 
 <script>
+import { Message, Lock, Avatar, MapLocation } from "@element-plus/icons-vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore"; 
 import firebaseApp from "../../firebase.js";
@@ -74,48 +82,78 @@ export default {
             alert(error.message);
           });
 
-          async function addUsertoFs(email,name,postalcode,id) {
-            try {
-              const docRef = await setDoc(doc(db,id,email), {
-                email: email, name: name, postalcode: postalcode,
-                purchasehistory: {
-                  1: {
-                    items: {
-                      item1: ["item1",1,50],
-                      item2: ["item2",1,50]
-                    },
-                    total: 100
+        async function addUsertoFs(email,name,postalcode,id) {
+          try {
+            const docRef = await setDoc(doc(db,id,email), {
+            email: email, name: name, postalcode: postalcode,
+              purchasehistory: {
+                1: {
+                  items: {
+                    item1: ["item1",1,50],
+                    item2: ["item2",1,50]
                   },
-                  2: {
-                    items: {
-                      item3: ["item3",1,60],
-                      item4: ["item4",1,50]
-                    },
-                    total: 110
+                  total: 100
+                },
+                2: {
+                  items: {
+                    item3: ["item3",1,60],
+                    item4: ["item4",1,50]
                   },
-                }
-              })
-              console.log(docRef)
-            } catch (error) {
-              console.error("Error adding document: ", error);
-            }
+                  total: 110
+                },
+              }
+            })
+            console.log(docRef)
+          } catch (error) {
+            console.error("Error adding document: ", error);
           }
-      },
+        }
     },
+  },
 };
 </script>
 
 <style scoped>
-.hero {
-  background-attachment: fixed;
-  position: relative;
-  height: 100vh;
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+.form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  text-align: center;
+  width: 30%;
 }
-.hero-text {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+.el-input,
+.el-row {
+  margin-bottom: 10px;
   justify-content: center;
+}
+
+button {
+  background-color: #ffcc00;
+  border: none;
   color: black;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  align-items: center;
+  font-family: "Nunito Sans", sans-serif;
+}
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+#centre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h4 {
+  font-family: "Nunito Sans", sans-serif;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 </style>
