@@ -1,17 +1,13 @@
 <template>
-  <section class="hero">
+  <section class="form">
     <div v-if="!validemail" class="hero-text container">
-      <img id="logo" src="@/assets/meridi.png" alt="" />
-      <div id="slogan">TCM at your fingertips</div>
-      <hr />
-      <h4 id="centre">To reset password, enter your email address:</h4>
+      <h4 id="centre">To reset password, enter your email:</h4>
       <div>
         <form id="forgot-password-form" @submit.prevent="forgotpassword">
-          <el-input
-            type="email"
-            placeholder="Email address..."
-            v-model="email"
-          />
+          <el-input id="email" v-model="email" type="email" placeholder="Email"
+            ><template #prefix>
+              <el-icon class="el-input__icon"><message /></el-icon> </template
+          ></el-input>
           <div id="centre">
             <button type="submit">RESET</button>
           </div>
@@ -22,6 +18,7 @@
 </template>
 
 <script>
+import { Message } from "@element-plus/icons-vue";
 import { doc, getDoc } from "firebase/firestore";
 import firebaseApp from "../firebase.js";
 import { getFirestore } from "firebase/firestore";
@@ -30,6 +27,8 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 const db = getFirestore(firebaseApp);
 
 export default {
+  components: { Message },
+
   name: "ForgotPasswordForm",
   data() {
     return {
@@ -61,43 +60,12 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
-.hero {
-  background-image: url("../assets/TCM-trans.png");
-  background-size: cover;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  background-attachment: fixed;
-  position: relative;
-  height: 100vh;
-}
-.hero-text {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: black;
-  width: 50ch;
-}
-#logo {
-  display: block;
+.form {
   margin-left: auto;
   margin-right: auto;
-  width: 54%;
-}
-#slogan {
+  margin-top: 20px;
   text-align: center;
-  font-size: 29.8px;
-  font-weight: bold;
-}
-hr {
-  border: 1px solid #ffcc00;
-  width: 55%;
-  margin: auto;
-  margin-top: 25px;
-  margin-bottom: 30px;
+  width: 30%;
 }
 .el-input,
 .el-row {

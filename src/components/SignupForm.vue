@@ -1,39 +1,46 @@
 <template>
-  <section class="hero">
-    <div class="hero-text container">
-      <img id="logo" src="@/assets/meridi.png" alt="" />
-      <div id="slogan">TCM at your fingertips</div>
-      <hr />
+  <div class="form">
+    <form @submit.prevent="register">
       <h4 id="centre">Sign up as a Customer:</h4>
-
-      <div>
-        <form @submit.prevent="register">
-          <el-input
-            type="email"
-            placeholder="Email address..."
-            v-model="email"
-          />
-          <el-input
-            type="password"
-            placeholder="Password..."
-            v-model="password"
-          />
-          <el-input type="text" placeholder="Full name..." v-model="fullname" />
-          <el-input
-            type="number"
-            placeholder="Postal code..."
-            v-model="postalcode"
-          />
-          <div id="centre">
-            <button type="submit">SIGN UP</button>
-          </div>
-        </form>
+      <el-input id="email" v-model="email" type="email" placeholder="Email"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><message /></el-icon> </template
+      ></el-input>
+      <el-input
+        id="password"
+        v-model="password"
+        type="password"
+        placeholder="Password"
+        show-password
+        ><template #prefix>
+          <el-icon class="el-input__icon"><lock /></el-icon>
+        </template>
+      </el-input>
+      <el-input
+        id="fullname"
+        v-model="fullname"
+        type="text"
+        placeholder="Full Name"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><avatar /></el-icon> </template
+      ></el-input>
+      <el-input
+        id="postalcode"
+        v-model="postalcode"
+        type="number"
+        placeholder="Postal Code"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><map-location /></el-icon> </template
+      ></el-input>
+      <div id="centre">
+        <button type="submit">SIGN UP</button>
       </div>
-    </div>
-  </section>
+    </form>
+  </div>
 </template>
 
 <script>
+import { Message, Lock, Avatar, MapLocation } from "@element-plus/icons-vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from "../firebase.js";
 import { getFirestore } from "firebase/firestore";
@@ -42,6 +49,8 @@ const db = getFirestore(firebaseApp);
 
 export default {
   name: "SignupForm",
+  components: { Message, Lock, Avatar, MapLocation },
+
   data() {
     return {
       id: "Undefined User",
@@ -92,43 +101,12 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
-.hero {
-  background-image: url("../assets/TCM-trans.png");
-  background-size: cover;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  background-attachment: fixed;
-  position: relative;
-  height: 100vh;
-}
-.hero-text {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: black;
-  width: 50ch;
-}
-#logo {
-  display: block;
+.form {
   margin-left: auto;
   margin-right: auto;
-  width: 54%;
-}
-#slogan {
+  margin-top: 20px;
   text-align: center;
-  font-size: 29.8px;
-  font-weight: bold;
-}
-hr {
-  border: 1px solid #ffcc00;
-  width: 55%;
-  margin: auto;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  width: 30%;
 }
 .el-input,
 .el-row {

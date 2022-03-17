@@ -1,23 +1,51 @@
 <template>
-  <div class="About">
-    <AboutTCM />
-    <!-- <section class="hero"></section> -->
-  </div>
+  <section class="hero">
+    <div class="hero-text container">
+      <AboutMeridi v-show="show" />
+      <AboutTCM v-show="!show" />
+      <el-menu
+        default-active="1"
+        class="el-menu-demo"
+        mode="horizontal"
+        background-color="none"
+        text-color="#000"
+        active-text-color="#ffcc00"
+        ellipsis="true"
+        collapse-transition="false"
+        @select="handleSelect"
+      >
+        <el-menu-item index="1" @click="showMeridi">About meridi.</el-menu-item>
+        <el-menu-item index="2" @click="showTCM">About TCM.</el-menu-item>
+      </el-menu>
+    </div>
+  </section>
 </template>
 
 <script>
 // @ is an alias to /src
-import AboutTCM from "/src/components/AboutTCM";
-
+import AboutMeridi from "../components/AboutMeridi.vue";
+import AboutTCM from "../components/AboutTCM.vue";
 export default {
   name: "About",
-  components: { AboutTCM },
+  components: { AboutMeridi, AboutTCM },
+  data() {
+    return {
+      show: true,
+    };
+  },
+  methods: {
+    showMeridi() {
+      this.show = true;
+    },
+    showTCM() {
+      this.show = false;
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .hero {
-  // background-image: url("../assets/hero-bg.png");
   background-attachment: fixed;
   position: relative;
   height: 100vh;
@@ -35,6 +63,25 @@ export default {
     justify-content: center;
     color: #fff;
 
+    .el-menu {
+      position: absolute;
+      top: 200px;
+      left: 0px;
+      right: 0px;
+      display: flex;
+      justify-content: space-evenly;
+      border: none;
+    }
+    .el-menu-item {
+      font-size: 32px;
+      font-weight: bold;
+    }
+    .el-menu-item:hover {
+      background: none !important;
+    }
+    .el-menu-item.is-active {
+      background: none !important;
+    }
     h4 {
       text-transform: uppercase;
       font-size: 22px;
