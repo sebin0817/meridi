@@ -9,6 +9,8 @@ import Products from "../views/Products.vue";
 import Cart from "../views/Cart.vue";
 import Profile from "../views/Profile.vue";
 import ClinicProducts from "../views/ClinicProducts.vue";
+import AddProduct from "../views/ClinicsView/AddProduct.vue";
+import EditProduct from "../views/ClinicsView/EditProduct.vue";
 import ClinicProfile from "../views/ClinicProfile.vue";
 import ClinicOrderHistory from "../views/ClinicOrderHistory.vue";
 
@@ -67,6 +69,16 @@ const routes = [
     path: "/ClinicProducts",
     name: "ClinicProducts",
     component: ClinicProducts,
+  },
+  {
+    path: "/AddProduct",
+    name: "AddProduct",
+    component: AddProduct,
+  },
+  {
+    path: "/EditProduct",
+    name: "EditProduct",
+    component: EditProduct,
   },
   {
     path: "/ClinicOrderHistory",

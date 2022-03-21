@@ -1,23 +1,12 @@
 <template>
-  <button @click="signout()">SIGN OUT</button>
+  <button @click="addProduct">ADD PRODUCT</button>
 </template>
 
 <script>
-import { getAuth, signOut } from "firebase/auth";
-
 export default {
   methods: {
-    signout() {
-      const auth = getAuth();
-      signOut(auth)
-        .then(() => {
-          alert("You have logged out successfully.");
-          this.emitter.emit("loginas", { userType: "undefined" });
-          this.$router.push("./");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    addProduct() {
+      this.$router.push("/AddProduct");
     },
   },
 };
@@ -25,7 +14,8 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 button {
-  margin-left: 16px;
+  margin-left: auto;
+  margin-bottom: 10px;
   background-color: #ffcc00;
   border: none;
   color: black;

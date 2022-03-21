@@ -1,10 +1,4 @@
 <template>
-  <!--section class="hero">
-    <div class="hero-text container">
-      <section>
-        <img id="logo" src="@/assets/meridi.png" alt="" />
-        <div id="slogan">Login as a {{ id }}</div>
-        <hr /-->
   <div class="form">
     <el-form :model="form" @submit.prevent="login">
       <el-form-item>
@@ -32,9 +26,6 @@
     <h4 @click="goToSignup()">CREATE NEW ACCOUNT</h4>
     <h4 @click="goToReset()">FORGOT PASSWORD</h4>
   </div>
-  <!--/section>
-    </div>
-  </section-->
 </template>
 
 <script>
@@ -97,42 +88,7 @@ export default {
 </script>
 
 <style scoped>
-/*.hero {
-  background-image: url("../assets/TCM-trans.png");
-  background-size: cover;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  background-attachment: fixed;
-  position: relative;
-  height: 100vh;
-}
-.hero-text {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: black;
-}
-#logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;
-}
-#slogan {
-  text-align: center;
-  font-size: 30px;
-  font-weight: bold;
-}
-hr {
-  border: 1px solid #ffcc00;
-  width: 20%;
-  margin: auto;
-  margin-top: 30px;
-}*/
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 .form {
   margin-left: auto;
   margin-right: auto;
@@ -150,6 +106,7 @@ button {
   border-radius: 4px;
   font-weight: bold;
   width: 30%;
+  font-family: "Nunito Sans", sans-serif;
 }
 button:hover {
   background: #ffc400;
@@ -162,6 +119,7 @@ button:focus {
 h4 {
   font-weight: bold;
   margin-top: 10px;
+  font-family: "Nunito Sans", sans-serif;
 }
 h4:hover {
   cursor: pointer;
