@@ -1,25 +1,19 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <ClinicInfo :useremail="useremail"/>
+      <EditParticularsForm/>
     </div>
   </section>
 </template>
 
 <script>
-import ClinicInfo from '../../components/ClinicsProfilePage/ClinicInfo.vue'
-
+import EditParticularsForm from '../../components/CustomersProfilePage/EditParticularsForm.vue'
 
 export default {
-  name: 'ClinicProfile',
-  components: {
-    ClinicInfo,
-  }, 
-  computed: {
-    useremail() {
-      return sessionStorage.getItem("useremail");
-    }
-  }
+    name: 'EditCustomerParticulars',
+    components: {
+      EditParticularsForm,
+    },
 };
 </script>
 
@@ -32,7 +26,7 @@ export default {
 .hero-text {
   height: 100%;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   color: black;
 }

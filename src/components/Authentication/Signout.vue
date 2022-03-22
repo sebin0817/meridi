@@ -12,6 +12,8 @@ export default {
           signOut(auth).then(() => {
             alert("You have logged out successfully.");
             this.emitter.emit('loginas', {'userType': "undefined"})
+            sessionStorage.setItem("useremail", "");
+            sessionStorage.setItem("usertype","")
             this.$router.push('./');
           }).catch((error) => {
               console.log(error);

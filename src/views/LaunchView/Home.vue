@@ -1,16 +1,18 @@
 <template>
   <section class="hero">
     <div>
-      <button @click="toCustomerLogin()">Customer</button>
-      <button @click="toClinicLogin()">Clinic</button>
+      <UserType />
     </div>
   </section>
 </template>
 
 <script>
+import UserType from '../../components/Authentication/UserType.vue'
 export default {
   name: 'Home',
-  components: {},
+  components: {
+    UserType
+  },
   methods: {
       toCustomerLogin() {
         this.$router.push({
@@ -49,3 +51,5 @@ export default {
   color: black;
 }
 </style>
+<button @click="toCustomerLogin()">Customer</button>
+      <button @click="toClinicLogin()">Clinic</button>
