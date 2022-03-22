@@ -16,19 +16,12 @@ export default {
   data() {
     return {
       userType: sessionStorage.getItem("usertype"),
-      email: {},
-    }
-  },
-  methods: {
-    loginasuser(type) {
-      this.userType = type;
-      console.log("hi");
     }
   },
   created() {
     this.emitter.on('loginas', (evt) => {
       this.userType = evt.userType;
     })
-  }
+  },
 }
 </script>

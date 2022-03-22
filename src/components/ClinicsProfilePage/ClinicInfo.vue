@@ -3,7 +3,12 @@
     <div id="hero-text">
         <h3>{{ name }}</h3>
         <h3>{{ email }}</h3>
-        <h3> {{ postalcode }}</h3>
+        <h3>{{ postalcode }}</h3>
+        <h3>{{ desc }}</h3>
+        <div v-for="service in services" :key="service">
+          <el-icon><circle-check-filled /></el-icon>
+          {{ service }}
+        </div>
         <button @click='goToEdit()'>EDIT PROFILE</button>
     </div>
   </section>
@@ -11,8 +16,9 @@
 
 <script>
 import { getFirestore } from "firebase/firestore";
-import firebaseApp from "../../firebase.js"
+import firebaseApp from "@/firebase.js"
 import { doc, getDoc } from "firebase/firestore";
+import { CircleCheckFilled } from "@element-plus/icons-vue";
 
 const db = getFirestore(firebaseApp);
 
@@ -21,11 +27,16 @@ export default {
     props: {
         useremail: String
     },
+    components: {
+      CircleCheckFilled,
+    },
     data() {
       return {
         name: '',
         email: '',
         postalcode: '',
+        desc: '',
+        services: []
       }
     },
     methods: {
@@ -42,6 +53,8 @@ export default {
             const data = docSnap.data();
             this.name = data.name;
             this.postalcode = data.postalcode;
+            this.desc = data.desc;
+            this.services = data.services;
         }
     }
 }

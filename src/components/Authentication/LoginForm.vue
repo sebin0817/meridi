@@ -1,7 +1,7 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <h4>Login as a {{ id }}</h4>
+      <h4>Login as a {{ tempType }}</h4>
       <div>   
         <form @submit.prevent="login">     
           <input       
@@ -36,31 +36,27 @@ export default {
     name: 'LoginForm',
     data() { 
       return { 
-        id: "Undefined User",
+        tempType: sessionStorage.getItem("tempType"),
         email: '', 
         password: '', 
       }; 
     },
-    created() {
-      this.id = this.$route.params.id;
-    },
     methods: {
       async login() {
         const auth = getAuth();
-        const docRef = doc(db,this.id + "s",this.email);
+        const docRef = doc(db,this.tempType,this.email);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           signInWithEmailAndPassword(auth,this.email,this.password)
           .then(() => {
             sessionStorage.setItem("useremail", this.email);
-            sessionStorage.setItem("usertype", this.id + "s");
-            if (this.id == "Customer") {
-              console.log("success")
+            sessionStorage.setItem("usertype", this.tempType);
+            if (this.tempType == "Customers") {
               this.$router.push('/Products');
             } else {
               this.$router.push('/ClinicProfile') 
             }
-            this.emitter.emit('loginas', {'userType': this.id + "s"})
+            this.emitter.emit('loginas', {'userType': this.tempType})
             alert('Successfully logged in');
           }).catch(error => {
             alert(error.message);
@@ -70,12 +66,12 @@ export default {
         }  
       },
       goToSignup() {
-          this.$router.push({
-            name: "Signup",
-            params: {
-              id: this.id + 's'
-            }
-          })
+        if (this.tempType == "Customers") {
+          this.$router.push('./Signup')
+        } else {
+          this.$router.push('./Signup1')
+        }
+          
       },
       goToReset() {
           this.$router.push('../ForgotPassword')

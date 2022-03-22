@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/LaunchView/Login.vue";
 import Signup from "../views/LaunchView/Signup.vue";
+import Signup1 from "../views/LaunchView/Signup1.vue";
 import ForgotPassword from "../views/LaunchView/ForgotPassword.vue";
 import Home from "../views/LaunchView/Home.vue";
 import EditCustomerParticulars from "../views/CustomersView/EditCustomerParticulars.vue";
@@ -21,14 +22,19 @@ const routes = [
     component: Home,
   },
   {
-    path: "/Login/:id",
+    path: "/Login",
     name: "Login",
     component: Login,
   },
   {
-    path: "/Signup/:id",
+    path: "/Signup",
     name: "Signup",
     component: Signup,
+  },
+  {
+    path: "/Signup1",
+    name: "Signup1",
+    component: Signup1,
   },
   {
     path: "/ForgotPassword",

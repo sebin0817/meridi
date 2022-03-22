@@ -11,6 +11,7 @@
             <input      
             v-model="desc"   
             /> 
+
           <button type="submit">
             SAVE CHANGE
           </button>   
@@ -31,8 +32,16 @@ export default {
             name: '',
             email: '',
             postalcode: '',
-            desc: ''
-
+            desc: '',
+            services: [],
+            options: [
+              { value: "Accupuncture" },
+              { value: "Tunia" },
+              { value: "Herbal Medication" },
+              { value: "Gua Sha" },
+              { value: "Cupping" },
+              { value: "Device Therapy" },
+      ],
         }
     },
     methods: {
@@ -41,7 +50,8 @@ export default {
           name: this.name,
           email: this.email,
           postalcode: this.postalcode,
-          desc: this.desc
+          desc: this.desc,
+          services: this.services
         });   
         alert("Profile successfully updated");
       }
@@ -55,6 +65,7 @@ export default {
             this.name = data.name;
             this.postalcode = data.postalcode;
             this.desc = data.desc;
+            this.services = data.services
         }
     }
 };
