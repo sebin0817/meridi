@@ -1,13 +1,20 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <h4>Clinics Page</h4>
+      <ApptForm />
     </div>
   </section>
 </template>
 
 <script>
-export default {};
+import ApptForm from "@/components/CustomersClinicsPage/AppointmentForm.vue";
+
+export default {
+  name: "Login",
+  components: {
+    ApptForm,
+  },
+};
 </script>
 
 <style scoped>

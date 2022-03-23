@@ -18,8 +18,8 @@
           </template>
         </el-input>
         <el-input
-          id="name"
-          v-model="name"
+          id="fullname"
+          v-model="fullname"
           type="text"
           placeholder="Full Name"
           ><template #prefix>
@@ -28,7 +28,7 @@
         <el-input
           id="postalcode"
           v-model="postalcode"
-          type="text"
+          type="number"
           placeholder="Postal Code"
           ><template #prefix>
             <el-icon class="el-input__icon"
@@ -73,19 +73,22 @@
 
 <script>
 import { Message, Lock, Avatar, MapLocation } from "@element-plus/icons-vue";
+
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import firebaseApp from "../../firebase.js";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import firebaseApp from "../../firebase";
+import { getFirestore } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
 
 export default {
   name: "SignupForm",
   components: { Message, Lock, Avatar, MapLocation },
+
   data() {
     return {
-      tempType: sessionStorage.getItem("tempType"),
+      id: "Undefined User",
       email: "",
-      name: "",
+      fullname: "",
       postalcode: "",
       password: "",
       img: "",
@@ -101,6 +104,9 @@ export default {
       ],
     };
   },
+  created() {
+    this.id = this.$route.params.id;
+  },
   methods: {
     register() {
       const auth = getAuth();
@@ -108,35 +114,39 @@ export default {
         .then(() => {
           addUsertoFs(
             this.email,
-            this.name,
+            this.fullname,
             this.postalcode,
-            this.tempType,
+            this.id,
             this.img,
             this.desc,
             this.services
           );
           alert("Successfully registered!");
-          this.$router.push("/ClinicProfile");
-          this.emitter.emit("loginas", { userType: this.tempType });
-          sessionStorage.setItem("useremail", this.email);
-          sessionStorage.setItem("usertype", this.tempType);
+          if (this.id == "Customer") {
+            console.log("success");
+            this.$router.push("/Products");
+          } else {
+            this.$router.push("/Profile");
+          }
+          this.emitter.emit("loginas", { userType: this.id });
         })
         .catch((error) => {
           alert(error.message);
         });
+
       async function addUsertoFs(
         email,
-        name,
+        fullname,
         postalcode,
-        type,
+        id,
         img,
         desc,
         services
       ) {
         try {
-          const docRef = await setDoc(doc(db, type, email), {
+          const docRef = await setDoc(doc(db, id, email), {
             email: email,
-            name: name,
+            name: fullname,
             postalcode: postalcode,
             img: img,
             desc: desc,
