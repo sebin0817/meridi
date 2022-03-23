@@ -6,7 +6,9 @@
       </div>
       <ul v-show="!mobile" class="navigation">
         <li>
-          <router-link class="link" :to="{ name: 'ClinicProfile' }">Profile</router-link>
+          <router-link class="link" :to="{ name: 'ClinicProfile' }"
+            >Profile</router-link
+          >
         </li>
         <li>
           <router-link class="link" :to="{ name: 'ClinicProducts' }"
@@ -18,7 +20,7 @@
             >Order History</router-link
           >
         </li>
-        <Signout/>
+        <Signout />
       </ul>
       <div class="icon">
         <i
@@ -39,21 +41,23 @@
             <router-link class="link" :to="{ name: '' }">Products</router-link>
           </li>
           <li>
-            <router-link class="link" :to="{ name: '' }">Order History</router-link>
+            <router-link class="link" :to="{ name: '' }"
+              >Order History</router-link
+            >
           </li>
-          <Signout/>
+          <Signout />
         </ul>
       </transition>
     </nav>
   </header>
 </template>
 <script>
-import Signout from './Signout.vue';
+import Signout from "./Signout.vue";
 
 export default {
-  name: "ClinicNav"
-  ,components: {
-    Signout
+  name: "ClinicNav",
+  components: {
+    Signout,
   },
   data() {
     return {

@@ -1,15 +1,15 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <Title :msg="msg" />
+      <TitleLogin :msg="msg" />
       <LoginForm />
     </div>
   </section>
 </template>
 
 <script>
-import Title from "@/components/Title.vue";
-import LoginForm from "@/components/LoginForm.vue";
+import TitleLogin from "@/components/Title.vue";
+import LoginForm from "@/components/Authentication/LoginForm.vue";
 export default {
   name: "Login",
   data() {
@@ -18,7 +18,7 @@ export default {
     };
   },
   components: {
-    Title,
+    TitleLogin,
     LoginForm,
   },
 };

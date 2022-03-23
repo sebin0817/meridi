@@ -26,7 +26,7 @@
             >Profile</router-link
           >
         </li>
-        <Signout/>
+        <Signout />
       </ul>
       <div class="icon">
         <i
@@ -55,19 +55,19 @@
           <li>
             <router-link class="link" :to="{ name: '' }">Profile</router-link>
           </li>
-          <Signout/>
+          <Signout />
         </ul>
       </transition>
     </nav>
   </header>
 </template>
 <script>
-import Signout from './Signout.vue';
+import Signout from "./Signout.vue";
 
 export default {
-  name: "CustomerNav"
-  ,components: {
-    Signout
+  name: "CustomerNav",
+  components: {
+    Signout,
   },
   data() {
     return {

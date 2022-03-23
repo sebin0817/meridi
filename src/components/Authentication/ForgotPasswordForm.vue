@@ -19,10 +19,9 @@
 
 <script>
 import { Message } from "@element-plus/icons-vue";
-import { doc, getDoc } from "firebase/firestore";
-import firebaseApp from "../firebase.js";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import firebaseApp from "../../firebase.js";
 
 const db = getFirestore(firebaseApp);
 
