@@ -1,7 +1,7 @@
 <template>
   <section class="form">
-    <div v-if="!validemail" class="hero-text container">
-      <h4 id="centre">To reset password, enter your email:</h4>
+    <div v-if="!validemail">
+      <h4 id="centre">To reset password, please enter your email:</h4>
       <div>
         <form id="forgot-password-form" @submit.prevent="forgotpassword">
           <el-input id="email" v-model="email" type="email" placeholder="Email"
@@ -73,13 +73,14 @@ export default {
   width: 50ch;
 }
 button {
+  margin: auto;
+  margin-top: 10px;
   background-color: #ffcc00;
   border: none;
   color: black;
-  padding: 9px;
+  padding: 10px;
   border-radius: 4px;
-  margin-top: 10px;
-  align-items: center;
+  font-weight: bold;
   font-family: "Nunito Sans", sans-serif;
 }
 button:hover {

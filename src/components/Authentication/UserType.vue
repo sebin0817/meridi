@@ -35,6 +35,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 .el-row {
   justify-content: space-evenly;
 }
@@ -49,13 +50,15 @@ export default {
   margin-bottom: 10px;
 }
 button {
+  margin: auto;
+  margin-top: 10px;
   background-color: #ffcc00;
   border: none;
   color: black;
   padding: 10px;
   border-radius: 4px;
   font-weight: bold;
-  margin-top: 10px;
+  font-family: "Nunito Sans", sans-serif;
 }
 button:hover {
   background: #ffc400;

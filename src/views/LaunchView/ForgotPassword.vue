@@ -1,21 +1,21 @@
 <template>
   <section class="hero">
-    <div class="hero-text container">
+    <!--div class="hero-text container"-->
       <Title :msg="msg" />
       <ForgotPasswordForm />
-    </div>
+    <!--/div-->
   </section>
 </template>
 
 <script>
-import Title from "../../components/Title.vue";
+import Title from "../../components/Authentication/Title.vue";
 import ForgotPasswordForm from "../../components/Authentication/ForgotPasswordForm.vue";
 
 export default {
   name: "ForgotPassword",
   data() {
     return {
-      msg: "TCM at your fingertips",
+      msg: "Reset Password",
     };
   },
   components: {

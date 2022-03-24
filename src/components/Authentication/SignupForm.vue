@@ -1,7 +1,6 @@
 <template>
   <div class="form">
     <form @submit.prevent="register">
-      <h4 id="centre">Sign up as a Customer:</h4>
       <el-input id="email" v-model="email" type="email" placeholder="Email"
         ><template #prefix>
           <el-icon class="el-input__icon"><message /></el-icon> </template
@@ -119,13 +118,14 @@ export default {
   justify-content: center;
 }
 button {
+  margin: auto;
+  margin-top: 10px;
   background-color: #ffcc00;
   border: none;
   color: black;
   padding: 10px;
   border-radius: 4px;
-  margin-top: 10px;
-  align-items: center;
+  font-weight: bold;
   font-family: "Nunito Sans", sans-serif;
 }
 button:hover {

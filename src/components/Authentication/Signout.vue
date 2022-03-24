@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 button {
   margin-left: 16px;
   background-color: #ffcc00;
@@ -32,6 +33,7 @@ button {
   padding: 10px;
   border-radius: 4px;
   font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
 }
 button:hover {
   background: #ffc400;

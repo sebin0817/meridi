@@ -1,7 +1,6 @@
 <template>
   <div class="form">
     <el-form :model="form" @submit.prevent="login">
-      <h4 id="centre">Sign up as a Clinic:</h4>
       <form @submit.prevent="register">
         <el-input id="email" v-model="email" type="email" placeholder="Email"
           ><template #prefix>
@@ -66,9 +65,6 @@
       </form>
     </el-form>
   </div>
-  <!-- </section>
-    </div>
-  </section> -->
 </template>
 
 <script>
@@ -169,13 +165,14 @@ export default {
   width: 50ch;
 }
 button {
+  margin: auto;
+  margin-top: 10px;
   background-color: #ffcc00;
   border: none;
   color: black;
   padding: 10px;
   border-radius: 4px;
-  margin-top: 10px;
-  align-items: center;
+  font-weight: bold;
   font-family: "Nunito Sans", sans-serif;
 }
 button:hover {

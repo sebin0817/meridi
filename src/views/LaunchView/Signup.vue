@@ -1,21 +1,21 @@
 <template>
   <section class="hero">
-    <div class="hero-text container">
+    <!--div class="hero-text container"-->
       <Title :msg="msg" />
       <SignupForm />
-    </div>
+    <!--/div-->
   </section>
 </template>
 
 <script>
-import Title from "../../components/Title.vue";
+import Title from "../../components/Authentication/Title.vue";
 import SignupForm from "@/components/Authentication/SignupForm.vue";
 
 export default {
   name: "Signup",
   data() {
     return {
-      msg: "TCM at your fingertips",
+      msg: "Sign up as " + sessionStorage.getItem("tempType"),
     };
   },
   components: {

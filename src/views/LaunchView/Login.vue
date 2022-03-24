@@ -1,14 +1,14 @@
 <template>
   <section class="hero">
-    <div class="hero-text container">
+    <!--div class="hero-text container"-->
       <TitleLogin :msg="msg" />
       <LoginForm />
-    </div>
+    <!--/div-->
   </section>
 </template>
 
 <script>
-import TitleLogin from "../../components/Title.vue";
+import TitleLogin from "../../components/Authentication/Title.vue";
 import LoginForm from "../../components/Authentication/LoginForm.vue";
 
 export default {
