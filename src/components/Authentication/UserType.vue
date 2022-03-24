@@ -2,12 +2,14 @@
   <el-row :gutter="20">
     <el-col :span="6">
       <div class="item">
+        <img id="buyer" src="@/assets/buyer.png" alt="" />
         <p>Get premier TCM products and quality TCM healthcare services</p>
         <button @click="toCustomerLogin()">LOGIN as a Customer</button>
       </div></el-col
     >
     <el-col :span="6">
       <div class="item">
+        <img id="clinic" src="@/assets/hospital.png" alt="" />
         <p>Expand market reach and promote TCM products and services</p>
         <button @click="toClinicLogin()">LOGIN as a Clinic</button>
       </div></el-col
@@ -19,14 +21,22 @@ export default {
   name: "UserType",
   methods: {
     toCustomerLogin() {
-      this.$router.push('./Login');
+      this.$router.push({
+        name: "Login",
+        params: {
+          id: "Customer",
+        },
+      });
       console.log("user is a Customer");
-      sessionStorage.setItem("tempType","Customers");
     },
     toClinicLogin() {
-      this.$router.push('./Login');
+      this.$router.push({
+        name: "Login",
+        params: {
+          id: "Clinic",
+        },
+      });
       console.log("user is a Clinic");
-      sessionStorage.setItem("tempType","Clinics");
     },
   },
 };
