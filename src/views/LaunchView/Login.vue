@@ -15,7 +15,7 @@ export default {
   name: "Login",
   data() {
     return {
-      msg: "Login as a " + this.$route.params.id,
+      msg: "Login as " + sessionStorage.getItem("tempType"),
     };
   },
   components: {

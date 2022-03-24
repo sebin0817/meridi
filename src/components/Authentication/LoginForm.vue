@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { Message, Lock } from "@element-plus/icons-vue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import firebaseApp from "../../firebase.js";
@@ -45,6 +46,7 @@ import firebaseApp from "../../firebase.js";
 const db = getFirestore(firebaseApp)
 export default {
     name: 'LoginForm',
+    components: { Message, Lock },
     data() { 
       return { 
         tempType: sessionStorage.getItem("tempType"),

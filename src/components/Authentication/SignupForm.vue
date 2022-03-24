@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { Message, Lock, Avatar, MapLocation } from "@element-plus/icons-vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore"; 
 import firebaseApp from "../../firebase.js";
@@ -47,6 +48,7 @@ const db = getFirestore(firebaseApp)
 
 export default {
     name: 'SignupForm',
+    components: { Message, Lock, Avatar, MapLocation },
     data() { 
       return { 
         tempType: sessionStorage.getItem("tempType"),
