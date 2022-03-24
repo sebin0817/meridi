@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Login from "../views/Login.vue";
-import Signup from "../views/Signup.vue";
-import ForgotPassword from "../views/ForgotPassword.vue";
-import Home from "../views/Home.vue";
-import About from "../views/About.vue";
-import Clinics from "../views/Clinics.vue";
-import Products from "../views/Products.vue";
-import Cart from "../views/Cart.vue";
-import Profile from "../views/Profile.vue";
-import ClinicProducts from "../views/ClinicProducts.vue";
-import ClinicProfile from "../views/ClinicProfile.vue";
-import ClinicOrderHistory from "../views/ClinicOrderHistory.vue";
+import Login from "../views/LaunchView/Login.vue";
+import Signup from "../views/LaunchView/Signup.vue";
+import ForgotPassword from "../views/LaunchView/ForgotPassword.vue";
+import Home from "../views/LaunchView/Home.vue";
+import About from "../views/CustomersView/About.vue";
+import Clinics from "../views/CustomersView/Clinics.vue";
+import Products from "../views/CustomersView/Products.vue";
+import Cart from "../views/CustomersView/Cart.vue";
+import Profile from "../views/CustomersView/Profile.vue";
+import ClinicProducts from "../views/ClinicsView/ClinicProducts.vue";
+import ClinicProfile from "../views/ClinicsView/ClinicProfile.vue";
+import ClinicOrderHistory from "../views/ClinicsView/ClinicOrderHistory.vue";
 
 const routes = [
   {

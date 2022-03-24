@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import CustomerNav from './CustomerNav.vue';
-import ClinicNav from './ClinicNav.vue';
+import CustomerNav from '../Navigation/CustomerNav.vue';
+import ClinicNav from '../Navigation/ClinicNav.vue';
 //import firebaseApp from "../firebase.js";
 //import { getAuth } from "firebase/auth";
 //import { getFirestore, doc, getDoc } from "firebase/firestore";

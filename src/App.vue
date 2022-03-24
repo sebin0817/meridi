@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import DisplayNav from "./components/DisplayNav.vue";
+import DisplayNav from "./components/Navigation/DisplayNav.vue";
 export default {
   name: "App",
   components: {
