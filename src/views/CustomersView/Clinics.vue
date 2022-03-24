@@ -1,5 +1,5 @@
 <template>
-  <Map :postalCode="postalCode"/>
+  <Map v-if="mounted" :postalCode="postalCode"/>
   <el-container>
     <el-header><ClinicsForm/></el-header>
     <el-main><ClinicsView :clinics="clinics"/></el-main> 
@@ -49,14 +49,16 @@ export default {
         this.clinics.push(y)
         this.postalCode.push(y.postalcode)
       })
-
+      this.mounted = true
     })
+
   },
   data() {
     return {
       clinics: [],
       filteredClinics: [],
       postalCode: [],
+      mounted: false,
       search: "",
       checkedCats: ['pain', 'treatments', 'wellness', 'kids'],
       sortBy: 0 /*sorted = 1 means high -> low, sorted = 0 means low -> high */
