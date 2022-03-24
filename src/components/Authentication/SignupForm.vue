@@ -17,8 +17,8 @@
         </template>
       </el-input>
       <el-input
-        id="fullname"
-        v-model="fullname"
+        id="name"
+        v-model="name"
         type="text"
         placeholder="Full Name"
         ><template #prefix>
@@ -27,7 +27,7 @@
       <el-input
         id="postalcode"
         v-model="postalcode"
-        type="number"
+        type="text"
         placeholder="Postal Code"
         ><template #prefix>
           <el-icon class="el-input__icon"><map-location /></el-icon> </template
@@ -40,60 +40,65 @@
 </template>
 
 <script>
-import { Message, Lock, Avatar, MapLocation } from "@element-plus/icons-vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import firebaseApp from "../../firebase";
-import { getFirestore } from "firebase/firestore";
-import { doc, setDoc } from "firebase/firestore";
-const db = getFirestore(firebaseApp);
+import { getFirestore, doc, setDoc } from "firebase/firestore"; 
+import firebaseApp from "../../firebase.js";
+const db = getFirestore(firebaseApp)
 
 export default {
-  name: "SignupForm",
-  components: { Message, Lock, Avatar, MapLocation },
+    name: 'SignupForm',
+    data() { 
+      return { 
+        tempType: sessionStorage.getItem("tempType"),
+        email: '', 
+        name: '',
+        postalcode: '',
+        password: '', 
 
-  data() {
-    return {
-      id: "Undefined User",
-      email: "",
-      fullname: "",
-      postalcode: "",
-      password: "",
-    };
-  },
-  created() {
-    this.id = this.$route.params.id;
-  },
-  methods: {
-    register() {
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth, this.email, this.password)
-        .then(() => {
-          addUsertoFs(this.email, this.fullname, this.postalcode, this.id);
-          alert("Successfully registered!");
-          if (this.id == "Customer") {
-            console.log("success");
-            this.$router.push("/Products");
-          } else {
-            this.$router.push("/Profile");
-          }
-          this.emitter.emit("loginas", { userType: this.id });
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
-
-      async function addUsertoFs(email, fullname, postalcode, id) {
-        try {
-          const docRef = await setDoc(doc(db, id, email), {
-            email: email,
-            name: fullname,
-            postalcode: postalcode,
+      }; 
+    },
+    methods: {
+      register() {
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth,this.email,this.password)
+          .then(() => {
+            addUsertoFs(this.email,this.name,this.postalcode,this.tempType);
+            alert('Successfully registered!');
+            sessionStorage.setItem("useremail", this.email);
+            sessionStorage.setItem("usertype", this.tempType);
+            this.$router.push('/Products');
+            this.emitter.emit('loginas', {'userType': this.tempType})
+          })
+          .catch(error => {
+            alert(error.message);
           });
-          console.log(docRef);
-        } catch (error) {
-          console.error("Error adding document: ", error);
+
+        async function addUsertoFs(email,name,postalcode,type) {
+          try {
+            const docRef = await setDoc(doc(db,type,email), {
+            email: email, name: name, postalcode: postalcode, purchasehistory: {}
+              // purchasehistory: {
+              //   1: {
+              //     items: {
+              //       item1: ["item1",1,50],
+              //       item2: ["item2",1,50]
+              //     },
+              //     total: 100
+              //   },
+              //   2: {
+              //     items: {
+              //       item3: ["item3",1,60],
+              //       item4: ["item4",1,50]
+              //     },
+              //     total: 110
+              //   },
+              // }
+            })
+            console.log(docRef)
+          } catch (error) {
+            console.error("Error adding document: ", error);
+          }
         }
-      }
     },
   },
 };
