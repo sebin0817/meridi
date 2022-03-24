@@ -8,7 +8,7 @@
 			/>
 			<div class="cardContent">
 				<span class="text block" id="title">{{product.name}}</span>
-				<p class="text block" id="description">{{product.description}}</p>
+				<p class="text block" id="description">{{categories}}</p>
 				<p class="text block" id="price">{{price}}</p>
 			</div>
 		</el-card>
@@ -28,6 +28,21 @@ export default {
 	computed: {
 		price() {
 			return ("$" + this.product.price);
+		},
+
+		categories() {
+			let res = "";
+			let ind = 0;
+
+			for (const cat of this.product.categories) {
+				if (ind === this.product.categories.length - 1) {
+					res += cat.replace('For', " ");
+				} else {
+					res += cat.replace('For', " ") + ",";
+				}
+				ind++;
+			}
+			return res;
 		}
 	}
 }

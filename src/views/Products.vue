@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import SearchForm from '@/components/SearchForm.vue'
-import ProductsView from '@/components/ProductsView.vue'
-import ProductFilter from '@/components/ProductFilter.vue'
+import SearchForm from '@/components/CustomersProductsPage/SearchForm.vue'
+import ProductsView from '@/components/CustomersProductsPage/ProductsView.vue'
+import ProductFilter from '@/components/CustomersProductsPage/ProductFilter.vue'
 
 import { getDocs, collection, getFirestore } from 'firebase/firestore'
 import firebaseApp from '@/firebase.js'
@@ -45,7 +45,10 @@ export default {
           id: docs.id,
           name: productData.name,
           description: productData.description,
-          price: productData.price
+          price: productData.price,
+          avail: productData.avail,
+          categories: productData.categories,
+          clinic: productData.clinic
         } 
         self.products.push(product);
         });
@@ -61,7 +64,7 @@ export default {
       products: [],
       filteredProducts: [],
       search: "",
-      checkedCats: ['pain', 'treatments', 'wellness', 'kids'],
+      checkedCats: ['for pain', 'for treatments', 'for wellness', 'for kids'],
       sortBy: 0 /*sorted = 1 means high -> low, sorted = 0 means low -> high */
     }
   },
@@ -80,7 +83,13 @@ export default {
       let catNames = this.checkedCats.map(cat => {
         return cat.toLowerCase();
       });
-      return catNames.indexOf(product.description.toLowerCase()) >= 0;
+      for (const cat of product.categories) {
+        if (catNames.indexOf(cat.toLowerCase()) >=0) {
+          console.log(`hi ${cat.toLowerCase()}`)
+          return true;
+        }
+      }
+      return false;
     },
 
     filteredProductsBySearch(product) {

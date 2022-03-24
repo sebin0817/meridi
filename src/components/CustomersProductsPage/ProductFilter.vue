@@ -58,18 +58,19 @@ export default {
     methods: {
         preprocessCats(cats) {
             let processedCats = cats.map(cat => {
-                if (cat === "For Pain") {
-                    return 'pain';
-                }
-                if (cat === 'For Treatments') {
-                    return 'treatments';
-                }
-                if (cat === 'For Wellness') {
-                    return 'wellness';
-                }
-                if (cat === 'For Kids') {
-                    return 'kids';
-                }
+                // if (cat === "For Pain") {
+                //     return 'pain';
+                // }
+                // if (cat === 'For Treatments') {
+                //     return 'treatments';
+                // }
+                // if (cat === 'For Wellness') {
+                //     return 'wellness';
+                // }
+                // if (cat === 'For Kids') {
+                //     return 'kids';
+                // }
+                return cat.toLowerCase();
             });
             return processedCats;
         },

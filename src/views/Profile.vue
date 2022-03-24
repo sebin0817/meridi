@@ -2,12 +2,19 @@
   <section class="hero">
     <div class="hero-text container">
       <h4>Profile Page</h4>
+  
     </div>
   </section>
 </template>
 
 <script>
-export default {};
+
+
+export default {
+  components: {
+
+  }
+};
 </script>
 
 <style scoped>
