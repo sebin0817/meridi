@@ -17,8 +17,8 @@
         </template>
       </el-input>
       <el-input
-        id="name"
-        v-model="name"
+        id="fullname"
+        v-model="fullname"
         type="text"
         placeholder="Full Name"
         ><template #prefix>
@@ -27,7 +27,7 @@
       <el-input
         id="postalcode"
         v-model="postalcode"
-        type="text"
+        type="number"
         placeholder="Postal Code"
         ><template #prefix>
           <el-icon class="el-input__icon"><map-location /></el-icon> </template

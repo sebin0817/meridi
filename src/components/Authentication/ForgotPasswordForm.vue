@@ -1,18 +1,17 @@
 <template>
-  <section class="hero">
+  <section class="form">
     <div v-if="!validemail" class="hero-text container">
-      <h4>Please enter your email address</h4>
-      <div>   
-        <form id="forgot-password-form" @submit.prevent="forgotpassword">     
-          <input       
-            type="email"       
-            placeholder="Email address..."       
-            v-model="email"     
-            />     
-          <button type="submit">
-            RESET
-          </button>   
-        </form> 
+      <h4 id="centre">To reset password, enter your email:</h4>
+      <div>
+        <form id="forgot-password-form" @submit.prevent="forgotpassword">
+          <el-input id="email" v-model="email" type="email" placeholder="Email"
+            ><template #prefix>
+              <el-icon class="el-input__icon"><message /></el-icon> </template
+          ></el-input>
+          <div id="centre">
+            <button type="submit">RESET</button>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -53,17 +52,48 @@ export default {
 };
 </script>
 
+
 <style scoped>
-.hero {
-  background-attachment: fixed;
-  position: relative;
-  height: 100vh;
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+.form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  text-align: center;
+  width: 30%;
 }
-.hero-text {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+.el-input,
+.el-row {
+  margin-top: 10px;
   justify-content: center;
+}
+.el-select {
+  width: 50ch;
+}
+button {
+  background-color: #ffcc00;
+  border: none;
   color: black;
+  padding: 9px;
+  border-radius: 4px;
+  margin-top: 10px;
+  align-items: center;
+  font-family: "Nunito Sans", sans-serif;
+}
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+#centre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h4 {
+  font-family: "Nunito Sans", sans-serif;
 }
 </style>

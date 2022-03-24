@@ -22,3 +22,23 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+button {
+  margin-left: 16px;
+  background-color: #ffcc00;
+  border: none;
+  color: black;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+</style>
