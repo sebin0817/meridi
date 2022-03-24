@@ -19,12 +19,14 @@
 
 <script>
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { Message } from "@element-plus/icons-vue";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import firebaseApp from "../../firebase.js";
 
 const db = getFirestore(firebaseApp)
 export default {
     name: 'ForgotPasswordForm',
+    components: { Message },
     data() { 
       return { 
         email: '', 
