@@ -2,30 +2,28 @@
   <section class="hero">
     <div class="hero-text container">
       <Title :msg="msg" />
-      <LoginForm />
+      <UserType />
     </div>
   </section>
 </template>
 
 <script>
-import Title from "@/components/Title.vue";
-import LoginForm from "@/components/LoginForm.vue";
+import Title from "../../components/Authentication/Title.vue";
+import UserType from "../../components/Authentication/UserType.vue";
 export default {
-  name: "Login",
+  name: "Home",
+  components: { Title, UserType },
   data() {
     return {
-      msg: "Login as a " + this.$route.params.id,
+      msg: "TCM at your fingertips",
     };
-  },
-  components: {
-    Title,
-    LoginForm,
   },
 };
 </script>
-<style lang="scss" scoped>
+
+<style scoped>
 .hero {
-  background-image: url("../assets/TCM-trans.png");
+  background-image: url("../../assets/TCM-trans.png");
   background-size: cover;
   position: absolute;
   top: 0px;

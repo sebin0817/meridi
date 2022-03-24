@@ -1,18 +1,20 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Login from "../views/Login.vue";
-import Signup from "../views/Signup.vue";
-import ForgotPassword from "../views/ForgotPassword.vue";
-import Home from "../views/Home.vue";
-import About from "../views/About.vue";
-import Clinics from "../views/Clinics.vue";
-import Products from "../views/Products.vue";
-import Cart from "../views/Cart.vue";
-import Profile from "../views/Profile.vue";
-import ClinicProducts from "../views/ClinicProducts.vue";
+import Login from "../views/LaunchView/Login.vue";
+import Signup from "../views/LaunchView/Signup.vue";
+import Signup1 from "../views/LaunchView/Signup1.vue";
+import ForgotPassword from "../views/LaunchView/ForgotPassword.vue";
+import Home from "../views/LaunchView/Home.vue";
+import EditClinicParticulars from "../views/ClinicsView/EditClinicParticulars.vue";
+import About from "../views/CustomersView/About.vue";
+import Clinics from "../views/CustomersView/Clinics.vue";
+import Products from "../views/CustomersView/Products.vue";
+import Cart from "../views/CustomersView/Cart.vue";
+import Profile from "../views/CustomersView/Profile.vue";
+import ClinicProducts from "../views/ClinicsView/ClinicProducts.vue";
 import AddProduct from "../views/ClinicsView/AddProduct.vue";
 import EditProduct from "../views/ClinicsView/EditProduct.vue";
-import ClinicProfile from "../views/ClinicProfile.vue";
-import ClinicOrderHistory from "../views/ClinicOrderHistory.vue";
+import ClinicProfile from "../views/ClinicsView/ClinicProfile.vue";
+import ClinicOrderHistory from "../views/ClinicsView/ClinicOrderHistory.vue";
 
 const routes = [
   {
@@ -21,19 +23,29 @@ const routes = [
     component: Home,
   },
   {
-    path: "/Login/:id",
+    path: "/Login",
     name: "Login",
     component: Login,
   },
   {
-    path: "/Signup/:id",
+    path: "/Signup",
     name: "Signup",
     component: Signup,
+  },
+  {
+    path: "/Signup1",
+    name: "Signup1",
+    component: Signup1,
   },
   {
     path: "/ForgotPassword",
     name: "ForgotPassword",
     component: ForgotPassword,
+  },
+  {
+    path: "/EditClinicParticulars",
+    name: "EditClinicParticulars",
+    component: EditClinicParticulars,
   },
   {
     path: "/About",

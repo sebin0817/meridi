@@ -11,7 +11,7 @@
 <script>
 import AddProductBtn from "@/components/ClinicsProductPage/AddProductBtn.vue";
 import ProductView from "@/components/ClinicsProductPage/ProductView.vue";
-import { getAuth } from "firebase/auth";
+//import { getAuth } from "firebase/auth";
 import {
   doc,
   getDoc,
@@ -27,13 +27,21 @@ export default {
     ProductView,
     AddProductBtn,
   },
+  data() {
+    return {
+      email: "",
+      products: [],
+    };
+  },
   created() {
     var self = this;
+    self.email = sessionStorage.getItem("useremail");
+    console.log(sessionStorage.getItem("useremail"));
     async function fetchProducts() {
       //get product list from Clinics collection
-      const auth = getAuth();
-      var user = auth.currentUser.email;
-      const docRef = doc(db, "Clinics", user);
+      //const auth = getAuth();
+      //var user = auth.currentUser.email;
+      const docRef = doc(db, "Clinics", self.email);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
         const data = docSnap.data();
@@ -56,16 +64,11 @@ export default {
           self.products.push(product);
         }
       });
-    } 
+    }
     fetchProducts();
   },
   updated() {
     location.reload();
-  },
-  data() {
-    return {
-      products: [],
-    };
   },
   computed: {
     clinicProducts() {

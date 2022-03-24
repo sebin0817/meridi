@@ -1,13 +1,19 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <h4>Profile Page</h4>
+      <EditParticularsForm/>
     </div>
   </section>
 </template>
 
 <script>
-export default {};
+import EditParticularsForm from '../../components/ClinicsProfilePage/EditParticularsForm.vue'
+export default {
+    name: 'EditCustomerParticulars',
+    components: {
+      EditParticularsForm,
+    },
+};
 </script>
 
 <style scoped>

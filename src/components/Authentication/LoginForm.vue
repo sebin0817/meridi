@@ -31,7 +31,7 @@
 <script>
 import { Message, Lock } from "@element-plus/icons-vue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import firebaseApp from "../firebase.js";
+import firebaseApp from "../../firebase.js";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
 
@@ -40,7 +40,7 @@ export default {
   components: { Message, Lock },
   data() {
     return {
-      id: "Undefined User",
+      tempType: sessionStorage.getItem("tempType"),
       email: "",
       password: "",
     };
@@ -51,18 +51,19 @@ export default {
   methods: {
     async login() {
       const auth = getAuth();
-      const docRef = doc(db, this.id + "s", this.email);
+      const docRef = doc(db, this.tempType, this.email);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         signInWithEmailAndPassword(auth, this.email, this.password)
           .then(() => {
-            if (this.id == "Customer") {
-              console.log("success");
+            sessionStorage.setItem("useremail", this.email);
+            sessionStorage.setItem("usertype", this.tempType);
+            if (this.tempType == "Customers") {
               this.$router.push("/Products");
             } else {
-              this.$router.push("/Profile");
+              this.$router.push("/ClinicProfile");
             }
-            this.emitter.emit("loginas", { userType: this.id + "s" });
+            this.emitter.emit("loginas", { userType: this.tempType });
             alert("Successfully logged in");
           })
           .catch((error) => {
@@ -73,12 +74,12 @@ export default {
       }
     },
     goToSignup() {
-      this.$router.push({
-        name: "Signup",
-        params: {
-          id: this.id + "s",
-        },
-      });
+      console.log(Object.keys(sessionStorage))
+      if (this.tempType == "Customers") {
+        this.$router.push("./Signup");
+      } else {
+        this.$router.push("./Signup1");
+      }
     },
     goToReset() {
       this.$router.push("../ForgotPassword");
