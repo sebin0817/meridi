@@ -56,7 +56,6 @@ export default {
         name: '',
         postalcode: '',
         password: '', 
-
       }; 
     },
     methods: {
@@ -74,7 +73,6 @@ export default {
           .catch(error => {
             alert(error.message);
           });
-
         async function addUsertoFs(email,name,postalcode,type) {
           try {
             const docRef = await setDoc(doc(db,type,email), {
@@ -120,7 +118,6 @@ export default {
   margin-bottom: 10px;
   justify-content: center;
 }
-
 button {
   background-color: #ffcc00;
   border: none;

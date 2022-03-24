@@ -1,6 +1,6 @@
 <template>
   <section>
-    <img id="logo" src="@/assets/meridi.png" alt="" />
+    <img id="logo" src="../../assets/meridi.png" alt="" />
     <div id="slogan">
       {{ msg }}
     </div>

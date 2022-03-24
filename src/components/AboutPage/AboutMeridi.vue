@@ -5,7 +5,7 @@
         <el-row :gutter="20">
           <el-col :span="12">
             <div class="image">
-              <img id="logo" src="@/assets/TCM.jpg" alt="" />
+              <img id="logo" src="../../assets/TCM.jpg" alt="" />
             </div>
           </el-col>
 
@@ -13,7 +13,7 @@
             <div class="text">
               <img
                 id="quotation"
-                src="@/assets/quotation-mark-black.png"
+                src="../../assets/quotation-mark-black.png"
                 alt=""
               />
               <p id="slogan">TCM at your finger print</p>

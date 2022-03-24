@@ -23,8 +23,8 @@
 
 <script>
 // @ is an alias to /src
-import AboutMeridi from "../../components/AboutMeridi.vue";
-import AboutTCM from "../../components/AboutTCM.vue";
+import AboutMeridi from "../../components/AboutPage/AboutMeridi.vue";
+import AboutTCM from "../../components/AboutPage/AboutTCM.vue";
 export default {
   name: "About",
   components: { AboutMeridi, AboutTCM },

@@ -23,7 +23,6 @@
 <script> 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"; 
 import firebaseApp from "../../firebase.js";
-
 const db = getFirestore(firebaseApp)
 export default {
     name: 'EditParticularsForm',

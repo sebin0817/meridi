@@ -1,21 +1,20 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <EditParticularsForm/>
+      <AddProductForm />
     </div>
   </section>
 </template>
-
 <script>
-import EditParticularsForm from '../../components/ClinicsProfilePage/EditParticularsForm.vue'
-export default {
-    name: 'EditCustomerParticulars',
-    components: {
-      EditParticularsForm,
-    },
-};
-</script>
+import AddProductForm from "@/components/ClinicsProductPage/AddProductForm.vue";
 
+export default {
+  name: "AddProduct",
+  components: {
+    AddProductForm,
+  },
+}
+</script>
 <style scoped>
 .hero {
   background-attachment: fixed;

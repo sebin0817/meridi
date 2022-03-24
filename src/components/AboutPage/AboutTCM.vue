@@ -140,43 +140,43 @@ export default {
 
 <style scoped>
 #accupuncture {
-  background-image: url("../assets/TCM/accupuncture.png");
+  background-image: url("../../assets/TCM/accupuncture.png");
 }
 #accupuncture:hover {
-  background-image: url("../assets/TCM/accupuncture1.png");
+  background-image: url("../../assets/TCM/accupuncture1.png");
 }
 #tuina {
-  background-image: url("../assets/TCM/tunia.png");
+  background-image: url("../../assets/TCM/tunia.png");
 }
 #tuina:hover {
-  background-image: url("../assets/TCM/tunia1.png");
+  background-image: url("../../assets/TCM/tunia1.png");
 }
 #herbal {
-  background-image: url("../assets/TCM/herbal.png");
+  background-image: url("../../assets/TCM/herbal.png");
 }
 #herbal {
-  background-image: url("../assets/TCM/herbal.png");
+  background-image: url("../../assets/TCM/herbal.png");
 }
 #herbal:hover {
-  background-image: url("../assets/TCM/herbal1.png");
+  background-image: url("../../assets/TCM/herbal1.png");
 }
 #guasha {
-  background-image: url("../assets/TCM/guasha.png");
+  background-image: url("../../assets/TCM/guasha.png");
 }
 #guasha:hover {
-  background-image: url("../assets/TCM/guasha1.png");
+  background-image: url("../../assets/TCM/guasha1.png");
 }
 #cupping {
-  background-image: url("../assets/TCM/cupping.png");
+  background-image: url("../../assets/TCM/cupping.png");
 }
 #cupping:hover {
-  background-image: url("../assets/TCM/cupping1.png");
+  background-image: url("../../assets/TCM/cupping1.png");
 }
 #device {
-  background-image: url("../assets/TCM/device.png");
+  background-image: url("../../assets/TCM/device.png");
 }
 #device:hover {
-  background-image: url("../assets/TCM/device1.png");
+  background-image: url("../../assets/TCM/device1.png");
 }
 .hero {
   background-attachment: fixed;

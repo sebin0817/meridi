@@ -77,7 +77,6 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from "../../firebase.js";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
-
 export default {
   name: "SignupForm",
   components: { Message, Lock, Avatar, MapLocation },
