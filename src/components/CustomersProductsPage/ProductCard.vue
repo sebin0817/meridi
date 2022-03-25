@@ -2,17 +2,18 @@
 	<div class="container">
 		<el-card shadow="hover">
 			<img
-				src="@/assets/TCM.jpg"
+				:src="`${product.imgURL}`"
 				alt="product img"
 				class="image"
 			/>
+      
 			<div class="cardContent">
 
 				<span class="text block" id="title">{{product.name}}</span>
 				<p class="text block" id="description">{{categories}}</p>
 				<p class="text block" id="price">{{price}}</p>
-				<router-link :to="{name:'IndividualProduct', params: {id:product.id}}">
-					<button>View</button>
+          <router-link :to="{name:'IndividualProduct', params: {id:product.id}}">
+					<button @click="sendData">View</button>
 				</router-link>
 			</div>
 		</el-card>
@@ -28,6 +29,17 @@ export default {
 			type: Object
 		}
 	},
+
+  methods: {
+    sendData() {
+        this.$router.push({
+        name: 'IndividualProduct',
+        params: {
+          name: this.product.name
+        }
+      })
+    }
+  },
 
 	computed: {
 		price() {

@@ -36,7 +36,10 @@ const routes = [
   {
     path: "/Products/show/:id",
     name: 'IndividualProduct',
-    component: IndividualProduct
+    component: IndividualProduct,
+    props: {
+      myProperty: {name: String}
+    }
   }
 ];
 

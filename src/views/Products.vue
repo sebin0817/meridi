@@ -48,7 +48,8 @@ export default {
           price: productData.price,
           avail: productData.avail,
           categories: productData.categories,
-          clinic: productData.clinic
+          clinic: productData.clinic,
+          imgURL: productData.image
         } 
         self.products.push(product);
         });
