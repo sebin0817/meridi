@@ -4,6 +4,7 @@ import Signup from "../views/LaunchView/Signup.vue";
 import Signup1 from "../views/LaunchView/Signup1.vue";
 import ForgotPassword from "../views/LaunchView/ForgotPassword.vue";
 import Home from "../views/LaunchView/Home.vue";
+import EditCustomerParticulars from "../views/CustomersView/EditCustomerParticulars.vue";
 import EditClinicParticulars from "../views/ClinicsView/EditClinicParticulars.vue";
 import About from "../views/CustomersView/About.vue";
 import Clinics from "../views/CustomersView/Clinics.vue";
@@ -41,6 +42,11 @@ const routes = [
     path: "/ForgotPassword",
     name: "ForgotPassword",
     component: ForgotPassword,
+  },
+  {
+    path: "/EditCustomerParticulars",
+    name: "EditCustomerParticulars",
+    component: EditCustomerParticulars,
   },
   {
     path: "/EditClinicParticulars",

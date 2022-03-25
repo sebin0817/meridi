@@ -1,28 +1,42 @@
 <template>
-  <section class="hero">
-    <div class="hero-text container">
-      <form @submit.prevent="update">        
-            <input       
-            v-model="name"   
-            />   
-            <input
-            v-model="postalcode"   
-            />    
-          <button type="submit">
-            SAVE CHANGE
-          </button>   
-        </form> 
-    </div>
-  </section>
+<div class="form">
+    <form @submit.prevent="update">
+      <el-row>
+      <el-input
+        id="name"
+        v-model="name"
+        type="text"
+        placeholder="Full Name"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><avatar /></el-icon> </template
+      ></el-input>
+      </el-row>
+      <el-row>
+      <el-input
+        id="postalcode"
+        v-model="postalcode"
+        type="number"
+        placeholder="Postal Code"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><map-location /></el-icon> </template
+      ></el-input>
+      </el-row>
+      <div id="centre">
+        <button type="submit">SAVE CHANGE</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script> 
+import { Avatar, MapLocation } from "@element-plus/icons-vue";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"; 
 import firebaseApp from "../../firebase.js";
 
 const db = getFirestore(firebaseApp)
 export default {
     name: 'EditParticularsForm',
+    components: { Avatar, MapLocation },
     data() {
         return {
           name: '',
@@ -55,16 +69,40 @@ export default {
 </script>
 
 <style scoped>
-.hero {
-  background-attachment: fixed;
-  position: relative;
-  height: 100vh;
+.form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  text-align: center;
+  width: 30%;
 }
-.hero-text {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+.el-input,
+.el-row {
+  margin-bottom: 10px;
   justify-content: center;
+}
+button {
+  margin: auto;
+  margin-top: 10px;
+  background-color: #ffcc00;
+  border: none;
   color: black;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+#centre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

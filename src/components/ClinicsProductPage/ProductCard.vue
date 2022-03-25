@@ -47,10 +47,8 @@ export default {
   },
   methods: {
     editProduct() {
-      this.$router.push({
-        name: "EditProduct",
-        params: { id: this.product.id },
-      });
+      this.$router.push('./EditProduct')
+      sessionStorage.setItem("productid", this.product.id);
     },
     async deleteProduct() {
       try {
@@ -61,8 +59,7 @@ export default {
           products: arrayRemove(this.product.id),
         });
         alert("Product successfullly deleted");
-        //location.reload(); //reload to show changes
-        this.$router.replace('./ClinicProducts');
+        location.reload(); //reload to show changes
         }
       } catch (error) {
         console.error("Error updating document: ", error);

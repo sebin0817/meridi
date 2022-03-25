@@ -36,7 +36,6 @@ export default {
   created() {
     var self = this;
     self.email = sessionStorage.getItem("useremail");
-    console.log(sessionStorage.getItem("useremail"));
     async function fetchProducts() {
       //get product list from Clinics collection
       //const auth = getAuth();
@@ -66,9 +65,6 @@ export default {
       });
     }
     fetchProducts();
-  },
-  updated() {
-    location.reload();
   },
   computed: {
     clinicProducts() {

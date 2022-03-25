@@ -1,19 +1,27 @@
 <template>
   <div class="form" @submit.prevent="edit">
     <form>
-      <el-input id="name" v-model="name" type="text" placeholder="Product Name"
-        ><template #prefix>
-          <el-icon class="el-input__icon"><Sell /></el-icon> </template
-      ></el-input>
-      <el-input
-        id="price"
-        v-model="price"
-        type="number"
-        placeholder="Product Price"
-        ><template #prefix>
-          <el-icon class="el-input__icon"><Coin /></el-icon>
-        </template>
-      </el-input>
+      <el-row>
+        <el-input
+          id="name"
+          v-model="name"
+          type="text"
+          placeholder="Product Name"
+          ><template #prefix>
+            <el-icon class="el-input__icon"><Sell /></el-icon> </template
+        ></el-input>
+      </el-row>
+      <el-row>
+        <el-input
+          id="product"
+          v-model="price"
+          type="number"
+          placeholder="Product Price"
+          ><template #prefix>
+            <el-icon class="el-input__icon"><Coin /></el-icon>
+          </template>
+        </el-input>
+      </el-row>
       <el-row>
         <el-input
           id="textarea"
@@ -85,7 +93,7 @@ export default {
   created() {
     var self = this;
     async function fetchProduct() {
-      const docRef = doc(db, "Products", self.$route.params.id);
+      const docRef = doc(db, "Products", sessionStorage.getItem("productid"));
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
         const data = docSnap.data();
@@ -140,13 +148,14 @@ export default {
   width: 100%;
 }
 button {
+  margin: auto;
+  margin-top: 10px;
   background-color: #ffcc00;
   border: none;
   color: black;
   padding: 10px;
   border-radius: 4px;
-  margin-top: 10px;
-  align-items: center;
+  font-weight: bold;
   font-family: "Nunito Sans", sans-serif;
 }
 button:hover {

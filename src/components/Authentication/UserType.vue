@@ -4,14 +4,14 @@
       <div class="item">
         <img id="buyer" src="@/assets/buyer.png" alt="" />
         <p>Get premier TCM products and quality TCM healthcare services</p>
-        <button @click="toCustomerLogin()">LOGIN as a Customer</button>
+        <button @click="toCustomerLogin()">LOGIN as Customers</button>
       </div></el-col
     >
     <el-col :span="6">
       <div class="item">
         <img id="clinic" src="@/assets/hospital.png" alt="" />
         <p>Expand market reach and promote TCM products and services</p>
-        <button @click="toClinicLogin()">LOGIN as a Clinic</button>
+        <button @click="toClinicLogin()">LOGIN as Clinics</button>
       </div></el-col
     >
   </el-row>

@@ -33,7 +33,6 @@ export default {
 </script>
 <style scoped>
 #purchase-history-div {
-
 }
 .order {
   border-width: 3px;
@@ -41,9 +40,7 @@ export default {
   margin-bottom: 30px;
   border-color: #e6e6e6;
   padding: 10px;
-
 }
 .item {
-
 }
 </style>

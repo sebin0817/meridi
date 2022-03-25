@@ -15,7 +15,7 @@ export default {
   name: "Signup",
   data() {
     return {
-      msg: "TCM at your fingertips",
+      msg: "Sign up as " + sessionStorage.getItem("tempType"),
     };
   },
   components: {

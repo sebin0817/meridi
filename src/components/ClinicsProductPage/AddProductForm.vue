@@ -1,19 +1,27 @@
 <template>
   <div class="form" @submit.prevent="add">
     <form>
-      <el-input id="name" v-model="name" type="text" placeholder="Product Name"
-        ><template #prefix>
-          <el-icon class="el-input__icon"><Sell /></el-icon> </template
-      ></el-input>
-      <el-input
-        id="price"
-        v-model="price"
-        type="number"
-        placeholder="Product Price"
-        ><template #prefix>
-          <el-icon class="el-input__icon"><Coin /></el-icon>
-        </template>
-      </el-input>
+      <el-row>
+        <el-input
+          id="name"
+          v-model="name"
+          type="text"
+          placeholder="Product Name"
+          ><template #prefix>
+            <el-icon class="el-input__icon"><Sell /></el-icon> </template
+        ></el-input>
+      </el-row>
+      <el-row>
+        <el-input
+          id="product"
+          v-model="price"
+          type="number"
+          placeholder="Product Price"
+          ><template #prefix>
+            <el-icon class="el-input__icon"><Coin /></el-icon>
+          </template>
+        </el-input>
+      </el-row>
       <el-row>
         <el-input
           id="textarea"
@@ -141,13 +149,14 @@ export default {
   width: 100%;
 }
 button {
+  margin: auto;
+  margin-top: 10px;
   background-color: #ffcc00;
   border: none;
   color: black;
   padding: 10px;
   border-radius: 4px;
-  margin-top: 10px;
-  align-items: center;
+  font-weight: bold;
   font-family: "Nunito Sans", sans-serif;
 }
 button:hover {

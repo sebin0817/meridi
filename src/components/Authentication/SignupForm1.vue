@@ -1,81 +1,95 @@
 <template>
   <div class="form">
-    <el-form :model="form" @submit.prevent="login">
-      <form @submit.prevent="register">
-        <el-input id="email" v-model="email" type="email" placeholder="Email"
-          ><template #prefix>
-            <el-icon class="el-input__icon"><message /></el-icon> </template
-        ></el-input>
-        <el-input
-          id="password"
-          v-model="password"
-          type="password"
-          placeholder="Password"
-          show-password
-          ><template #prefix>
-            <el-icon class="el-input__icon"><lock /></el-icon>
-          </template>
-        </el-input>
-        <el-input
-          id="name"
-          v-model="name"
-          type="text"
-          placeholder="Full Name"
-          ><template #prefix>
-            <el-icon class="el-input__icon"><avatar /></el-icon> </template
-        ></el-input>
-        <el-input
-          id="postalcode"
-          v-model="postalcode"
-          type="text"
-          placeholder="Postal Code"
-          ><template #prefix>
-            <el-icon class="el-input__icon"
-              ><map-location
-            /></el-icon> </template
-        ></el-input>
+    <el-form :model="form" @submit.prevent="register">
+      <el-input
+        id="email"
+        v-model="email"
+        type="email"
+        placeholder="Email"
+        required="true"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><message /></el-icon> </template
+      ></el-input>
+      <el-input
+        id="password"
+        v-model="password"
+        type="password"
+        placeholder="Password"
+        required="true"
+        show-password
+        ><template #prefix>
+          <el-icon class="el-input__icon"><lock /></el-icon>
+        </template>
+      </el-input>
+      <el-input
+        id="name"
+        v-model="name"
+        type="text"
+        placeholder="Company Name"
+        required="true"
+        ><template #prefix>
+          <el-icon class="el-input__icon"
+            ><office-building
+          /></el-icon> </template
+      ></el-input>
+      <el-input
+        id="postalcode"
+        v-model="postalcode"
+        type="text"
+        placeholder="Postal Code"
+        required="true"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><map-location /></el-icon> </template
+      ></el-input>
 
-        <el-row>
-          <el-input
-            id="textarea"
-            :rows="2"
-            type="textarea"
-            placeholder="Company Description"
-            v-model="desc"
-          />
-        </el-row>
-        <el-row>
-          <el-select
-            v-model="services"
-            multiple
-            placeholder="Service(s) Provided"
+      <el-row>
+        <el-input
+          id="textarea"
+          :rows="2"
+          type="textarea"
+          placeholder="Company Description"
+          required="true"
+          v-model="desc"
+        />
+      </el-row>
+      <el-row>
+        <el-select
+          v-model="services"
+          multiple
+          placeholder="Service(s) Provided"
+          required="true"
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
           >
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
-        </el-row>
-        <div id="centre">
-          <button type="submit">SIGN UP</button>
-        </div>
-      </form>
+          </el-option>
+        </el-select>
+      </el-row>
+      <div id="centre">
+        <button type="submit">SIGN UP</button>
+      </div>
     </el-form>
+    <h4 @click="goToLogin()">ALREADY HAVE AN ACCOUNT? LOGIN</h4>
   </div>
 </template>
 
 <script>
-import { Message, Lock, Avatar, MapLocation } from "@element-plus/icons-vue";
+import {
+  Message,
+  Lock,
+  OfficeBuilding,
+  MapLocation,
+} from "@element-plus/icons-vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from "../../firebase.js";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
 export default {
   name: "SignupForm",
-  components: { Message, Lock, Avatar, MapLocation },
+  components: { Message, Lock, OfficeBuilding, MapLocation },
   data() {
     return {
       tempType: sessionStorage.getItem("tempType"),
@@ -143,6 +157,9 @@ export default {
         }
       }
     },
+    goToLogin() {
+      this.$router.replace("./Login");
+    },
   },
 };
 </script>
@@ -189,8 +206,11 @@ button:focus {
   align-items: center;
 }
 h4 {
+  font-weight: bold;
+  margin-top: 10px;
   font-family: "Nunito Sans", sans-serif;
-  margin-bottom: 10px;
-  font-size: 20px;
+}
+h4:hover {
+  cursor: pointer;
 }
 </style>
