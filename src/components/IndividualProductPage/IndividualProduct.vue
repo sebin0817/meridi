@@ -22,13 +22,14 @@
 export default {
     data() {
         return {
-            product: {
-                name: 'Beauty Enhance',
-                description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, perferendis? In, porro est. Eum asperiores iste eos maxime saepe consequuntur, quas tempora eaque culpa excepturi perferendis recusandae. Tempore, rem corporis.", 
-                price: 75,
-                clinic: 'Eu Yan Sang Singapore' 
-            }
+            product: {}
         }
+    },
+
+    props: ["baseURL", "products"],
+
+    mounted() {
+      this.id = this.$route.params.id;
     },
 
     computed: {

@@ -7,9 +7,13 @@
 				class="image"
 			/>
 			<div class="cardContent">
+
 				<span class="text block" id="title">{{product.name}}</span>
 				<p class="text block" id="description">{{categories}}</p>
 				<p class="text block" id="price">{{price}}</p>
+				<router-link :to="{name:'IndividualProduct', params: {id:product.id}}">
+					<button>View</button>
+				</router-link>
 			</div>
 		</el-card>
 	</div>
@@ -51,6 +55,27 @@ export default {
 <style>
 el-card {
 	padding: 0px;
+}
+
+button {
+  margin: 10px;
+  background-color: #ffcc00;
+  border: none;
+  color: black;
+  padding: 10px 15px 10px 15px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
 }
 
 .container {

@@ -4,6 +4,7 @@ import Clinics from "../views/Clinics.vue";
 import Products from "../views/Products.vue";
 import Cart from "../views/Cart.vue";
 import Profile from "../views/Profile.vue";
+import IndividualProduct from "../components/IndividualProductPage/IndividualProduct.vue"
 
 const routes = [
   {
@@ -31,6 +32,12 @@ const routes = [
     name: "Profile",
     component: Profile,
   },
+
+  {
+    path: "/Products/show/:id",
+    name: 'IndividualProduct',
+    component: IndividualProduct
+  }
 ];
 
 const router = createRouter({
