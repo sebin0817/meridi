@@ -1,17 +1,26 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <h4>Order History</h4>
+      <OrderHistory />
     </div>
   </section>
 </template>
 
 <script>
-export default {};
+import OrderHistory from "@/components/ClinicsOrdersPage/OrderHistory.vue";
+
+export default {
+  name: "Login",
+  components: {
+    OrderHistory,
+  },
+};
 </script>
 
 <style scoped>
 .hero {
+  background-attachment: fixed;
+  position: absolute;
   background-attachment: fixed;
   position: relative;
   height: 100vh;
