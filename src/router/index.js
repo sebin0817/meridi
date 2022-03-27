@@ -16,6 +16,7 @@ import AddProduct from "../views/ClinicsView/AddProduct.vue";
 import EditProduct from "../views/ClinicsView/EditProduct.vue";
 import ClinicProfile from "../views/ClinicsView/ClinicProfile.vue";
 import ClinicOrderHistory from "../views/ClinicsView/ClinicOrderHistory.vue";
+import IndividualProduct from "../components/IndividualProductPage/IndividualProduct.vue";
 
 const routes = [
   {
@@ -103,6 +104,15 @@ const routes = [
     name: "ClinicOrderHistory",
     component: ClinicOrderHistory,
   },
+
+  {
+    path: "/Products/show/:id",
+    name: 'IndividualProduct',
+    component: IndividualProduct,
+    props: {
+      myProperty: {name: String}
+    }
+  }
 ];
 
 const router = createRouter({
