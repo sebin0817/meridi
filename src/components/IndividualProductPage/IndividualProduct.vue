@@ -1,21 +1,32 @@
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-header>
-        <h2>{{product.name}}</h2>
-        <h4>{{clinic}}</h4>
-      </el-header>
-      <el-container>
-        <el-aside width="600px">
-            <img :src="product.imgURL" alt="product">
-        </el-aside>
-        <el-main>
-            <p>{{price}}</p>
-            <p>{{product.description}}</p>
-        </el-main>
-      </el-container>
-    </el-container>
-  </div>
+  <section class="hero">
+    <div class="hero-text container">
+      <section id="product">
+        <div id="aside">
+            <img
+              :src="`${product.imgURL}`"
+              alt="product img"
+              class="image"
+              style="height:100%; width:100%"
+            />
+        </div>
+          <div id="main" class="text">
+              <div>
+                <h2 id="name">{{product.name}}</h2>
+                <h2 id="clinic">{{clinic}}</h2>
+                <h2 id="price">{{price}}</h2>
+              </div>
+
+              <div>
+                <h2 style="font-size:20px;font-weight:bold">Description</h2>
+                <p id="description">{{product.description}}</p>
+              </div>           
+          </div>
+      
+      </section>
+    </div>
+  </section>
+  
 </template>
 
 <script>
@@ -31,9 +42,9 @@ export default {
         }
     },
 
-    props: {
-      name: String
-    },
+    // props: {
+    //   name: String
+    // },
 
     mounted() {
       this.id = this.$route.params.id;
@@ -68,16 +79,77 @@ export default {
   },
 
     computed: {
-        clinic() {
-            return ("@" + this.product.clinic);
-        },
-        price() {
-            return ("$" + this.product.price); 
-        }
+      name() {
+        return ("" + this.product.name);
+      },
+
+      clinic() {
+          return ("Sold at: " + this.product.clinic);
+      },
+
+      price() {
+          return ("$" + this.product.price); 
+      }
     }
 }
 </script>
 
 <style>
+
+html {
+  font-size: 62.5%;
+}
+
+.hero {
+  background-attachment: fixed;
+  position: relative;
+  height: 100vh;
+  background-color: white;
+}
+
+.hero-text {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: black;
+}
+
+.text {
+	font-family: "Georgia", Times, serif;
+	line-height: 1.6;
+}
+
+#product {
+  display: flex;
+  margin-top: 15rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70rem;
+  align-items: center;
+}
+
+#aside {
+  flex: 1;
+  margin: 3rem;
+}
+
+#main {
+  flex: 2;
+  margin: 3rem;
+}
+
+#name {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#clinic {
+  font-weight: 600;
+}
+
+#price {
+  font-weight: 600;
+}
 
 </style>

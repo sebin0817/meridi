@@ -1,14 +1,15 @@
 <template>
-  <main>
-		<el-row>
+  <main >
+		<el-row class="container">
 				<el-col
 					v-for="product in products"
 					:key="product"
-					:span="6"
+            :span="8"
 				>
 					<ProductCard
 						:product="product"
 						:key="product.id"
+            class="card-wrap"
 					/>
 				</el-col>
 			</el-row>
@@ -41,6 +42,15 @@ export default {
 </script>
 
 <style>
+.container { 
+  display: flex; 
+  flex-flow: row wrap;
+}
 
+.card-wrap {
+  flex: 0 0 33.333%;
+  display: flex;
+  padding: 10px; /* gutter width */
+}
 
 </style>

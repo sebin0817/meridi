@@ -1,20 +1,24 @@
 <template>
 	<div class="container">
 		<el-card shadow="hover">
-			<img
-				:src="`${product.imgURL}`"
-				alt="product img"
-				class="image"
-			/>
+      <div class="image">
+        <img
+          :src="`${product.imgURL}`"
+          alt="product img"
+        />
+      </div>
       
 			<div class="cardContent">
-
-				<span class="text block" id="title">{{product.name}}</span>
-				<p class="text block" id="description">{{categories}}</p>
-				<p class="text block" id="price">{{price}}</p>
-          <router-link :to="{name:'IndividualProduct', params: {id:product.id}}">
-					<button @click="sendData">View</button>
-				</router-link>
+        <div class="header">
+          <span class="text block" id="title">{{product.name}}</span>
+          <p class="text block" id="description">{{categories}}</p>
+        </div>
+        <div class="mid">
+          <p class="text block" id="price">{{price}}</p>
+            <router-link :to="{name:'IndividualProduct', params: {id:product.id}}">
+            <button @click="sendData">View</button>
+          </router-link>
+        </div>
 			</div>
 		</el-card>
 	</div>
@@ -67,6 +71,7 @@ export default {
 <style>
 el-card {
 	padding: 0px;
+  height: 200px;
 }
 
 button {
@@ -78,6 +83,11 @@ button {
   border-radius: 4px;
   font-weight: bold;
   font-family: "Nunito Sans", sans-serif;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
 }
 
 button:hover {
@@ -98,11 +108,13 @@ button:focus {
 .cardContent {
 	padding: 14px;
 	text-align: center;
+  height: 150px;
 }
 
 .image {
-  width: 100%;
-  display: block;
+  width: 150px;
+  height: 150px;
+  text-align: center;
 }
 
 .text {
@@ -112,6 +124,10 @@ button:focus {
 
 .block {
 	display: block;
+}
+
+.header {
+  height: 60px;
 }
 
 #title {

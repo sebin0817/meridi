@@ -122,6 +122,10 @@ export default {
 </script>
 
 <style scoped>
+html {
+  font-size: 62.5%;
+}
+
 .hero {
   background-attachment: fixed;
   position: relative;
@@ -129,7 +133,7 @@ export default {
 }
 
 .hero-text {
-
+  justify-content: center;
   height: 100%;
   display: flex;
   flex-direction: column; 
@@ -137,9 +141,10 @@ export default {
 }
 
 #products {
-  margin-top: 150px;
-  margin-left: 150px;
-  margin-right: 150px;
+  margin-top: 20rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100rem;
 }
 
 
