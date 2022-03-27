@@ -21,6 +21,11 @@
                 <h2 style="font-size:20px;font-weight:bold">Description</h2>
                 <p id="description">{{product.description}}</p>
               </div>           
+
+              <div class="cart">
+                <el-input-number v-model="qty" :step="1"/>
+                <button @click="addToCart">Add to Cart</button>
+              </div>
           </div>
       
       </section>
@@ -38,13 +43,10 @@ const db = getFirestore(firebaseApp);
 export default {
     data() {
         return {
-          product: {}
+          product: {},
+          qty: 1
         }
     },
-
-    // props: {
-    //   name: String
-    // },
 
     mounted() {
       this.id = this.$route.params.id;
@@ -90,7 +92,8 @@ export default {
       price() {
           return ("$" + this.product.price); 
       }
-    }
+    },
+
 }
 </script>
 
@@ -150,6 +153,10 @@ html {
 
 #price {
   font-weight: 600;
+}
+
+#description {
+  font-size: 15px;
 }
 
 </style>
