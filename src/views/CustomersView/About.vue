@@ -45,6 +45,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+
 .hero {
   background-attachment: fixed;
   position: relative;
@@ -65,7 +67,7 @@ export default {
 
     .el-menu {
       position: absolute;
-      top: 200px;
+      top: 130px;
       left: 0px;
       right: 0px;
       display: flex;
@@ -75,6 +77,7 @@ export default {
     .el-menu-item {
       font-size: 32px;
       font-weight: bold;
+      font-family: "Nunito Sans", sans-serif;
     }
     .el-menu-item:hover {
       background: none !important;

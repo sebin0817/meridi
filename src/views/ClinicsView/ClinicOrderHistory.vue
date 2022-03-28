@@ -1,8 +1,6 @@
 <template>
   <section class="hero">
-    <div class="hero-text container">
-      <OrderHistory />
-    </div>
+    <OrderHistory />
   </section>
 </template>
 
@@ -19,17 +17,12 @@ export default {
 
 <style scoped>
 .hero {
-  background-attachment: fixed;
+  background-size: cover;
   position: absolute;
-  background-attachment: fixed;
-  position: relative;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
   height: 100vh;
-}
-.hero-text {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: black;
 }
 </style>

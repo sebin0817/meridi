@@ -6,7 +6,6 @@
         <el-table :data="tableData">
           <el-table-column prop="no" label="No." width="80px" />
           <el-table-column prop="product" label="Product" width="550px" />
-
           <el-table-column prop="price" label="Price" />
         </el-table>
       </el-scrollbar>
@@ -30,7 +29,7 @@ export default {
   height: 30px;
 }
 #container {
-  width: 90%;
+  width: 80%;
   margin-top: 120px;
   margin-left: auto;
   margin-right: auto;

@@ -1,8 +1,8 @@
 <template>
   <section class="hero">
     <!--div class="hero-text container"-->
-      <Title :msg="msg" />
-      <UserType />
+    <Title :msg="msg" />
+    <UserType />
     <!--/div-->
   </section>
 </template>
