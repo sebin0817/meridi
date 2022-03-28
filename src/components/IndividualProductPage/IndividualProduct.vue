@@ -13,17 +13,18 @@
         <div id="main" class="text">
           <div>
             <h2 id="name">{{ product.name }}</h2>
-            <h2 id="clinic">{{ clinic }}</h2>
+            <h3 id="clinic">{{ clinic }}</h3>
             <h2 id="price">{{ price }}</h2>
           </div>
+
           <div>
-            <h2 style="font-size: 20px; font-weight: bold">Description</h2>
             <p id="description">{{ product.description }}</p>
           </div>
+
           <div class="cart">
             <el-input-number v-model="qty" :step="1" />
-            <button @click="addToCart">Add to Cart</button>
           </div>
+          <button @click="addToCart">Add to Cart</button>
         </div>
       </section>
     </div>
@@ -154,6 +155,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 html {
   font-size: 62.5%;
 }
@@ -180,7 +182,6 @@ html {
 
 #product {
   display: flex;
-  margin-top: 15rem;
   margin-left: auto;
   margin-right: auto;
   width: 70rem;
@@ -208,9 +209,32 @@ html {
 
 #price {
   font-weight: 600;
+  margin-top: 20px;
 }
 
 #description {
   font-size: 15px;
+  margin-top: 10px;
+}
+.cart {
+  margin-top: 10px;
+}
+button {
+  margin-top: 10px;
+  background-color: #ffcc00;
+  border: none;
+  color: black;
+  padding: 10px 15px 10px 15px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
 }
 </style>

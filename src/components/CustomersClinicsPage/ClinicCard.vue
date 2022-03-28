@@ -35,6 +35,9 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+el-card {
+	padding: 0px;
+}
 .container {
   margin-left: 195px;
   background-attachment: fixed;

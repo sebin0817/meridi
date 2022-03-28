@@ -3,59 +3,63 @@
     <el-container class="hero-text">
       <section id="products">
         <el-container>
-          <el-aside width="300px"><ProductFilter @categoryFilter="filteredByCategory($event)" @sortBy="sortByPrice($event)"/></el-aside>  
+          <el-aside width="300px"
+            ><ProductFilter
+              @categoryFilter="filteredByCategory($event)"
+              @sortBy="sortByPrice($event)"
+          /></el-aside>
           <el-container>
-            <el-header><SearchForm @search="filteredBySearch($event)"/></el-header>
-            <el-main><ProductsView :products="filterProducts"/></el-main> 
+            <el-header
+              ><SearchForm @search="filteredBySearch($event)"
+            /></el-header>
+            <el-main><ProductsView :products="filterProducts" /></el-main>
           </el-container>
         </el-container>
-        
       </section>
     </el-container>
   </section>
-   
 </template>
 
 <script>
-import SearchForm from '@/components/CustomersProductsPage/SearchForm.vue'
-import ProductsView from '@/components/CustomersProductsPage/ProductsView.vue'
-import ProductFilter from '@/components/CustomersProductsPage/ProductFilter.vue'
+import SearchForm from "@/components/CustomersProductsPage/SearchForm.vue";
+import ProductsView from "@/components/CustomersProductsPage/ProductsView.vue";
+import ProductFilter from "@/components/CustomersProductsPage/ProductFilter.vue";
 
-import { getDocs, collection, getFirestore } from 'firebase/firestore'
-import firebaseApp from '@/firebase.js'
+import { getDocs, collection, getFirestore } from "firebase/firestore";
+import firebaseApp from "@/firebase.js";
 
 const db = getFirestore(firebaseApp);
 
 export default {
-  name: 'Products',
+  name: "Products",
   components: {
     SearchForm,
     ProductsView,
-    ProductFilter
+    ProductFilter,
   },
 
   created() {
     var self = this;
     async function fetchProducts() {
       let productsDb = await getDocs(collection(db, "Products"));
-      try {  
+      try {
         productsDb.forEach((docs) => {
-        let productData = docs.data();
-        let product = {
-          id: docs.id,
-          name: productData.name,
-          description: productData.description,
-          price: productData.price,
-          avail: productData.avail,
-          categories: productData.categories,
-          clinic: productData.clinic,
-          imgURL: productData.image
-        } 
-        self.products.push(product);
+          let productData = docs.data();
+          let product = {
+            id: docs.id,
+            name: productData.name,
+            description: productData.description,
+            price: productData.price,
+            avail: productData.avail,
+            categories: productData.categories,
+            clinic: productData.clinic,
+            imgURL: productData.image,
+          };
+          self.products.push(product);
         });
       } catch (e) {
-        console.log(`error when getting db ${e}`)
-      }    
+        console.log(`error when getting db ${e}`);
+      }
     }
     fetchProducts();
   },
@@ -65,9 +69,9 @@ export default {
       products: [],
       filteredProducts: [],
       search: "",
-      checkedCats: ['for pain', 'for treatments', 'for wellness', 'for kids'],
-      sortBy: 0 /*sorted = 1 means high -> low, sorted = 0 means low -> high */
-    }
+      checkedCats: ["for pain", "for treatments", "for wellness", "for kids"],
+      sortBy: 0 /*sorted = 1 means high -> low, sorted = 0 means low -> high */,
+    };
   },
 
   methods: {
@@ -77,16 +81,16 @@ export default {
 
     filteredByCategory(checkedCats) {
       this.checkedCats = checkedCats;
-      console.log(`inside parentl, value is ${this.checkedCats}`)
+      console.log(`inside parentl, value is ${this.checkedCats}`);
     },
 
     filteredProductsByCategory(product) {
-      let catNames = this.checkedCats.map(cat => {
+      let catNames = this.checkedCats.map((cat) => {
         return cat.toLowerCase();
       });
       for (const cat of product.categories) {
-        if (catNames.indexOf(cat.toLowerCase()) >=0) {
-          console.log(`hi ${cat.toLowerCase()}`)
+        if (catNames.indexOf(cat.toLowerCase()) >= 0) {
+          console.log(`hi ${cat.toLowerCase()}`);
           return true;
         }
       }
@@ -94,12 +98,12 @@ export default {
     },
 
     filteredProductsBySearch(product) {
-        return product.name.toLowerCase().includes(this.search.toLowerCase());
+      return product.name.toLowerCase().includes(this.search.toLowerCase());
     },
 
     sortByPrice(sort) {
       this.sortBy = sort;
-    }
+    },
   },
 
   computed: {
@@ -126,27 +130,21 @@ export default {
 html {
   font-size: 62.5%;
 }
-
 .hero {
   background-attachment: fixed;
   position: relative;
-  height: 100vh;
 }
-
 .hero-text {
   justify-content: center;
   height: 100%;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   color: black;
 }
-
 #products {
-  margin-top: 20rem;
+  margin-top: 10rem;
   margin-left: auto;
   margin-right: auto;
-  width: 100rem;
+  width: 70rem;
 }
-
-
 </style>
