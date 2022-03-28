@@ -1,6 +1,7 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
+      <br>
       <h1>Product List</h1>
       <AddProductBtn style="float: right" />
       <ProductView :products="clinicProducts" />
@@ -11,7 +12,6 @@
 <script>
 import AddProductBtn from "@/components/ClinicsProductPage/AddProductBtn.vue";
 import ProductView from "@/components/ClinicsProductPage/ProductView.vue";
-//import { getAuth } from "firebase/auth";
 import {
   doc,
   getDoc,
@@ -38,8 +38,6 @@ export default {
     self.email = sessionStorage.getItem("useremail");
     async function fetchProducts() {
       //get product list from Clinics collection
-      //const auth = getAuth();
-      //var user = auth.currentUser.email;
       const docRef = doc(db, "Clinics", self.email);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
@@ -78,7 +76,6 @@ export default {
 .hero {
   background-attachment: fixed;
   position: relative;
-  height: 100vh;
 }
 .hero-text {
   height: 100%;

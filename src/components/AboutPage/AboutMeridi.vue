@@ -21,11 +21,12 @@
               <p id="description">
                 meridi serves to generate an alternative stream of revenue for
                 traditional TCM businesses by allowing prospective customers to
-                purchase their products and services online. This is targeted at
-                younger customers who are tech-savvy and highly value
-                convenience when making purchases. meridi also provides TCM
-                businesses with an opportunity to market their online presence,
-                establishing their position in the highly competitive market.
+                purchase their products and services online. <br /><br />This is
+                targeted at younger customers who are tech-savvy and highly
+                value convenience when making purchases. meridi also provides
+                TCM businesses with an opportunity to market their online
+                presence, establishing their position in the highly competitive
+                market.
               </p>
             </div>
           </el-col>
@@ -41,7 +42,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 .hero {
   background-attachment: fixed;
   position: relative;
@@ -53,10 +55,11 @@ export default {
   flex-direction: column;
   justify-content: center;
   color: black;
+  font-family: "Nunito Sans", sans-serif;
 }
 #meridi {
   position: absolute;
-  top: 300px;
+  top: 240px;
   left: 0px;
   right: 0px;
 }
@@ -64,19 +67,22 @@ export default {
   margin-bottom: 20px;
 }
 #slogan {
-  font-size: 40px;
+  font-size: 30px;
+  font-family: "Nunito Sans", sans-serif;
 }
 #description {
-  font-size: 20px;
+  font-size: 18px;
+  font-family: "Nunito Sans", sans-serif;
 }
 #logo {
   width: 90%;
+  margin-top: 40px;
 }
 #text {
   width: 90%;
 }
 #quotation {
-  width: 10%;
+  width: 7%;
   opacity: 0.5;
 }
 </style>

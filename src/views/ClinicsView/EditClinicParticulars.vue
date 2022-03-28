@@ -1,8 +1,6 @@
 <template>
   <section class="hero">
-    <div class="hero-text container">
-      <EditParticularsForm/>
-    </div>
+    <EditParticularsForm />
   </section>
 </template>
 
@@ -10,24 +8,21 @@
 import EditParticularsForm from '@/components/ClinicsProfilePage/EditParticularsForm.vue'
 
 export default {
-    name: 'EditCustomerParticulars',
-    components: {
-      EditParticularsForm,
-    },
+  name: "EditCustomerParticulars",
+  components: {
+    EditParticularsForm,
+  },
 };
 </script>
 
 <style scoped>
 .hero {
-  background-attachment: fixed;
-  position: relative;
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
   height: 100vh;
-}
-.hero-text {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: black;
 }
 </style>
