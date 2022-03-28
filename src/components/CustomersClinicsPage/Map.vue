@@ -5,18 +5,18 @@
   :center="centerlatlng"
   :zoom="13"
   >
-    <Marker 
+    <Marker
       :key="marker"
       v-for="(m, marker) in markers"
+      :code="m.code"
       :options="m.options"
-      @click="showCard()"/>
+      @click="showCard($event)"/>
     <Marker :options="customerMarker"/>
   </GoogleMap>
 </template>
 
 <script>
 import { GoogleMap, Marker } from 'vue3-google-map'
-
 import axios from "axios"
 
 async function getLatLngFromPostal(codes) {
@@ -68,11 +68,9 @@ export default {
 
   emits: ["chosen"],
   methods: {
-    showCard() {
-      this.chosen = 0
-      this.$emit("chosen", this.chosen);
-      console.log(this.chosen)
-      console.log("hi")
+    showCard(event) {
+      let targetCode = event.currentTarget.code
+      console.log(targetCode)
     }
   },
   watch: {
@@ -94,7 +92,7 @@ export default {
         .then((y) => {    
         for (var i = 0; i < y.length; i++) {
           this.markers.push({
-            id: i,
+            code: i,
             options: { position: y[i], label: "" + i }
           })
         }
@@ -118,7 +116,7 @@ export default {
       .then((y) => {    
       for (var i = 0; i < y.length; i++) {
         this.markers.push({
-          id: i,
+          code: i,
           options: { position: y[i], label: "" + i }
         })
       }
