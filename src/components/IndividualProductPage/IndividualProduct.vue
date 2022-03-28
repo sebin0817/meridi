@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { getFirestore, getDocs, doc, getDoc, collection } from "firebase/firestore"; 
+import { getFirestore, getDocs, doc, getDoc, collection, updateDoc } from "firebase/firestore"; 
 import firebaseApp from "../../firebase.js";
 
 const db = getFirestore(firebaseApp)
@@ -93,11 +93,9 @@ export default {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
           const data = docSnap.data();
-          self.cart = JSON.parse(JSON.stringify(data.cart)).products;
-          // console.log(self.cart);
-          // let a = cs2030;
-          // console.log(JSON.parse(JSON.stringify(self.cart)).a === undefined);
+          self.cart = self.jsonify(data.cart).products;
       }
+      console.log(self.cart)
     }
     fetchCart();
     
@@ -119,11 +117,35 @@ export default {
 
     methods: {
       addToCart() {
-        
+        let addQty = this.qty;
+        let price = Number(this.product.price);
+        let product = this.product.name.toLowerCase();
+
+        if (this.isExist()) {
+          this.cart[product].quantity += addQty;
+          // this.cart[product].total += addQty * price;
+        } else {
+          this.cart[product] = {};
+          this.cart[product].quantity = addQty;
+          this.cart[product].price = price;
+        }
+        // console.log(this.cart)
+        this.updateCartToFb();
       },
       isExist() {
-        // let currProduct = this.product.name;
-        return self.cart.currProduct === undefined;
+        let currProduct = this.product.name.toLowerCase();
+        let currCart = this.jsonify(this.cart);
+        return !(currCart[currProduct] === undefined);
+      },
+      jsonify(data) {
+        return JSON.parse(JSON.stringify(data));
+      },
+      async updateCartToFb() {
+        const cartDoc = doc(db, "Customers", this.email);
+        let updateCart = {"products": this.cart};
+        await updateDoc(cartDoc, {
+          "cart": updateCart
+        })
       }
     }
 
