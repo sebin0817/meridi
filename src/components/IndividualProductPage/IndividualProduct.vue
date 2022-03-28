@@ -33,23 +33,28 @@
 </template>
 
 <script>
-
-import { getFirestore, getDocs, doc, getDoc, collection, updateDoc } from "firebase/firestore"; 
+import {
+  getFirestore,
+  getDocs,
+  doc,
+  getDoc,
+  collection,
+  updateDoc,
+} from "firebase/firestore";
 import firebaseApp from "../../firebase.js";
 
-const db = getFirestore(firebaseApp)
+const db = getFirestore(firebaseApp);
 export default {
-
-    data() {
-        return {
-          product: {},
-          qty: 1,
-          email: "",
-          user: {},
-          cart: {},
-          totalPrice: 0
-        }
-    },
+  data() {
+    return {
+      product: {},
+      qty: 1,
+      email: "",
+      user: {},
+      cart: {},
+      totalPrice: 0,
+    };
+  },
 
   mounted() {
     this.id = this.$route.params.id;
@@ -57,7 +62,7 @@ export default {
 
   created() {
     var self = this;
-    
+
     // console.log(this.email);
     async function fetchProducts() {
       let productsDb = await getDocs(collection(db, "Products"));
@@ -85,22 +90,20 @@ export default {
     fetchProducts();
 
     async function fetchCart() {
-      
-      console.log("fetch cart")
+      console.log("fetch cart");
       self.email = sessionStorage.getItem("useremail");
 
       console.log(self.email);
-      const docRef = doc(db,"Customers",self.email);
+      const docRef = doc(db, "Customers", self.email);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
-          const data = docSnap.data();
-          self.cart = self.jsonify(data.cart).products;
-          self.totalPrice = self.jsonify(data.cart).total;
+        const data = docSnap.data();
+        self.cart = self.jsonify(data.cart).products;
+        self.totalPrice = self.jsonify(data.cart).total;
       }
-      console.log(self.cart)
+      console.log(self.cart);
     }
     fetchCart();
-    
   },
 
   computed: {
@@ -112,7 +115,6 @@ export default {
       return "Sold at: " + this.product.clinic;
     },
 
-
     methods: {
       addToCart() {
         let addQty = this.qty;
@@ -121,7 +123,7 @@ export default {
 
         if (this.isExist()) {
           this.cart[product].quantity += addQty;
-          console.log(this.cart[product].quantity)
+          console.log(this.cart[product].quantity);
         } else {
           this.cart[product] = {};
           this.cart[product].clinic = this.product.clinic;
@@ -129,7 +131,7 @@ export default {
           this.cart[product].quantity = addQty;
         }
         console.log(this.qty);
-        console.log(this.price)
+        console.log(this.price);
         this.totalPrice += addQty * price;
         this.updateCartToFb();
       },
@@ -143,15 +145,14 @@ export default {
       },
       async updateCartToFb() {
         const cartDoc = doc(db, "Customers", this.email);
-        let updateCart = {"products": this.cart, "total": this.totalPrice};
+        let updateCart = { products: this.cart, total: this.totalPrice };
         await updateDoc(cartDoc, {
-          "cart": updateCart
-        })
-      }
-    }
-
-}
-
+          cart: updateCart,
+        });
+      },
+    },
+  },
+};
 </script>
 
 <style scoped>
