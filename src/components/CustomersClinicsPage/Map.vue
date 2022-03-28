@@ -1,37 +1,38 @@
 <template>
   <GoogleMap
-  class="map"
-  api-key= AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78
-  :center="center"
-  :zoom="12"
+    class="map"
+    api-key="AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78"
+    :center="center"
+    :zoom="12"
   >
-    <Marker 
+    <Marker
       :key="marker"
       v-for="(m, marker) in markers"
       :id="m.id"
       :options="m.options"
-      @click="showCard()"/>
+      @click="showCard()"
+    />
   </GoogleMap>
 </template>
 
 <script>
-import { GoogleMap, Marker } from 'vue3-google-map'
+import { GoogleMap, Marker } from "vue3-google-map";
 
-import axios from "axios"
+import axios from "axios";
 
 async function getLatLngFromPostal(codes) {
-  var LatLng = []
+  var LatLng = [];
   for (let i = 0; i < codes.length; i++) {
     try {
       var { data } = await axios.get(
-          "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+        "https://maps.googleapis.com/maps/api/geocode/json?address=" +
           codes[i] +
           "&key=AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78"
       );
       if (data.error_message) {
-          console.log(data.error_message)
+        console.log(data.error_message);
       } else {
-          LatLng.push(data.results[0].geometry.location);
+        LatLng.push(data.results[0].geometry.location);
       }
     } catch (error) {
       console.log(error.message);
@@ -40,47 +41,44 @@ async function getLatLngFromPostal(codes) {
   return LatLng;
 }
 
-
 export default {
   name: "Map",
   components: { Marker, GoogleMap },
   props: {
-		postalCode: {
-			type: Array
-		},
+    postalCode: {
+      type: Array,
+    },
     customerPostalcode: {
-      type: String
-    }
-	},
+      type: String,
+    },
+  },
   data() {
     return {
       center: { lat: 1.339987, lng: 103.810128 },
       markers: [],
       customerMarker: {},
-      chosen: {}
-    }
-
+      chosen: {},
+    };
   },
 
   emits: ["chosen"],
   methods: {
     showCard() {
-      this.chosen = 0
+      this.chosen = 0;
       this.$emit("chosen", this.chosen);
-      console.log(this.chosen)
-    }
+      console.log(this.chosen);
+    },
   },
   created() {
     // Place Markers on ALL Clinics and Customer
-    var codes = this.postalCode
-    codes.push(this.customerPostalcode)
-      getLatLngFromPostal(codes)
-      .then((y) => {    
+    var codes = this.postalCode;
+    codes.push(this.customerPostalcode);
+    getLatLngFromPostal(codes).then((y) => {
       for (var i = 0; i < y.length; i++) {
         this.markers.push({
           id: i,
-          options: { position: y[i], label: "" + i }
-        })
+          options: { position: y[i], label: "" + i },
+        });
       }
       // y.forEach((latlng) => {
       //   this.markers.push({
@@ -88,10 +86,9 @@ export default {
       //   options: { position: latlng }
       //   })
       // })
-      })
-    }
-
-}
+    });
+  },
+};
 </script>
 
 <style scoped>
@@ -99,6 +96,7 @@ export default {
   position: relative;
   width: 500px;
   height: 500px;
+  margin-left: auto;
 }
 .hero-text {
   height: 100%;

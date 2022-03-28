@@ -76,13 +76,17 @@ export default {
 }
 #logo {
   width: 90%;
-  margin-top: 40px;
+
+  margin-top: 20px;
+  position: relative;
 }
 #text {
   width: 90%;
+  position: relative;
 }
 #quotation {
   width: 7%;
   opacity: 0.5;
+  position: relative;
 }
 </style>

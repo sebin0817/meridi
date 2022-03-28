@@ -1,17 +1,37 @@
 <template>
-  <Map v-if="mounted && done" :postalCode="postalCode" :customerPostalcode="customerPostalcode"/>
-  <el-container>
-    <el-main><ClinicsView :clinics="filterClinics"/></el-main> 
-  </el-container>
-  <ClinicsForm @categoryFilter="filteredByCategory($event)" @clinicName="filteredBySearch($event)" @postal="postal" />
+  <section class="hero">
+    <!-- <Map
+        v-if="mounted && done"
+        :postalCode="postalCode"
+        :customerPostalcode="customerPostalcode"
+      /> -->
+    <div class="formcard">
+      <div id="formcard2">
+        <ClinicsForm
+          @categoryFilter="filteredByCategory($event)"
+          @clinicName="filteredBySearch($event)"
+          @postal="postal"
+        />
+        <div class="container1">
+          <ClinicsView :clinics="filterClinics" />
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import Map from '@/components/CustomersClinicsPage/Map.vue'
-import ClinicsForm from '@/components/CustomersClinicsPage/Form.vue'
-import ClinicsView from '@/components/CustomersClinicsPage/ClinicsView.vue'
-import { getDocs, collection, getFirestore, query, where } from 'firebase/firestore'
-import firebaseApp from '@/firebase.js'
+// import Map from "@/components/CustomersClinicsPage/Map.vue";
+import ClinicsForm from "@/components/CustomersClinicsPage/Form.vue";
+import ClinicsView from "@/components/CustomersClinicsPage/ClinicsView.vue";
+import {
+  getDocs,
+  collection,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
+import firebaseApp from "@/firebase.js";
 
 const db = getFirestore(firebaseApp);
 
@@ -36,42 +56,41 @@ async function fetchClinics() {
   return clinics;
 }
 
-    async function getCustomerPostalCode() {
-      let code;
-      let email = sessionStorage.getItem("useremail")
-      const q = query(collection(db, "Customers"), where("email", "==", email));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((docs) => {
-          let y = docs.data()
-          code = y.postalcode
-            })
-      return code;
-    }
+async function getCustomerPostalCode() {
+  let code;
+  let email = sessionStorage.getItem("useremail");
+  const q = query(collection(db, "Customers"), where("email", "==", email));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((docs) => {
+    let y = docs.data();
+    code = y.postalcode;
+  });
+  return code;
+}
 
 export default {
   components: {
     ClinicsForm,
-    Map,
     ClinicsView,
+    // Map,
   },
 
   created() {
     fetchClinics().then((x) => {
       x.forEach((y) => {
-        this.clinics.push(y)
-        this.postalCode.push(y.postalcode)
-      })
-    })
+        this.clinics.push(y);
+        this.postalCode.push(y.postalcode);
+      });
+    });
     this.filterClinics.forEach((y) => {
-        this.postalCode.push(y.postalcode)
-      })
-      this.mounted = true
+      this.postalCode.push(y.postalcode);
+    });
+    this.mounted = true;
 
     getCustomerPostalCode().then((x) => {
-      this.customerPostalcode = x
-      this.done = true
-    })
-
+      this.customerPostalcode = x;
+      this.done = true;
+    });
   },
   data() {
     return {
@@ -83,28 +102,35 @@ export default {
       done: false,
       clinicName: "",
       postal: "",
-      checkedCats: ['accupuncture', 'tunia', 'herbal medication', 'gua sha', 'cupping', 'device therapy'],
-    }
+      checkedCats: [
+        "accupuncture",
+        "tunia",
+        "herbal medication",
+        "gua sha",
+        "cupping",
+        "device therapy",
+      ],
+    };
   },
   methods: {
     filteredBySearch(searchResult) {
       if (searchResult != null) {
         this.clinicName = searchResult;
       }
-      console.log(`inside Form, name search is ${this.clinicName}`)
+      console.log(`inside Form, name search is ${this.clinicName}`);
     },
 
     filteredByCategory(checkedCats) {
       if (checkedCats != null) {
         this.checkedCats = checkedCats;
       }
-      console.log(`inside Form, services chosen are ${this.checkedCats}`)
+      console.log(`inside Form, services chosen are ${this.checkedCats}`);
     },
 
     filteredClinicsByCategory(clinic) {
       let catNames = this.checkedCats;
       for (const cat of clinic.services) {
-        if (catNames.indexOf(cat.toLowerCase()) >=0) {
+        if (catNames.indexOf(cat.toLowerCase()) >= 0) {
           return true;
         }
       }
@@ -112,17 +138,37 @@ export default {
     },
 
     filteredClinicsBySearch(clinic) {
-        return clinic.name.toLowerCase().includes(this.clinicName.toLowerCase());
-    }
+      return clinic.name.toLowerCase().includes(this.clinicName.toLowerCase());
+    },
   },
   computed: {
     filterClinics() {
       return this.clinics.filter((clinic) => {
-        return this.filteredClinicsBySearch(clinic) && this.filteredClinicsByCategory(clinic);       
-      })
+        return (
+          this.filteredClinicsBySearch(clinic) &&
+          this.filteredClinicsByCategory(clinic)
+        );
+      });
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.hero {
+  position: absolute;
+  background-attachment: fixed;
+  position: relative;
+  height: 100vh;
+}
+.formcard2 {
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+.container1 {
+  height: 55vh;
+
+  overflow: scroll;
+}
+</style>

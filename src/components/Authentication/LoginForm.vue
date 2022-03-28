@@ -108,7 +108,7 @@ button {
   margin-top: 10px;
   background-color: #ffcc00;
   border: none;
-  color: black;
+  color: lack;
   padding: 10px;
   border-radius: 4px;
   font-weight: bold;

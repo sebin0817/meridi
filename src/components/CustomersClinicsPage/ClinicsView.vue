@@ -1,48 +1,36 @@
 <template>
   <main>
-		<el-row>
-				<el-col
-					v-for="clinic in clinics"
-					:key="clinic"
-					:span="3">
-					<ClinicCard
-						:clinic="clinic"
-						:key="clinic.id"
-					/>
-				</el-col>
-			</el-row>
-	</main>
-  
+    <el-row v-for="clinic in clinics" :key="clinic" :span="3">
+      <!-- <el-col v-for="clinic in clinics" :key="clinic" :span="3"> -->
+      <ClinicCard :clinic="clinic" :key="clinic.id" />
+      <!-- </el-col> -->
+    </el-row>
+  </main>
 </template>
 
 <script>
-import ClinicCard from './ClinicCard.vue'
+import ClinicCard from "./ClinicCard.vue";
 
 export default {
-	name: "ClinicsView",
-	components: {
-		ClinicCard
-	},
+  name: "ClinicsView",
+  components: {
+    ClinicCard,
+  },
 
-	created() {
-		console.log(this.clinics)
-	},
+  created() {
+    console.log(this.clinics);
+  },
 
-	props: {
-		clinics: {
-			type: Array
-		}
-	},
+  props: {
+    clinics: {
+      type: Array,
+    },
+  },
 
   data() {
-    return {
-				
-    };
-  }
-}
+    return {};
+  },
+};
 </script>
 
-<style>
-
-
-</style>
+<style scoped></style>
