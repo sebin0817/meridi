@@ -35,16 +35,18 @@
 </template>
 
 <script>
-import { getDocs, collection, getFirestore } from 'firebase/firestore'
-import firebaseApp from '@/firebase.js'
+import { getFirestore, getDocs, doc, getDoc, collection } from "firebase/firestore"; 
+import firebaseApp from "../../firebase.js";
 
-const db = getFirestore(firebaseApp);
-
+const db = getFirestore(firebaseApp)
 export default {
     data() {
         return {
           product: {},
-          qty: 1
+          qty: 1,
+          email: "",
+          user: {},
+          cart: {}
         }
     },
 
@@ -54,6 +56,8 @@ export default {
 
     created() {
     var self = this;
+    
+    // console.log(this.email);
     async function fetchProducts() {
       let productsDb = await getDocs(collection(db, "Products"));
       try {  
@@ -78,6 +82,25 @@ export default {
       }    
     }
     fetchProducts();
+
+    async function fetchCart() {
+      
+      console.log("fetch cart")
+      self.email = sessionStorage.getItem("useremail");
+
+      console.log(self.email);
+      const docRef = doc(db,"Customers",self.email);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists) {
+          const data = docSnap.data();
+          self.cart = JSON.parse(JSON.stringify(data.cart)).products;
+          // console.log(self.cart);
+          // let a = cs2030;
+          // console.log(JSON.parse(JSON.stringify(self.cart)).a === undefined);
+      }
+    }
+    fetchCart();
+    
   },
 
     computed: {
@@ -93,6 +116,16 @@ export default {
           return ("$" + this.product.price); 
       }
     },
+
+    methods: {
+      addToCart() {
+        
+      },
+      isExist() {
+        // let currProduct = this.product.name;
+        return self.cart.currProduct === undefined;
+      }
+    }
 
 }
 </script>
