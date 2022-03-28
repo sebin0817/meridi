@@ -1,42 +1,33 @@
 <template>
-  <section class="hero">
+  <section class="profile">
     <div class="hero-text container">
-      <ClinicInfo :useremail="useremail"/>
-      <EditParticularsForm/>
+      <ClinicInfo :useremail="useremail" />
     </div>
+    <!-- <EditParticularsForm /> -->
   </section>
 </template>
 
 <script>
-import ClinicInfo from '../../components/ClinicsProfilePage/ClinicInfo.vue'
-import EditParticularsForm from '@/components/ClinicsProfilePage/EditParticularsForm.vue'
-
+import ClinicInfo from "../../components/ClinicsProfilePage/ClinicInfo.vue";
+// import EditParticularsForm from "@/components/ClinicsProfilePage/EditParticularsForm.vue";
 
 export default {
-  name: 'ClinicProfile',
+  name: "ClinicProfile",
   components: {
     ClinicInfo,
-    EditParticularsForm
-  }, 
+    // EditParticularsForm,
+  },
   computed: {
     useremail() {
       return sessionStorage.getItem("useremail");
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
-.hero {
-  background-attachment: fixed;
-  position: relative;
-  height: 100vh;
-}
-.hero-text {
-  height: 100%;
+.profile {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: black;
+  height: 100%;
 }
 </style>
