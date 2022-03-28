@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 el-card {
 	padding: 0px;
   height: 200px;
@@ -108,7 +108,7 @@ button:focus {
 .cardContent {
 	padding: 14px;
 	text-align: center;
-  height: 150px;
+  height: 200px;
 }
 
 .image {

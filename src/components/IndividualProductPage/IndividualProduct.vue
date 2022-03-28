@@ -3,102 +3,98 @@
     <div class="hero-text container">
       <section id="product">
         <div id="aside">
-            <img
-              :src="`${product.imgURL}`"
-              alt="product img"
-              class="image"
-              style="height:100%; width:100%"
-            />
+          <img
+            :src="`${product.imgURL}`"
+            alt="product img"
+            class="image"
+            style="weight: 100px;"
+          />
         </div>
-          <div id="main" class="text">
-              <div>
-                <h2 id="name">{{product.name}}</h2>
-                <h2 id="clinic">{{clinic}}</h2>
-                <h2 id="price">{{price}}</h2>
-              </div>
-
-              <div>
-                <h2 style="font-size:20px;font-weight:bold">Description</h2>
-                <p id="description">{{product.description}}</p>
-              </div>           
-
-              <div class="cart">
-                <el-input-number v-model="qty" :step="1"/>
-                <button @click="addToCart">Add to Cart</button>
-              </div>
+        <div id="main" class="text">
+          <div>
+            <h2 id="name">{{ product.name }}</h2>
+            <h3 id="clinic">{{ clinic }}</h3>
+            <h2 id="price">{{ price }}</h2>
           </div>
-      
+
+          <div>
+            <p id="description">{{ product.description }}</p>
+          </div>
+
+          <div class="cart">
+            <el-input-number v-model="qty" :step="1" />
+          </div>
+          <button @click="addToCart">Add to Cart</button>
+        </div>
       </section>
     </div>
   </section>
-  
 </template>
 
 <script>
-import { getDocs, collection, getFirestore } from 'firebase/firestore'
-import firebaseApp from '@/firebase.js'
+import { getDocs, collection, getFirestore } from "firebase/firestore";
+import firebaseApp from "@/firebase.js";
 
 const db = getFirestore(firebaseApp);
 
 export default {
-    data() {
-        return {
-          product: {},
-          qty: 1
-        }
-    },
+  data() {
+    return {
+      product: {},
+      qty: 1,
+    };
+  },
 
-    mounted() {
-      this.id = this.$route.params.id;
-    },
+  mounted() {
+    this.id = this.$route.params.id;
+  },
 
-    created() {
+  created() {
     var self = this;
     async function fetchProducts() {
       let productsDb = await getDocs(collection(db, "Products"));
-      try {  
+      try {
         productsDb.forEach((docs) => {
-        let productData = docs.data();
-        let product = {
-          id: docs.id,
-          name: productData.name,
-          description: productData.description,
-          price: productData.price,
-          avail: productData.avail,
-          categories: productData.categories,
-          clinic: productData.clinic,
-          imgURL: productData.image
-        } 
-        if (product.id === self.id) {
-          self.product = product;
-        }
+          let productData = docs.data();
+          let product = {
+            id: docs.id,
+            name: productData.name,
+            description: productData.description,
+            price: productData.price,
+            avail: productData.avail,
+            categories: productData.categories,
+            clinic: productData.clinic,
+            imgURL: productData.image,
+          };
+          if (product.id === self.id) {
+            self.product = product;
+          }
         });
       } catch (e) {
-        console.log(`error when getting db ${e}`)
-      }    
+        console.log(`error when getting db ${e}`);
+      }
     }
     fetchProducts();
   },
 
-    computed: {
-      name() {
-        return ("" + this.product.name);
-      },
-
-      clinic() {
-          return ("Sold at: " + this.product.clinic);
-      },
-
-      price() {
-          return ("$" + this.product.price); 
-      }
+  computed: {
+    name() {
+      return "" + this.product.name;
     },
 
-}
+    clinic() {
+      return "Sold at: " + this.product.clinic;
+    },
+
+    price() {
+      return "$" + this.product.price;
+    },
+  },
+};
 </script>
 
-<style>
-
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 html {
   font-size: 62.5%;
 }
@@ -119,13 +115,12 @@ html {
 }
 
 .text {
-	font-family: "Georgia", Times, serif;
-	line-height: 1.6;
+  font-family: "Georgia", Times, serif;
+  line-height: 1.6;
 }
 
 #product {
   display: flex;
-  margin-top: 15rem;
   margin-left: auto;
   margin-right: auto;
   width: 70rem;
@@ -153,10 +148,32 @@ html {
 
 #price {
   font-weight: 600;
+  margin-top: 20px;
 }
 
 #description {
   font-size: 15px;
+  margin-top: 10px;
 }
-
+.cart {
+  margin-top: 10px;
+}
+button {
+  margin-top: 10px;
+  background-color: #ffcc00;
+  border: none;
+  color: black;
+  padding: 10px 15px 10px 15px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
 </style>

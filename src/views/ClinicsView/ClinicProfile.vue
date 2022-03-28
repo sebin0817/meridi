@@ -1,21 +1,16 @@
 <template>
   <section class="profile">
-    <div class="hero-text container">
-      <ClinicInfo :useremail="useremail" />
-    </div>
-    <!-- <EditParticularsForm /> -->
+      <ClinicInfo id="info" :useremail="useremail" />
   </section>
 </template>
 
 <script>
 import ClinicInfo from "../../components/ClinicsProfilePage/ClinicInfo.vue";
-// import EditParticularsForm from "@/components/ClinicsProfilePage/EditParticularsForm.vue";
 
 export default {
   name: "ClinicProfile",
   components: {
     ClinicInfo,
-    // EditParticularsForm,
   },
   computed: {
     useremail() {
@@ -29,5 +24,8 @@ export default {
 .profile {
   display: flex;
   height: 100%;
+}
+#info {
+  width: 100%;
 }
 </style>

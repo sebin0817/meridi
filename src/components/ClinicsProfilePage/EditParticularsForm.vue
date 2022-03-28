@@ -1,22 +1,33 @@
 <template>
+  <img id="logo" src="../../assets/user.png" alt="" />
   <div class="form">
-    <h4>Edit Particulars</h4>
+    <!--h4>Edit Particulars</h4-->
     <el-form :model="form" @submit.prevent="update">
-      <el-input id="name" v-model="name" type="text" placeholder="Company Name"
-        ><template #prefix>
-          <el-icon class="el-input__icon"
-            ><office-building
-          /></el-icon> </template
-      ></el-input>
-      <el-input
-        id="postalcode"
-        v-model="postalcode"
-        type="text"
-        placeholder="Postal Code"
-        required="true"
-        ><template #prefix>
-          <el-icon class="el-input__icon"><map-location /></el-icon> </template
-      ></el-input>
+      <el-row>
+        <el-input
+          id="name"
+          v-model="name"
+          type="text"
+          placeholder="Company Name"
+          ><template #prefix>
+            <el-icon class="el-input__icon"
+              ><office-building
+            /></el-icon> </template
+        ></el-input>
+      </el-row>
+      <el-row>
+        <el-input
+          id="postalcode"
+          v-model="postalcode"
+          type="text"
+          placeholder="Postal Code"
+          required="true"
+          ><template #prefix>
+            <el-icon class="el-input__icon"
+              ><map-location
+            /></el-icon> </template
+        ></el-input>
+      </el-row>
       <el-row>
         <el-input
           id="textarea"
@@ -43,12 +54,8 @@
           </el-option>
         </el-select>
       </el-row>
-      <el-row>
-        <button type="submit">SAVE CHANGE</button>
-      </el-row>
-      <el-row>
-        <button @click="goToProfile()">BACK</button>
-      </el-row>
+      <button type="submit">SAVE CHANGE</button>
+      <h4 @click="goToProfile()">BACK TO MY PROFILE</h4>
     </el-form>
   </div>
 </template>
@@ -89,6 +96,7 @@ export default {
         services: this.services,
       });
       alert("Profile successfully updated");
+      this.$router.push("./ClinicProfile");
     },
     goToProfile() {
       this.$router.push("./ClinicProfile");
@@ -111,11 +119,10 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
-
 .form {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 170px;
+  margin-top: 20px;
   text-align: center;
   width: 30%;
 }
@@ -125,7 +132,7 @@ export default {
   justify-content: center;
 }
 .el-select {
-  width: 50ch;
+  width: 100%;
 }
 button {
   margin: auto;
@@ -148,8 +155,16 @@ button:focus {
 }
 h4 {
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-top: 10px;
   font-family: "Nunito Sans", sans-serif;
-  font-size: 25px;
+}
+h4:hover {
+  cursor: pointer;
+}
+#logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
 }
 </style>

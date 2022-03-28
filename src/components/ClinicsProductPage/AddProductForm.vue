@@ -2,6 +2,10 @@
   <div class="form" @submit.prevent="add">
     <form>
       <el-row>
+        <img :src="imageUrl" id="image" />
+        <input type="file" @change="preview" />
+      </el-row>
+      <el-row>
         <el-input
           id="name"
           v-model="name"
@@ -89,6 +93,7 @@ export default {
   components: { Coin, Sell },
   data() {
     return {
+      imageUrl: "",
       name: "",
       price: "",
       desc: "",
@@ -105,8 +110,34 @@ export default {
   },
 
   methods: {
-    click() {
-      this.$refs.image.click();
+    preview(e) {
+      let imageUrl = URL.createObjectURL(e.target.files[0]);
+      this.imageUrl = imageUrl;
+    },
+    upload() {
+      console.log(this.imageUrl);
+    },
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+      console.log(this.imageUrl);
+    },
+    beforeAvatarUpload(file) {
+      const isImage =
+        file.type === "image/jpeg" ||
+        file.type === "image/png" ||
+        file.raw.type === "image/gif";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isImage) {
+        this.$message.error("Please upload an image.");
+      }
+      if (!isLt2M) {
+        this.$message.error(
+          " The size of the uploaded image cannot exceed 2MB."
+        );
+      }
+      console.log(this.imageUrl);
+      return isImage && isLt2M;
     },
     //store the information
     async add() {
@@ -114,6 +145,7 @@ export default {
       try {
         //store in Products collection
         const docRef = await addDoc(collection(db, "Products"), {
+          image: this.imageUrl,
           name: this.name,
           price: this.price,
           description: this.desc,
@@ -121,7 +153,6 @@ export default {
           avail: this.avail,
           clinic: user, //use email as id
         });
-        //upload the product image
 
         //store in Clinics collection
         await updateDoc(doc(db, "Clinics", user), {
@@ -177,5 +208,34 @@ button:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+#image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
 }
 </style>

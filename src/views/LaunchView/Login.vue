@@ -1,9 +1,9 @@
 <template>
   <section class="hero">
-    <!--div class="hero-text container"-->
+    <div class="hero-text container">
       <TitleLogin :msg="msg" />
       <LoginForm />
-    <!--/div-->
+    </div>
   </section>
 </template>
 
