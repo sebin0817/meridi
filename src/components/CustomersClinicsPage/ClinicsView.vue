@@ -4,8 +4,7 @@
 				<el-col
 					v-for="clinic in clinics"
 					:key="clinic"
-					:span="6"
-				>
+					:span="3">
 					<ClinicCard
 						:clinic="clinic"
 						:key="clinic.id"
@@ -25,6 +24,9 @@ export default {
 		ClinicCard
 	},
 
+	created() {
+		console.log(this.clinics)
+	},
 
 	props: {
 		clinics: {

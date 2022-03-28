@@ -8,9 +8,9 @@
     <Marker 
       :key="marker"
       v-for="(m, marker) in markers"
+      :id="m.id"
       :options="m.options"
-      @mouseover="showDetail()"/>
-
+      @click="showCard()"/>
   </GoogleMap>
 </template>
 
@@ -47,31 +47,48 @@ export default {
   props: {
 		postalCode: {
 			type: Array
-		}
+		},
+    customerPostalcode: {
+      type: String
+    }
 	},
   data() {
     return {
       center: { lat: 1.339987, lng: 103.810128 },
       markers: [],
+      customerMarker: {},
+      chosen: {}
     }
 
   },
+
+  emits: ["chosen"],
   methods: {
-    showDetail() {
-      console.log("hi")
+    showCard() {
+      this.chosen = 0
+      this.$emit("chosen", this.chosen);
+      console.log(this.chosen)
     }
   },
-  async created() {
-    // Place Markers on ALL Clinics
-      getLatLngFromPostal(this.postalCode)
+  created() {
+    // Place Markers on ALL Clinics and Customer
+    var codes = this.postalCode
+    codes.push(this.customerPostalcode)
+      getLatLngFromPostal(codes)
       .then((y) => {    
-      y.forEach((latlng) => {
+      for (var i = 0; i < y.length; i++) {
         this.markers.push({
-        options: { position: latlng }
+          id: i,
+          options: { position: y[i], label: "" + i }
         })
+      }
+      // y.forEach((latlng) => {
+      //   this.markers.push({
+      //   id: this.id,
+      //   options: { position: latlng }
+      //   })
+      // })
       })
-      })
-    console.log(this.postalCode)
     }
 
 }
