@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ProductView from "@/components/ClinicsProductPage/ProductView.vue";
+import ProductView from "@/components/ClinicsProductsPage/ProductView.vue";
 import {
   doc,
   getDoc,
