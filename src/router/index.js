@@ -110,7 +110,7 @@ const routes = [
     name: 'IndividualProduct',
     component: IndividualProduct,
     props: {
-      myProperty: {name: String}
+      myProperty: {id: String}
     }
   }
 ];
