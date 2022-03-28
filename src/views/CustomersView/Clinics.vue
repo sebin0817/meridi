@@ -1,17 +1,37 @@
 <template>
-  <Map v-if="mounted && done" :postalCodes="filterPostalCodes" :customerPostalcode="customerPostalcode" :center="center"/>
-  <el-container>
-    <el-main><ClinicsView :clinics="filterClinics"/></el-main> 
-  </el-container>
-  <ClinicsForm @categoryFilter="filteredByCategory($event)" @clinicName="filteredBySearch($event)" @postal="newcenter($event)" />
+  <section class="hero">
+    <!-- <Map
+        v-if="mounted && done"
+        :postalCode="postalCode"
+        :customerPostalcode="customerPostalcode"
+      /> -->
+    <div class="formcard">
+      <div id="formcard2">
+        <ClinicsForm
+          @categoryFilter="filteredByCategory($event)"
+          @clinicName="filteredBySearch($event)"
+          @postal="postal"
+        />
+        <div class="container1">
+          <ClinicsView :clinics="filterClinics" />
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import Map from '@/components/CustomersClinicsPage/Map.vue'
-import ClinicsForm from '@/components/CustomersClinicsPage/Form.vue'
-import ClinicsView from '@/components/CustomersClinicsPage/ClinicsView.vue'
-import { getDocs, collection, getFirestore, query, where } from 'firebase/firestore'
-import firebaseApp from '@/firebase.js'
+// import Map from "@/components/CustomersClinicsPage/Map.vue";
+import ClinicsForm from "@/components/CustomersClinicsPage/Form.vue";
+import ClinicsView from "@/components/CustomersClinicsPage/ClinicsView.vue";
+import {
+  getDocs,
+  collection,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
+import firebaseApp from "@/firebase.js";
 const db = getFirestore(firebaseApp);
 async function fetchClinics() {
   let clinics = [];
@@ -33,22 +53,24 @@ async function fetchClinics() {
   }
   return clinics;
 }
-    async function getCustomerPostalCode() {
-      let code;
-      let email = sessionStorage.getItem("useremail")
-      const q = query(collection(db, "Customers"), where("email", "==", email));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((docs) => {
-          let y = docs.data()
-          code = y.postalcode
-            })
-      return code;
-    }
+
+async function getCustomerPostalCode() {
+  let code;
+  let email = sessionStorage.getItem("useremail");
+  const q = query(collection(db, "Customers"), where("email", "==", email));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((docs) => {
+    let y = docs.data();
+    code = y.postalcode;
+  });
+  return code;
+}
+
 export default {
   components: {
     ClinicsForm,
-    Map,
     ClinicsView,
+    // Map,
   },
   created() {
     fetchClinics().then((x) => {
@@ -70,9 +92,16 @@ export default {
       mounted: false,
       done: false,
       clinicName: "",
-      center: "",
-      checkedCats: ['accupuncture', 'tunia', 'herbal medication', 'gua sha', 'cupping', 'device therapy'],
-    }
+      postal: "",
+      checkedCats: [
+        "accupuncture",
+        "tunia",
+        "herbal medication",
+        "gua sha",
+        "cupping",
+        "device therapy",
+      ],
+    };
   },
   methods: {
     newcenter(center) {
@@ -86,13 +115,13 @@ export default {
       if (searchResult != null) {
         this.clinicName = searchResult;
       }
-      console.log(`inside Form, name search is ${this.clinicName}`)
+      console.log(`inside Form, name search is ${this.clinicName}`);
     },
     filteredByCategory(checkedCats) {
       if (checkedCats != null) {
         this.checkedCats = checkedCats;
       }
-      console.log(`inside Form, services chosen are ${this.checkedCats}`)
+      console.log(`inside Form, services chosen are ${this.checkedCats}`);
     },
     filteredClinicsByCategory(clinic) {
       let catNames = this.checkedCats.map(cat => {
@@ -103,13 +132,14 @@ export default {
       }
 
       for (const cat of clinic.services) {
-        if (catNames.indexOf(cat.toLowerCase()) >=0) {
+        if (catNames.indexOf(cat.toLowerCase()) >= 0) {
           return true;
         }
       }
       return false;
     },
     filteredClinicsBySearch(clinic) {
+
         if (this.clinicName == "") {
           return 'empty';
         }
@@ -143,4 +173,21 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.hero {
+  position: absolute;
+  background-attachment: fixed;
+  position: relative;
+  height: 100vh;
+}
+.formcard2 {
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+.container1 {
+  height: 55vh;
+
+  overflow: scroll;
+}
+</style>

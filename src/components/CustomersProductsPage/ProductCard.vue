@@ -1,76 +1,75 @@
 <template>
-	<div class="container">
-		<el-card shadow="hover">
+  <div class="container">
+    <el-card shadow="hover">
       <div class="image">
-        <img
-          :src="`${product.imgURL}`"
-          alt="product img"
-        />
+        <img :src="`${product.imgURL}`" alt="product img" />
       </div>
-      
-			<div class="cardContent">
+
+      <div class="cardContent">
         <div class="header">
-          <span class="text block" id="title">{{product.name}}</span>
-          <p class="text block" id="description">{{categories}}</p>
+          <span class="text block" id="title">{{ product.name }}</span>
+          <p class="text block" id="description">{{ categories }}</p>
         </div>
         <div class="mid">
-          <p class="text block" id="price">{{price}}</p>
-            <router-link :to="{name:'IndividualProduct', params: {id:product.id}}">
+          <p class="text block" id="price">{{ price }}</p>
+          <router-link
+            :to="{ name: 'IndividualProduct', params: { id: product.id } }"
+          >
             <button @click="sendData">View</button>
           </router-link>
         </div>
-			</div>
-		</el-card>
-	</div>
-	
+      </div>
+    </el-card>
+  </div>
 </template>
 
 <script>
 export default {
-	name: "ProductCard",
-	props: {
-		product: {
-			type: Object
-		}
-	},
+  name: "ProductCard",
+  props: {
+    product: {
+      type: Object,
+    },
+  },
 
   methods: {
     sendData() {
-        this.$router.push({
-        name: 'IndividualProduct',
+      this.$router.push({
+        name: "IndividualProduct",
         params: {
+
           id: this.product.id
         }
       })
     }
   },
 
-	computed: {
-		price() {
-			return ("$" + this.product.price);
-		},
+  computed: {
+    price() {
+      return "$" + this.product.price;
+    },
 
-		categories() {
-			let res = "";
-			let ind = 0;
+    categories() {
+      let res = "";
+      let ind = 0;
 
-			for (const cat of this.product.categories) {
-				if (ind === this.product.categories.length - 1) {
-					res += cat.replace('For', " ");
-				} else {
-					res += cat.replace('For', " ") + ",";
-				}
-				ind++;
-			}
-			return res;
-		}
-	}
-}
+      for (const cat of this.product.categories) {
+        if (ind === this.product.categories.length - 1) {
+          res += cat.replace("For", " ");
+        } else {
+          res += cat.replace("For", " ") + ",";
+        }
+        ind++;
+      }
+      return res;
+    },
+  },
+};
 </script>
 
-<style>
+<style scoped>
 el-card {
-	padding: 0px;
+  padding: 0px;
   height: 200px;
 }
 
@@ -101,13 +100,13 @@ button:focus {
 }
 
 .container {
-	line-height: 5;
-	margin-bottom: 30px;
+  line-height: 5;
+  margin-bottom: 30px;
 }
 
 .cardContent {
-	padding: 14px;
-	text-align: center;
+  padding: 14px;
+  text-align: center;
   height: 150px;
 }
 
@@ -118,12 +117,12 @@ button:focus {
 }
 
 .text {
-	font-family: "Georgia", Times, serif;
-	line-height: 1.6;
+  font-family: "Georgia", Times, serif;
+  line-height: 1.6;
 }
 
 .block {
-	display: block;
+  display: block;
 }
 
 .header {
@@ -131,19 +130,18 @@ button:focus {
 }
 
 #title {
-	font-weight: bold;
-	font-size: 14px;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 #description {
-	width: 100%;
-	font-size: 13px;
+  width: 100%;
+  font-size: 13px;
 }
 
 #price {
-	font-size: 16px;
-	margin-top: 20px;
-	font-weight: 500;
+  font-size: 16px;
+  margin-top: 20px;
+  font-weight: 500;
 }
-
 </style>
