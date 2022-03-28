@@ -1,6 +1,8 @@
 <template>
   <section class="hero">
-    <EditParticularsForm />
+    <div class="hero-text container">
+      <EditParticularsForm id="form"/>
+    </div>
   </section>
 </template>
 
@@ -17,12 +19,15 @@ export default {
 
 <style scoped>
 .hero {
-  background-size: cover;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
+  background-attachment: fixed;
+  position: relative;
   height: 100vh;
+}
+.hero-text {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: black;
 }
 </style>
