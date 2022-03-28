@@ -1,19 +1,17 @@
 <template>
   <GoogleMap
-
-  class="map"
-  api-key= AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78
-  :center="centerlatlng"
-  :zoom="13"
+    class="map"
+    api-key="AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78"
+    :center="centerlatlng"
+    :zoom="13"
   >
     <Marker
       :key="marker"
       v-for="(m, marker) in markers"
       :options="m.options"
-
-      @click="showCard()"/>
-    <Marker :options="customerMarker"/>
-
+      @click="showCard()"
+    />
+    <Marker :options="customerMarker" />
   </GoogleMap>
 </template>
 
@@ -47,17 +45,16 @@ export default {
   name: "Map",
   components: { Marker, GoogleMap },
   props: {
-
-		postalCodes: {
-			type: Array
-		},
+    postalCodes: {
+      type: Array,
+    },
     customerPostalcode: {
-      type: String
+      type: String,
     },
     center: {
-      type: String
-    }
-	},
+      type: String,
+    },
+  },
 
   data() {
     return {
@@ -66,10 +63,7 @@ export default {
       markers: [],
       customerMarker: {},
       chosen: {},
-
-    }
-
-
+    };
   },
 
   emits: ["chosen"],
@@ -78,77 +72,68 @@ export default {
       this.chosen = 0;
       this.$emit("chosen", this.chosen);
 
-      console.log(this.chosen)
-      console.log("hi")
-
-  },
-  watch: {
-    center: function(newVal, oldVal) { // watch it
-      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
-      if (newVal == null || newVal == "") {
-        this.centerlatlng = this.customerlatlng
-      } else {
-        getLatLngFromPostal([newVal])
-        .then((y) => {
-          this.centerlatlng = y[0]
-        })
-      }
+      console.log(this.chosen);
+      console.log("hi");
     },
-    postalCodes: function(newVal, oldVal) { // watch it
-        console.log('Prop changed: ', newVal, ' | was: ', oldVal)
-        this.markers = []
-        getLatLngFromPostal(this.postalCodes)
-        .then((y) => {    
+    watch: {
+      center: function (newVal, oldVal) {
+        // watch it
+        console.log("Prop changed: ", newVal, " | was: ", oldVal);
+        if (newVal == null || newVal == "") {
+          this.centerlatlng = this.customerlatlng;
+        } else {
+          getLatLngFromPostal([newVal]).then((y) => {
+            this.centerlatlng = y[0];
+          });
+        }
+      },
+      postalCodes: function (newVal, oldVal) {
+        // watch it
+        console.log("Prop changed: ", newVal, " | was: ", oldVal);
+        this.markers = [];
+        getLatLngFromPostal(this.postalCodes).then((y) => {
+          for (var i = 0; i < y.length; i++) {
+            this.markers.push({
+              id: i,
+              options: { position: y[i], label: "" + i },
+            });
+          }
+        });
+      },
+    },
+    created() {
+      // Place marker and center map at customer
+      getLatLngFromPostal([this.customerPostalcode]).then((y) => {
+        this.customerMarker = {
+          options: {
+            position: y[0],
+            icon: {
+              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+            },
+          },
+        };
+        this.centerlatlng = y[0];
+        this.customerlatlng = y[0];
+      });
+      // Place Markers on ALL Clinics
+      getLatLngFromPostal(this.postalCodes).then((y) => {
         for (var i = 0; i < y.length; i++) {
           this.markers.push({
             id: i,
-            options: { position: y[i], label: "" + i }
-          })
+            options: { position: y[i], label: "" + i },
+          });
         }
-      })
+      });
     },
   },
-  created() {
-
-    // Place marker and center map at customer
-    getLatLngFromPostal([this.customerPostalcode])
-        .then((y) => {
-          this.customerMarker = {
-            options: { position: y[0], icon: {
-              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-            }}
-          }
-          this.centerlatlng = y[0]
-          this.customerlatlng = y[0]
-        })
-      // Place Markers on ALL Clinics
-      getLatLngFromPostal(this.postalCodes)
-      .then((y) => {    
-
-      for (var i = 0; i < y.length; i++) {
-        this.markers.push({
-          id: i,
-          options: { position: y[i], label: "" + i },
-        });
-      }
-
-      })
-    },
-}
+};
 </script>
 
 <style scoped>
 .map {
   position: relative;
-  width: 500px;
-  height: 500px;
-  margin-left: auto;
-}
-.hero-text {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: black;
+  width: 700px;
+  height: 525px;
+  margin-top: 160px;
 }
 </style>

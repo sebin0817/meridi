@@ -1,27 +1,30 @@
 <template>
-  <section class="hero">
-    <!-- <Map
-        v-if="mounted && done"
-        :postalCode="postalCode"
-        :customerPostalcode="customerPostalcode"
-      /> -->
-    <div class="formcard">
-      <div id="formcard2">
+  <div class="hero">
+    <div id="formcard2">
+      <div class="clinicform">
         <ClinicsForm
           @categoryFilter="filteredByCategory($event)"
           @clinicName="filteredBySearch($event)"
           @postal="postal"
         />
-        <div class="container1">
-          <ClinicsView :clinics="filterClinics" />
-        </div>
+      </div>
+
+      <div class="container1">
+        <ClinicsView :clinics="filterClinics" />
       </div>
     </div>
-  </section>
+    <div id="map">
+      <Map
+        v-if="mounted && done"
+        :postalCode="postalCode"
+        :customerPostalcode="customerPostalcode"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
-// import Map from "@/components/CustomersClinicsPage/Map.vue";
+import Map from "@/components/CustomersClinicsPage/Map.vue";
 import ClinicsForm from "@/components/CustomersClinicsPage/Form.vue";
 import ClinicsView from "@/components/CustomersClinicsPage/ClinicsView.vue";
 import {
@@ -70,20 +73,20 @@ export default {
   components: {
     ClinicsForm,
     ClinicsView,
-    // Map,
+    Map,
   },
   created() {
     fetchClinics().then((x) => {
       x.forEach((y) => {
-        this.clinics.push(y)
-      })
-      this.mounted = true
-    })
+        this.clinics.push(y);
+      });
+      this.mounted = true;
+    });
 
     getCustomerPostalCode().then((x) => {
-      this.customerPostalcode = x
-      this.done = true
-    })
+      this.customerPostalcode = x;
+      this.done = true;
+    });
   },
   data() {
     return {
@@ -106,9 +109,9 @@ export default {
   methods: {
     newcenter(center) {
       if (center != null) {
-        this.center = center
+        this.center = center;
       }
-      console.log(`inside Form, center is ${this.center}`)
+      console.log(`inside Form, center is ${this.center}`);
     },
 
     filteredBySearch(searchResult) {
@@ -124,11 +127,11 @@ export default {
       console.log(`inside Form, services chosen are ${this.checkedCats}`);
     },
     filteredClinicsByCategory(clinic) {
-      let catNames = this.checkedCats.map(cat => {
+      let catNames = this.checkedCats.map((cat) => {
         return cat.toLowerCase();
       });
       if (catNames.length == 0) {
-        return 'empty';
+        return "empty";
       }
 
       for (const cat of clinic.services) {
@@ -139,55 +142,58 @@ export default {
       return false;
     },
     filteredClinicsBySearch(clinic) {
-
-        if (this.clinicName == "") {
-          return 'empty';
-        }
-        return clinic.name.toLowerCase().includes(this.clinicName.toLowerCase());
-    }
+      if (this.clinicName == "") {
+        return "empty";
+      }
+      return clinic.name.toLowerCase().includes(this.clinicName.toLowerCase());
+    },
   },
   computed: {
     filterClinics() {
-      let catNames = this.checkedCats.map(cat => {
+      let catNames = this.checkedCats.map((cat) => {
         return cat.toLowerCase();
       });
-      console.log('submit form')
+      console.log("submit form");
       if (catNames.length == 0 && this.clinicName == "") {
         return this.clinics;
-      }
-      else {
+      } else {
         return this.clinics.filter((clinic) => {
-          return this.filteredClinicsBySearch(clinic) && this.filteredClinicsByCategory(clinic);       
-        })
+          return (
+            this.filteredClinicsBySearch(clinic) &&
+            this.filteredClinicsByCategory(clinic)
+          );
+        });
       }
-      
     },
     filterPostalCodes() {
-      let tmp = []
+      let tmp = [];
       this.filterClinics.forEach((c) => {
-        tmp.push(c.postalcode)
-      })
-      return tmp
-    }
+        tmp.push(c.postalcode);
+      });
+      return tmp;
+    },
   },
 };
 </script>
 
 <style scoped>
 .hero {
+  display: flex;
   position: absolute;
   background-attachment: fixed;
   position: relative;
   height: 100vh;
 }
-.formcard2 {
-  align-items: center;
-  justify-content: center;
-  margin-top: 60px;
+.clinicform {
+  margin-left: 120px;
 }
 .container1 {
   height: 55vh;
-
   overflow: scroll;
+  float: left;
+}
+#map {
+  flex-grow: 1;
+  padding-left: 10px;
 }
 </style>
