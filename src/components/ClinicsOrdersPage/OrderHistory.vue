@@ -3,11 +3,15 @@
     <el-header id="historyheader">Order History</el-header>
     <el-main>
       <el-scrollbar>
-        <el-table :data="tableData">
+        <div class="order" v-for="order in orderhistory" :key="order">
+        <h4>{{ order.custname }} ordered on {{ order.dop }}</h4>
+        <el-table  :data="obtoarr(order)">
           <el-table-column prop="no" label="No." width="80px" />
-          <el-table-column prop="product" label="Product" width="550px" />
-          <el-table-column prop="price" label="Price" />
+          <el-table-column prop="name" label="Product" width="550px" />
+          <el-table-column prop="quantity" label="Quantity" width="80px" />
+          <el-table-column prop="totalprice" label="Price" />
         </el-table>
+        </div>
       </el-scrollbar>
     </el-main>
   </el-container>
@@ -15,9 +19,24 @@
 
 <script>
 export default {
-  data() {
-    return {};
+  props: {
+    orderhistory: Object
   },
+  methods: {
+    obtoarr(order) {
+      var prodsobj = order.products
+      var prodsarr = []
+      var index = 1
+      for (const [key, value] of Object.entries(prodsobj)) {
+        var product = value
+        product.name = key
+        product.no = index
+        prodsarr.push(product)
+        index++
+      }
+      return prodsarr
+    }
+  }
 };
 </script>
 
