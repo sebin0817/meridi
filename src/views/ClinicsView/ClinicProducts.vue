@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import AddProductBtn from "@/components/ClinicsProductPage/AddProductBtn.vue";
-import ProductView from "@/components/ClinicsProductPage/ProductView.vue";
+import AddProductBtn from "@/components/ClinicsProductsPage/AddProductBtn.vue";
+import ProductView from "@/components/ClinicsProductsPage/ProductView.vue";
 import {
   doc,
   getDoc,
