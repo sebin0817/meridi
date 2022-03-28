@@ -1,7 +1,6 @@
 <template>
   <section class="hero">
     <img id="logo" src="../../assets/user.png" alt="" />
-
     <h3 class="profile-info">{{ name }}</h3>
     <h3 class="profile-info">{{ email }}</h3>
     <h3 class="profile-info">{{ postalcode }}</h3>
