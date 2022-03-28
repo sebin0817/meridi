@@ -78,35 +78,7 @@ export default {
         async function addUsertoFs(email,name,postalcode,type) {
           try {
             const docRef = await setDoc(doc(db,type,email), {
-            email: email, name: name, postalcode: postalcode, purchasehistory: {}
-               /*purchasehistory: {
-                 1: {
-                   products: {
-                     product1: {
-                       quantity: 1,
-                       price: 50
-                     },
-                     product2: {
-                       quantity: 2,
-                       price: 50
-                     }
-                   },
-                   total: 100
-                 },
-                 2: {
-                   products: {
-                      product2: {
-                        quantity: 3,
-                        price: 60
-                      },
-                      product3: {
-                        quantity: 5,
-                        price: 50
-                      }
-                   },
-                   total: 110
-                 },
-               }*/
+            email: email, name: name, postalcode: postalcode, cart: {total: 0, products: {}}, purchasehistory: {}
             })
             console.log(docRef)
           } catch (error) {

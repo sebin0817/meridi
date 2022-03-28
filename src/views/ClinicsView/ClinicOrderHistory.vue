@@ -1,13 +1,38 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <h4>Order History</h4>
+      <OrderHistory v-if="mounted" :orderhistory="orderhistory"/>
     </div>
   </section>
 </template>
 
 <script>
-export default {};
+import OrderHistory from '@/components/ClinicsOrdersPage/OrderHistory.vue'
+import { getFirestore, doc, getDoc } from "firebase/firestore"; 
+import firebaseApp from "../../firebase.js";
+const db = getFirestore(firebaseApp)
+
+export default {
+  name: 'ClinicOrderHistory',
+  components: {
+    OrderHistory
+  },
+  data() {
+    return {
+      orderhistory: null,
+      mounted: false,
+    }
+  },
+  async created() {
+    const email = sessionStorage.getItem("useremail");
+    const docRef = doc(db,"Clinics",email);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists) {
+        this.orderhistory = docSnap.data().orderhistory;
+        this.mounted = true;
+        }
+  },
+};
 </script>
 
 <style scoped>
