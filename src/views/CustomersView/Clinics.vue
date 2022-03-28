@@ -12,9 +12,7 @@ import ClinicsForm from '@/components/CustomersClinicsPage/Form.vue'
 import ClinicsView from '@/components/CustomersClinicsPage/ClinicsView.vue'
 import { getDocs, collection, getFirestore, query, where } from 'firebase/firestore'
 import firebaseApp from '@/firebase.js'
-
 const db = getFirestore(firebaseApp);
-
 async function fetchClinics() {
   let clinics = [];
   let clinicsDB = await getDocs(collection(db, "Clinics"));
@@ -35,7 +33,6 @@ async function fetchClinics() {
   }
   return clinics;
 }
-
     async function getCustomerPostalCode() {
       let code;
       let email = sessionStorage.getItem("useremail")
@@ -47,14 +44,12 @@ async function fetchClinics() {
             })
       return code;
     }
-
 export default {
   components: {
     ClinicsForm,
     Map,
     ClinicsView,
   },
-
   created() {
     fetchClinics().then((x) => {
       x.forEach((y) => {
@@ -66,12 +61,10 @@ export default {
         this.postalCode.push(y.postalcode)
       })
       this.mounted = true
-
     getCustomerPostalCode().then((x) => {
       this.customerPostalcode = x
       this.done = true
     })
-
   },
   data() {
     return {
@@ -93,16 +86,20 @@ export default {
       }
       console.log(`inside Form, name search is ${this.clinicName}`)
     },
-
     filteredByCategory(checkedCats) {
       if (checkedCats != null) {
         this.checkedCats = checkedCats;
       }
       console.log(`inside Form, services chosen are ${this.checkedCats}`)
     },
-
     filteredClinicsByCategory(clinic) {
-      let catNames = this.checkedCats;
+      let catNames = this.checkedCats.map(cat => {
+        return cat.toLowerCase();
+      });
+      if (catNames.length == 0) {
+        return 'empty';
+      }
+
       for (const cat of clinic.services) {
         if (catNames.indexOf(cat.toLowerCase()) >=0) {
           return true;
@@ -110,16 +107,28 @@ export default {
       }
       return false;
     },
-
     filteredClinicsBySearch(clinic) {
+        if (this.clinicName == "") {
+          return 'empty';
+        }
         return clinic.name.toLowerCase().includes(this.clinicName.toLowerCase());
     }
   },
   computed: {
     filterClinics() {
-      return this.clinics.filter((clinic) => {
-        return this.filteredClinicsBySearch(clinic) && this.filteredClinicsByCategory(clinic);       
-      })
+      let catNames = this.checkedCats.map(cat => {
+        return cat.toLowerCase();
+      });
+      console.log('submit form')
+      if (catNames.length == 0 && this.clinicName == "") {
+        return this.clinics;
+      }
+      else {
+        return this.clinics.filter((clinic) => {
+          return this.filteredClinicsBySearch(clinic) && this.filteredClinicsByCategory(clinic);       
+        })
+      }
+      
     },
   },
 };
