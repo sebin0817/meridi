@@ -179,7 +179,7 @@ export default {
   display: flex;
   position: absolute;
   background-attachment: fixed;
-  position: relative;
+  position: absolute;
   height: 100vh;
 }
 .clinicform {
@@ -189,9 +189,11 @@ export default {
   height: 55vh;
   overflow: scroll;
   float: left;
+  position: absolute;
 }
 #map {
   flex-grow: 1;
-  padding-left: 10px;
+  margin-left: 500px;
+  position: absolute;
 }
 </style>
