@@ -7,6 +7,7 @@
           v-model="name"
           type="text"
           placeholder="Product Name"
+          required="true"
           ><template #prefix>
             <el-icon class="el-input__icon"><Sell /></el-icon> </template
         ></el-input>
@@ -17,6 +18,7 @@
           v-model="price"
           type="number"
           placeholder="Product Price"
+          required="true"
           ><template #prefix>
             <el-icon class="el-input__icon"><Coin /></el-icon>
           </template>
@@ -28,6 +30,7 @@
           :rows="2"
           type="textarea"
           placeholder="Product Description"
+          required="true"
           v-model="desc"
         />
       </el-row>
@@ -36,6 +39,7 @@
           v-model="categories"
           multiple
           placeholder="Product Categories"
+          required="true"
         >
           <el-option
             v-for="item in options"
@@ -47,7 +51,11 @@
         </el-select>
       </el-row>
       <el-row>
-        <el-select v-model="avail" placeholder="Product Availability">
+        <el-select
+          v-model="avail"
+          placeholder="Product Availability"
+          required="true"
+        >
           <el-option
             v-for="item in availability"
             :key="item.value"
@@ -66,7 +74,6 @@
 
 <script>
 import { Coin, Sell } from "@element-plus/icons-vue";
-import { getAuth } from "firebase/auth";
 import firebaseApp from "@/firebase.js";
 import { getFirestore } from "firebase/firestore";
 import {
@@ -103,8 +110,7 @@ export default {
     },
     //store the information
     async add() {
-      const auth = getAuth();
-      var user = auth.currentUser.email;
+      var user = sessionStorage.getItem("useremail");
       try {
         //store in Products collection
         const docRef = await addDoc(collection(db, "Products"), {
