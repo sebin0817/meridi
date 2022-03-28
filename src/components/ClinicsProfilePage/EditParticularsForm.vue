@@ -1,21 +1,51 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <form @submit.prevent="update">        
-            <input       
-            v-model="name"   
-            />   
-            <input
-            v-model="postalcode"   
-            />    
-            <input      
-            v-model="desc"   
-            /> 
-
-          <button type="submit">
-            SAVE CHANGE
-          </button>   
-        </form> 
+      <el-form :model="form" @submit.prevent="update">
+      <form @submit.prevent="update">
+        <el-input
+          id="name"
+          v-model="name"
+          type="text"
+          ><template #prefix>
+            <el-icon class="el-input__icon"><avatar /></el-icon> </template
+        ></el-input>
+        <el-input
+          id="postalcode"
+          v-model="postalcode"
+          type="text"
+          ><template #prefix>
+            <el-icon class="el-input__icon"
+              ><map-location
+            /></el-icon> </template
+        ></el-input>
+        <el-row>
+          <el-input
+            id="textarea"
+            :rows="2"
+            type="textarea"
+            v-model="desc"
+          />
+        </el-row>
+        <el-row>
+          <el-select
+            v-model="services"
+            multiple
+          >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-row>
+        <div id="centre">
+          <button type="submit">SAVE CHANGE</button>
+        </div>
+      </form>
+    </el-form>
     </div>
   </section>
 </template>
@@ -53,6 +83,7 @@ export default {
           services: this.services
         });   
         alert("Profile successfully updated");
+        this.$router.push('./ClinicProfile')
       }
     },
     async created() {
@@ -70,17 +101,48 @@ export default {
 };
 </script>
 
-<style scoped>
-.hero {
-  background-attachment: fixed;
-  position: relative;
-  height: 100vh;
+<style>
+.form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  text-align: center;
+  width: 30%;
 }
-.hero-text {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+.el-input,
+.el-row {
+  margin-bottom: 10px;
   justify-content: center;
+}
+.el-select {
+  width: 50ch;
+}
+button {
+  background-color: #ffcc00;
+  border: none;
   color: black;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  align-items: center;
+  font-family: "Nunito Sans", sans-serif;
+}
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+#centre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h4 {
+  font-family: "Nunito Sans", sans-serif;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 </style>

@@ -4,10 +4,10 @@
     <div id="purchase-history-div">
         <div class="order" v-for="(order,index) in purchasehistory" :key="order">
             <h3>{{ index }}</h3>
-            <div class="item" v-for="item in order.items" :key="item">
-                <h3>{{ item[0] }}</h3>
-                <h3>{{ item[1] }}</h3>
-                <h3>{{ item[2] }}</h3>
+            <div class="item" v-for="(product,index) in order.products" :key="product">
+                <h3>{{ index }}</h3>
+                <h3>{{ product.quantity }}</h3>
+                <h3>${{ product.price }}</h3>
             </div>
             <h3>Total: ${{ order.total }}</h3>
         </div>

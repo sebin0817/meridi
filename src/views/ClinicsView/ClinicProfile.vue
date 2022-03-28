@@ -2,21 +2,17 @@
   <section class="hero">
     <div class="hero-text container">
       <ClinicInfo :useremail="useremail"/>
-      <EditParticularsForm/>
     </div>
   </section>
 </template>
 
 <script>
-import ClinicInfo from '../../components/ClinicsProfilePage/ClinicInfo.vue'
-import EditParticularsForm from '@/components/ClinicsProfilePage/EditParticularsForm.vue'
-
+import ClinicInfo from '@/components/ClinicsProfilePage/ClinicInfo.vue'
 
 export default {
   name: 'ClinicProfile',
   components: {
     ClinicInfo,
-    EditParticularsForm
   }, 
   computed: {
     useremail() {
