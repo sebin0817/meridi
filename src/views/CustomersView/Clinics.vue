@@ -1,11 +1,4 @@
 <template>
-  <section class="hero">
-    <Map
-        v-if="mounted && done"
-        :postalCodes="filterPostalCodes"
-        :customerPostalcode="customerPostalcode"
-        :center="center"
-      />
   <div class="hero">
     <div id="formcard2">
       <div class="clinicform">
@@ -23,8 +16,9 @@
     <div id="map">
       <Map
         v-if="mounted && done"
-        :postalCode="postalCode"
+        :postalCodes="filterPostalCodes"
         :customerPostalcode="customerPostalcode"
+        :center="center"
       />
     </div>
   </div>
@@ -62,17 +56,17 @@ async function fetchClinics() {
   }
   return clinics;
 }
-    async function getCustomerPostalCode() {
-      let code;
-      let email = sessionStorage.getItem("useremail")
-      const q = query(collection(db, "Customers"), where("email", "==", email));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((docs) => {
-          let y = docs.data()
-          code = y.postalcode
-            })
-      return code;
-    }
+async function getCustomerPostalCode() {
+  let code;
+  let email = sessionStorage.getItem("useremail");
+  const q = query(collection(db, "Customers"), where("email", "==", email));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((docs) => {
+    let y = docs.data();
+    code = y.postalcode;
+  });
+  return code;
+}
 export default {
   components: {
     ClinicsForm,
@@ -100,8 +94,15 @@ export default {
       done: false,
       clinicName: "",
       center: "",
-      checkedCats: ['accupuncture', 'tunia', 'herbal medication', 'gua sha', 'cupping', 'device therapy'],
-    }
+      checkedCats: [
+        "accupuncture",
+        "tunia",
+        "herbal medication",
+        "gua sha",
+        "cupping",
+        "device therapy",
+      ],
+    };
   },
   methods: {
     newcenter(center) {
@@ -115,13 +116,13 @@ export default {
       if (searchResult != null) {
         this.clinicName = searchResult;
       }
-      console.log(`inside Form, name search is ${this.clinicName}`)
+      console.log(`inside Form, name search is ${this.clinicName}`);
     },
     filteredByCategory(checkedCats) {
       if (checkedCats != null) {
         this.checkedCats = checkedCats;
       }
-      console.log(`inside Form, services chosen are ${this.checkedCats}`)
+      console.log(`inside Form, services chosen are ${this.checkedCats}`);
     },
     filteredClinicsByCategory(clinic) {
       let catNames = this.checkedCats.map((cat) => {
@@ -132,7 +133,7 @@ export default {
       }
 
       for (const cat of clinic.services) {
-        if (catNames.indexOf(cat.toLowerCase()) >=0) {
+        if (catNames.indexOf(cat.toLowerCase()) >= 0) {
           return true;
         }
       }
