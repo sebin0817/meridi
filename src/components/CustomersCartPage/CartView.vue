@@ -48,6 +48,14 @@ export default {
         total: this.cart.total
     }
   },
+  watch: {
+    cart: function(newval,oldval) {
+      console.log("before", oldval)
+      console.log("after", newval)
+      this.tableData = []
+      this.total = 0
+    }
+  },
   props: {
     cart: Object
   },
@@ -59,13 +67,12 @@ export default {
   },
   created() {
     var index = 1;
-    var cart = JSON.parse(JSON.stringify(this.cart));
-    delete cart.total;
-    for (const [key, value] of Object.entries(cart)) {
+    var products = JSON.parse(JSON.stringify(this.cart.products));
+    for (const [key, value] of Object.entries(products)) {
       var product = value;
       product.number = index;
       product.name = key;
-      product.totalprice = "$" + (product.unitprice * product.quantity).toFixed(2)
+      product.totalprice ="$" + (product.unitprice * product.quantity).toFixed()
       product.unitprice = "$" + product.unitprice.toFixed(2)
       this.tableData.push(product)
       index++;

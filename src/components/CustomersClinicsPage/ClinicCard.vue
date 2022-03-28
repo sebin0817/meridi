@@ -6,7 +6,7 @@
         <span class="text block" id="postal">{{ clinic.postalcode }}</span>
         <span class="text block" id="services">{{ services }}</span>
         <div id="centre">
-          <button type="submit">Book</button>
+          <button type="submit" @click="sendData">Book</button>
         </div>
       </div>
     </el-card>
@@ -30,6 +30,17 @@ export default {
       return text.substring(0, text.length - 2);
     },
   },
+
+  methods: {
+    sendData() {
+      this.$router.push({
+        name: "IndividualClinic",
+        params: {
+          id: this.clinic.id
+        }
+      })
+    }
+  }
 };
 </script>
 

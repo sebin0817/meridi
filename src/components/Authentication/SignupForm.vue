@@ -80,40 +80,21 @@ export default {
         .catch((error) => {
           alert(error.message);
         });
-      async function addUsertoFs(email, name, postalcode, type) {
-        try {
-          const docRef = await setDoc(doc(db, type, email), {
-            email: email,
-            name: name,
-            postalcode: postalcode,
-            purchasehistory: {},
-            // purchasehistory: {
-            //   1: {
-            //     items: {
-            //       item1: ["item1",1,50],
-            //       item2: ["item2",1,50]
-            //     },
-            //     total: 100
-            //   },
-            //   2: {
-            //     items: {
-            //       item3: ["item3",1,60],
-            //       item4: ["item4",1,50]
-            //     },
-            //     total: 110
-            //   },
-            // }
-          });
-          console.log(docRef);
-        } catch (error) {
-          console.error("Error adding document: ", error);
+        async function addUsertoFs(email,name,postalcode,type) {
+          try {
+            const docRef = await setDoc(doc(db,type,email), {
+            email: email, name: name, postalcode: postalcode, cart: {total: 0, products: {}}, purchasehistory: {}
+            })
+            console.log(docRef)
+          } catch (error) {
+            console.error("Error adding document: ", error);
+          }
         }
       }
     },
     goToLogin() {
       this.$router.replace("./Login");
     },
-  },
 };
 </script>
 

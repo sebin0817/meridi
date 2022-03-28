@@ -129,8 +129,8 @@ export default {
           this.cart[product].unitprice = price;
           this.cart[product].quantity = addQty;
         }
-        console.log(this.qty);
-        console.log(this.price);
+        // console.log(this.qty);
+        // console.log(this.price)
         this.totalPrice += addQty * price;
         this.updateCartToFb();
       },
@@ -146,12 +146,14 @@ export default {
         const cartDoc = doc(db, "Customers", this.email);
         let updateCart = { products: this.cart, total: this.totalPrice };
         await updateDoc(cartDoc, {
-          cart: updateCart,
-        });
-      },
-    },
-  },
-};
+          "cart": updateCart
+        })
+      }
+    }
+
+}
+}
+
 </script>
 
 <style scoped>
