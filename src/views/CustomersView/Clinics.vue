@@ -32,9 +32,7 @@ import {
   where,
 } from "firebase/firestore";
 import firebaseApp from "@/firebase.js";
-
 const db = getFirestore(firebaseApp);
-
 async function fetchClinics() {
   let clinics = [];
   let clinicsDB = await getDocs(collection(db, "Clinics"));
@@ -74,29 +72,22 @@ export default {
     ClinicsView,
     // Map,
   },
-
   created() {
     fetchClinics().then((x) => {
       x.forEach((y) => {
-        this.clinics.push(y);
-        this.postalCode.push(y.postalcode);
-      });
-    });
-    this.filterClinics.forEach((y) => {
-      this.postalCode.push(y.postalcode);
-    });
-    this.mounted = true;
+        this.clinics.push(y)
+      })
+      this.mounted = true
+    })
 
     getCustomerPostalCode().then((x) => {
-      this.customerPostalcode = x;
-      this.done = true;
-    });
+      this.customerPostalcode = x
+      this.done = true
+    })
   },
   data() {
     return {
       clinics: [],
-      filteredClinics: [],
-      postalCode: [],
       customerPostalcode: "",
       mounted: false,
       done: false,
@@ -113,22 +104,33 @@ export default {
     };
   },
   methods: {
+    newcenter(center) {
+      if (center != null) {
+        this.center = center
+      }
+      console.log(`inside Form, center is ${this.center}`)
+    },
+
     filteredBySearch(searchResult) {
       if (searchResult != null) {
         this.clinicName = searchResult;
       }
       console.log(`inside Form, name search is ${this.clinicName}`);
     },
-
     filteredByCategory(checkedCats) {
       if (checkedCats != null) {
         this.checkedCats = checkedCats;
       }
       console.log(`inside Form, services chosen are ${this.checkedCats}`);
     },
-
     filteredClinicsByCategory(clinic) {
-      let catNames = this.checkedCats;
+      let catNames = this.checkedCats.map(cat => {
+        return cat.toLowerCase();
+      });
+      if (catNames.length == 0) {
+        return 'empty';
+      }
+
       for (const cat of clinic.services) {
         if (catNames.indexOf(cat.toLowerCase()) >= 0) {
           return true;
@@ -136,20 +138,37 @@ export default {
       }
       return false;
     },
-
     filteredClinicsBySearch(clinic) {
-      return clinic.name.toLowerCase().includes(this.clinicName.toLowerCase());
-    },
+
+        if (this.clinicName == "") {
+          return 'empty';
+        }
+        return clinic.name.toLowerCase().includes(this.clinicName.toLowerCase());
+    }
   },
   computed: {
     filterClinics() {
-      return this.clinics.filter((clinic) => {
-        return (
-          this.filteredClinicsBySearch(clinic) &&
-          this.filteredClinicsByCategory(clinic)
-        );
+      let catNames = this.checkedCats.map(cat => {
+        return cat.toLowerCase();
       });
+      console.log('submit form')
+      if (catNames.length == 0 && this.clinicName == "") {
+        return this.clinics;
+      }
+      else {
+        return this.clinics.filter((clinic) => {
+          return this.filteredClinicsBySearch(clinic) && this.filteredClinicsByCategory(clinic);       
+        })
+      }
+      
     },
+    filterPostalCodes() {
+      let tmp = []
+      this.filterClinics.forEach((c) => {
+        tmp.push(c.postalcode)
+      })
+      return tmp
+    }
   },
 };
 </script>

@@ -25,15 +25,14 @@
         id="name"
         v-model="name"
         type="text"
-        placeholder="Full Name"
-        required="true"
+        placeholder="Name"
         ><template #prefix>
           <el-icon class="el-input__icon"><avatar /></el-icon> </template
       ></el-input>
       <el-input
         id="postalcode"
         v-model="postalcode"
-        type="number"
+        type="text"
         placeholder="Postal Code"
         required="true"
         ><template #prefix>

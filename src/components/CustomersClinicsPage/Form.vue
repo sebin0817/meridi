@@ -92,9 +92,12 @@ export default {
   methods: {
     onSubmit() {
       this.$emit("categoryFilter", this.formInline.services);
-      this.$emit("postal", this.formInline.code);
+
+      this.$emit("postal", this.formInline.code)
       this.$emit("clinicName", this.formInline.name);
-    },
+      console.log(`inside submit clinic, ${this.formInline}`)
+      // console.log('hehe submit again here')
+    }
   },
   created() {},
 };

@@ -37,10 +37,11 @@ export default {
       this.$router.push({
         name: "IndividualProduct",
         params: {
-          name: this.product.name,
-        },
-      });
-    },
+
+          id: this.product.id
+        }
+      })
+    }
   },
 
   computed: {

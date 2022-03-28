@@ -79,17 +79,18 @@ export default {
       ],
     };
   },
-  methods: {
-    async update() {
-      await setDoc(doc(db, "Clinics", this.email), {
-        name: this.name,
-        email: this.email,
-        postalcode: this.postalcode,
-        desc: this.desc,
-        services: this.services,
-      });
-      alert("Profile successfully updated");
-    },
+    methods: {
+      async update() {
+        await setDoc(doc(db, "Clinics", this.email), {
+          name: this.name,
+          email: this.email,
+          postalcode: this.postalcode,
+          desc: this.desc,
+          services: this.services
+        });   
+        alert("Profile successfully updated");
+        this.$router.push('./ClinicProfile')
+      },
     goToProfile() {
       this.$router.push("./ClinicProfile");
     },

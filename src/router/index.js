@@ -104,15 +104,24 @@ const routes = [
     name: "ClinicOrderHistory",
     component: ClinicOrderHistory,
   },
-
   {
     path: "/Products/show/:id",
-    name: 'IndividualProduct',
+    name: "IndividualProduct",
     component: IndividualProduct,
     props: {
-      myProperty: {name: String}
-    }
-  }
+      myProperty: { id: String },
+    },
+  },
+  {
+    path: "/EditCustomerParticulars",
+    name: "EditCustomerParticulars",
+    component: EditCustomerParticulars,
+  },
+  {
+    path: "/EditClinicParticulars",
+    name: "EditClinicParticulars",
+    component: EditClinicParticulars,
+  },
 ];
 
 const router = createRouter({

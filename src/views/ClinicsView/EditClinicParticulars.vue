@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import EditParticularsForm from "../../components/ClinicsProfilePage/EditParticularsForm.vue";
+import EditParticularsForm from '@/components/ClinicsProfilePage/EditParticularsForm.vue'
+
 export default {
   name: "EditCustomerParticulars",
   components: {

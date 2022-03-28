@@ -104,6 +104,7 @@ export default {
 
   computed: {
     filterProducts() {
+      // console.log("change everytime filter cate changes")
       return this.products.filter(product => {
         return this.filteredProductsBySearch(product) && this.filteredProductsByCategory(product);       
       }).sort((p1, p2) => {

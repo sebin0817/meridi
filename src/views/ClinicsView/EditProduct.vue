@@ -6,7 +6,7 @@
   </section>
 </template>
 <script>
-import EditProductForm from "@/components/ClinicsProductPage/EditProductForm.vue";
+import EditProductForm from "@/components/ClinicsProductsPage/EditProductForm.vue";
 
 export default {
   name: "EditProduct",

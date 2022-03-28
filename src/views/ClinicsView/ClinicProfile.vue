@@ -1,22 +1,20 @@
 <template>
   <section class="profile">
     <div class="hero-text container">
-      <ClinicInfo :useremail="useremail" />
+      <ClinicInfo :useremail="useremail"/>
     </div>
     <!-- <EditParticularsForm /> -->
   </section>
 </template>
 
 <script>
-import ClinicInfo from "../../components/ClinicsProfilePage/ClinicInfo.vue";
-// import EditParticularsForm from "@/components/ClinicsProfilePage/EditParticularsForm.vue";
+import ClinicInfo from '@/components/ClinicsProfilePage/ClinicInfo.vue'
 
 export default {
   name: "ClinicProfile",
   components: {
     ClinicInfo,
-    // EditParticularsForm,
-  },
+  }, 
   computed: {
     useremail() {
       return sessionStorage.getItem("useremail");
