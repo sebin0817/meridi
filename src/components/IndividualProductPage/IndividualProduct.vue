@@ -46,7 +46,8 @@ export default {
           qty: 1,
           email: "",
           user: {},
-          cart: {}
+          cart: {},
+          totalPrice: 0
         }
     },
 
@@ -94,6 +95,7 @@ export default {
       if (docSnap.exists) {
           const data = docSnap.data();
           self.cart = self.jsonify(data.cart).products;
+          self.totalPrice = self.jsonify(data.cart).total;
       }
       console.log(self.cart)
     }
@@ -123,13 +125,16 @@ export default {
 
         if (this.isExist()) {
           this.cart[product].quantity += addQty;
-          // this.cart[product].total += addQty * price;
+          console.log(this.cart[product].quantity)
         } else {
           this.cart[product] = {};
+          this.cart[product].clinic = this.product.clinic;
+          this.cart[product].unitprice = price;
           this.cart[product].quantity = addQty;
-          this.cart[product].price = price;
         }
-        // console.log(this.cart)
+        console.log(this.qty);
+        console.log(this.price)
+        this.totalPrice += addQty * price;
         this.updateCartToFb();
       },
       isExist() {
@@ -142,7 +147,7 @@ export default {
       },
       async updateCartToFb() {
         const cartDoc = doc(db, "Customers", this.email);
-        let updateCart = {"products": this.cart};
+        let updateCart = {"products": this.cart, "total": this.totalPrice};
         await updateDoc(cartDoc, {
           "cart": updateCart
         })
