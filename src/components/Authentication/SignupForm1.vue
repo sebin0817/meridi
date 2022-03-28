@@ -1,6 +1,6 @@
 <template>
   <div class="form">
-    <el-form :model="form" @submit.prevent="login">
+    <el-form :model="form" @submit.prevent="register">
       <h4 id="centre">Sign up as a Clinic:</h4>
       <form @submit.prevent="register">
         <el-input id="email" v-model="email" type="email" placeholder="Email"

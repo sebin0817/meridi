@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import EditParticularsForm from '../../components/CustomersProfilePage/EditParticularsForm.vue'
+import EditParticularsForm from '@/components/CustomersProfilePage/EditParticularsForm.vue'
 
 export default {
     name: 'EditCustomerParticulars',

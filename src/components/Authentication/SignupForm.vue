@@ -17,17 +17,17 @@
         </template>
       </el-input>
       <el-input
-        id="fullname"
-        v-model="fullname"
+        id="name"
+        v-model="name"
         type="text"
-        placeholder="Full Name"
+        placeholder="Name"
         ><template #prefix>
           <el-icon class="el-input__icon"><avatar /></el-icon> </template
       ></el-input>
       <el-input
         id="postalcode"
         v-model="postalcode"
-        type="number"
+        type="text"
         placeholder="Postal Code"
         ><template #prefix>
           <el-icon class="el-input__icon"><map-location /></el-icon> </template
@@ -79,22 +79,34 @@ export default {
           try {
             const docRef = await setDoc(doc(db,type,email), {
             email: email, name: name, postalcode: postalcode, purchasehistory: {}
-              // purchasehistory: {
-              //   1: {
-              //     items: {
-              //       item1: ["item1",1,50],
-              //       item2: ["item2",1,50]
-              //     },
-              //     total: 100
-              //   },
-              //   2: {
-              //     items: {
-              //       item3: ["item3",1,60],
-              //       item4: ["item4",1,50]
-              //     },
-              //     total: 110
-              //   },
-              // }
+               /*purchasehistory: {
+                 1: {
+                   products: {
+                     product1: {
+                       quantity: 1,
+                       price: 50
+                     },
+                     product2: {
+                       quantity: 2,
+                       price: 50
+                     }
+                   },
+                   total: 100
+                 },
+                 2: {
+                   products: {
+                      product2: {
+                        quantity: 3,
+                        price: 60
+                      },
+                      product3: {
+                        quantity: 5,
+                        price: 50
+                      }
+                   },
+                   total: 110
+                 },
+               }*/
             })
             console.log(docRef)
           } catch (error) {
