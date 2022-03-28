@@ -93,11 +93,11 @@ export default {
     onSubmit() {
       this.$emit("categoryFilter", this.formInline.services);
 
-      this.$emit("postal", this.formInline.code)
+      this.$emit("postal", this.formInline.code);
       this.$emit("clinicName", this.formInline.name);
-      console.log(`inside submit clinic, ${this.formInline}`)
+      console.log(`inside submit clinic, ${this.formInline}`);
       // console.log('hehe submit again here')
-    }
+    },
   },
   created() {},
 };
@@ -105,13 +105,11 @@ export default {
 
 <style scoped>
 .container {
-  width: 20%;
-  margin-left: 150px;
+  width: 70%;
 }
 .form {
-  margin-top: 20px;
   text-align: center;
-  margin-top: 180px;
+  margin-top: 150px;
 }
 .el-input {
   margin-bottom: 10px;

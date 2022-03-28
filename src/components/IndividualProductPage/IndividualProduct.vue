@@ -16,12 +16,10 @@
             <h2 id="clinic">{{ clinic }}</h2>
             <h2 id="price">{{ price }}</h2>
           </div>
-
           <div>
             <h2 style="font-size: 20px; font-weight: bold">Description</h2>
             <p id="description">{{ product.description }}</p>
           </div>
-
           <div class="cart">
             <el-input-number v-model="qty" :step="1" />
             <button @click="addToCart">Add to Cart</button>
