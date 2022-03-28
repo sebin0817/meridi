@@ -1,10 +1,10 @@
 <template>
   <section class="hero">
-    <!-- <Map
+    <Map
         v-if="mounted && done"
         :postalCode="postalCode"
         :customerPostalcode="customerPostalcode"
-      /> -->
+      />
     <div class="formcard">
       <div id="formcard2">
         <ClinicsForm
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-// import Map from "@/components/CustomersClinicsPage/Map.vue";
+import Map from "@/components/CustomersClinicsPage/Map.vue";
 import ClinicsForm from "@/components/CustomersClinicsPage/Form.vue";
 import ClinicsView from "@/components/CustomersClinicsPage/ClinicsView.vue";
 import {
@@ -70,7 +70,7 @@ export default {
   components: {
     ClinicsForm,
     ClinicsView,
-    // Map,
+    Map,
   },
   created() {
     fetchClinics().then((x) => {

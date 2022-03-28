@@ -128,8 +128,8 @@ export default {
           this.cart[product].unitprice = price;
           this.cart[product].quantity = addQty;
         }
-        console.log(this.qty);
-        console.log(this.price)
+        // console.log(this.qty);
+        // console.log(this.price)
         this.totalPrice += addQty * price;
         this.updateCartToFb();
       },
@@ -150,6 +150,7 @@ export default {
       }
     }
 
+}
 }
 
 </script>
