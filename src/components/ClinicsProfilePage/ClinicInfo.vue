@@ -1,15 +1,18 @@
 <template>
   <section class="hero">
-    <img id="logo" src="../../assets/user.png" alt="" />
-    <h3 class="profile-info">{{ name }}</h3>
-    <h3 class="profile-info">{{ email }}</h3>
-    <h3 class="profile-info">{{ postalcode }}</h3>
-    <h3 class="profile-info">{{ desc }}</h3>
-    <div v-for="service in services" :key="service">
-      <el-icon><circle-check-filled /></el-icon>
-      {{ service }}
+    <div id="profile-div">
+      <img id="logo" src="../../assets/user.png" alt="" />
+      <h3 class="profile-info">{{ name }}</h3>
+      <h3 class="profile-info">{{ email }}</h3>
+      <h3 class="profile-info">{{ postalcode }}</h3>
+      <h3 class="profile-info">{{ desc }}</h3>
+      <h3 id="services" v-for="service in services" :key="service">
+        <el-icon><circle-check-filled /></el-icon>
+        {{ service }}
+      </h3>
+      <br />
+      <button @click="goToEdit()">EDIT PROFILE</button>
     </div>
-    <button @click="goToEdit()">EDIT PROFILE</button>
   </section>
 </template>
 
@@ -60,22 +63,33 @@ export default {
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
-
 .hero {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 180px;
+  margin-top: 100px;
+}
+#profile-div {
   text-align: center;
 }
 #logo {
-  width: 20%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
 }
 .profile-info {
-  font-family: "Nunito Sans", sans-serif;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+#services {
+  display: inline;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 button {
   margin: auto;
-  margin-top: 10px;
+  margin-top: 20px;
   background-color: #ffcc00;
   border: none;
   color: black;

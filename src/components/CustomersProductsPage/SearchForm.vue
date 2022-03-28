@@ -13,9 +13,7 @@
         </el-col>
         <el-col :offset="1" :span="2">
           <el-form-item>
-            <el-button id="searchBtn" size="large" @click="submitSearch"
-              >Search</el-button
-            >
+            <button size="large" @click="submitSearch">SEARCH</button>
           </el-form-item>
         </el-col>
       </el-row>
@@ -50,11 +48,23 @@ export default {
 .el-row {
   margin-bottom: 20px;
 }
-// cannot make text inside button bold
-#searchBtn {
+
+button {
+  margin: auto;
   background-color: #ffcc00;
+  border: none;
   color: black;
-  font-size: 13px;
-  text-transform: uppercase;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
 }
 </style>

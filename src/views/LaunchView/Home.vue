@@ -1,9 +1,9 @@
 <template>
   <section class="hero">
-    <!--div class="hero-text container"-->
+    <div class="hero-text container">
     <Title :msg="msg" />
     <UserType />
-    <!--/div-->
+    </div>
   </section>
 </template>
 

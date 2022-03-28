@@ -13,19 +13,18 @@
         <div id="main" class="text">
           <div>
             <h2 id="name">{{ product.name }}</h2>
-            <h2 id="clinic">{{ clinic }}</h2>
+            <h3 id="clinic">{{ clinic }}</h3>
             <h2 id="price">{{ price }}</h2>
           </div>
 
           <div>
-            <h2 style="font-size: 20px; font-weight: bold">Description</h2>
             <p id="description">{{ product.description }}</p>
           </div>
 
           <div class="cart">
             <el-input-number v-model="qty" :step="1" />
-            <button @click="addToCart">Add to Cart</button>
           </div>
+          <button @click="addToCart">Add to Cart</button>
         </div>
       </section>
     </div>
@@ -33,23 +32,28 @@
 </template>
 
 <script>
-
-import { getFirestore, getDocs, doc, getDoc, collection, updateDoc } from "firebase/firestore"; 
+import {
+  getFirestore,
+  getDocs,
+  doc,
+  getDoc,
+  collection,
+  updateDoc,
+} from "firebase/firestore";
 import firebaseApp from "../../firebase.js";
 
-const db = getFirestore(firebaseApp)
+const db = getFirestore(firebaseApp);
 export default {
-
-    data() {
-        return {
-          product: {},
-          qty: 1,
-          email: "",
-          user: {},
-          cart: {},
-          totalPrice: 0
-        }
-    },
+  data() {
+    return {
+      product: {},
+      qty: 1,
+      email: "",
+      user: {},
+      cart: {},
+      totalPrice: 0,
+    };
+  },
 
   mounted() {
     this.id = this.$route.params.id;
@@ -57,7 +61,7 @@ export default {
 
   created() {
     var self = this;
-    
+
     // console.log(this.email);
     async function fetchProducts() {
       let productsDb = await getDocs(collection(db, "Products"));
@@ -85,22 +89,20 @@ export default {
     fetchProducts();
 
     async function fetchCart() {
-      
-      console.log("fetch cart")
+      console.log("fetch cart");
       self.email = sessionStorage.getItem("useremail");
 
       console.log(self.email);
-      const docRef = doc(db,"Customers",self.email);
+      const docRef = doc(db, "Customers", self.email);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
-          const data = docSnap.data();
-          self.cart = self.jsonify(data.cart).products;
-          self.totalPrice = self.jsonify(data.cart).total;
+        const data = docSnap.data();
+        self.cart = self.jsonify(data.cart).products;
+        self.totalPrice = self.jsonify(data.cart).total;
       }
-      console.log(self.cart)
+      console.log(self.cart);
     }
     fetchCart();
-    
   },
 
   computed: {
@@ -112,7 +114,6 @@ export default {
       return "Sold at: " + this.product.clinic;
     },
 
-
     methods: {
       addToCart() {
         let addQty = this.qty;
@@ -121,7 +122,7 @@ export default {
 
         if (this.isExist()) {
           this.cart[product].quantity += addQty;
-          console.log(this.cart[product].quantity)
+          console.log(this.cart[product].quantity);
         } else {
           this.cart[product] = {};
           this.cart[product].clinic = this.product.clinic;
@@ -143,7 +144,7 @@ export default {
       },
       async updateCartToFb() {
         const cartDoc = doc(db, "Customers", this.email);
-        let updateCart = {"products": this.cart, "total": this.totalPrice};
+        let updateCart = { products: this.cart, total: this.totalPrice };
         await updateDoc(cartDoc, {
           "cart": updateCart
         })
@@ -156,6 +157,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 html {
   font-size: 62.5%;
 }
@@ -182,7 +184,6 @@ html {
 
 #product {
   display: flex;
-  margin-top: 15rem;
   margin-left: auto;
   margin-right: auto;
   width: 70rem;
@@ -210,9 +211,32 @@ html {
 
 #price {
   font-weight: 600;
+  margin-top: 20px;
 }
 
 #description {
   font-size: 15px;
+  margin-top: 10px;
+}
+.cart {
+  margin-top: 10px;
+}
+button {
+  margin-top: 10px;
+  background-color: #ffcc00;
+  border: none;
+  color: black;
+  padding: 10px 15px 10px 15px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
 }
 </style>

@@ -2,6 +2,18 @@
   <div class="form" @submit.prevent="add">
     <form>
       <el-row>
+        <img :src="image" id="image" />
+        <el-input
+          id="image"
+          v-model="image"
+          type="text"
+          placeholder="Product Image Link"
+          required="true"
+          ><template #prefix>
+            <el-icon class="el-input__icon"><Camera /></el-icon> </template
+        ></el-input>
+      </el-row>
+      <el-row>
         <el-input
           id="name"
           v-model="name"
@@ -73,7 +85,7 @@
 </template>
 
 <script>
-import { Coin, Sell } from "@element-plus/icons-vue";
+import { Coin, Sell, Camera } from "@element-plus/icons-vue";
 import firebaseApp from "@/firebase.js";
 import { getFirestore } from "firebase/firestore";
 import {
@@ -86,9 +98,10 @@ import {
 const db = getFirestore(firebaseApp);
 export default {
   name: "Add ProductForm",
-  components: { Coin, Sell },
+  components: { Coin, Sell, Camera },
   data() {
     return {
+      image: "",
       name: "",
       price: "",
       desc: "",
@@ -105,15 +118,13 @@ export default {
   },
 
   methods: {
-    click() {
-      this.$refs.image.click();
-    },
     //store the information
     async add() {
       var user = sessionStorage.getItem("useremail");
       try {
         //store in Products collection
         const docRef = await addDoc(collection(db, "Products"), {
+          image: this.image,
           name: this.name,
           price: this.price,
           description: this.desc,
@@ -121,7 +132,6 @@ export default {
           avail: this.avail,
           clinic: user, //use email as id
         });
-        //upload the product image
 
         //store in Clinics collection
         await updateDoc(doc(db, "Clinics", user), {
@@ -177,5 +187,34 @@ button:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+#image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
 }
 </style>

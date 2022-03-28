@@ -1,16 +1,12 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <br>
-      <h1>Product List</h1>
-      <AddProductBtn style="float: right" />
-      <ProductView :products="clinicProducts" />
+      <ProductView :products="clinicProducts" @delete="update"/>
     </div>
   </section>
 </template>
 
 <script>
-import AddProductBtn from "@/components/ClinicsProductsPage/AddProductBtn.vue";
 import ProductView from "@/components/ClinicsProductsPage/ProductView.vue";
 import {
   doc,
@@ -25,15 +21,20 @@ export default {
   name: "ClinicProduct",
   components: {
     ProductView,
-    AddProductBtn,
   },
   data() {
     return {
       email: "",
       products: [],
+      updateCount: 0,
     };
   },
-  created() {
+  methods: {
+    update() {
+      this.updateCount += 1;
+    },
+  },
+  mounted() {
     var self = this;
     self.email = sessionStorage.getItem("useremail");
     async function fetchProducts() {
@@ -57,7 +58,8 @@ export default {
             categories: productData.categories,
             avail: productData.avail,
             clinic: productData.clinic,
-          }; //add image
+            image: productData.image,
+          };
           self.products.push(product);
         }
       });

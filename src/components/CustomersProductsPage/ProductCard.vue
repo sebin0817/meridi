@@ -105,9 +105,9 @@ button:focus {
 }
 
 .cardContent {
-  padding: 14px;
-  text-align: center;
-  height: 150px;
+	padding: 14px;
+	text-align: center;
+  height: 200px;
 }
 
 .image {
