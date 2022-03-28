@@ -2,8 +2,8 @@
   <GoogleMap
   class="map"
   api-key= AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78
-  :center="center"
-  :zoom="12"
+  :center="centerlatlng"
+  :zoom="13"
   >
     <Marker 
       :key="marker"
@@ -50,14 +50,17 @@ export default {
 		},
     customerPostalcode: {
       type: String
+    },
+    center: {
+      type: String
     }
 	},
   data() {
     return {
-      center: { lat: 1.339987, lng: 103.810128 },
+      centerlatlng: { lat: 1.339987, lng: 103.810128 },
       markers: [],
       customerMarker: {},
-      chosen: {}
+      chosen: {},
     }
 
   },
@@ -68,7 +71,21 @@ export default {
       this.chosen = 0
       this.$emit("chosen", this.chosen);
       console.log(this.chosen)
+      console.log("hi")
     }
+  },
+  watch: {
+    center: function(newVal, oldVal) { // watch it
+      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+      if (newVal == null || newVal == "") {
+        this.centerlatlng = { lat: 1.339987, lng: 103.810128 }
+      } else {
+        getLatLngFromPostal([newVal])
+        .then((y) => {
+          this.centerlatlng = y[0]
+        })
+      }
+  }
   },
   created() {
     // Place Markers on ALL Clinics and Customer
@@ -89,8 +106,7 @@ export default {
       //   })
       // })
       })
-    }
-
+    },
 }
 </script>
 

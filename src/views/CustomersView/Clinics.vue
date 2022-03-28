@@ -1,9 +1,9 @@
 <template>
-  <Map v-if="mounted && done" :postalCode="postalCode" :customerPostalcode="customerPostalcode"/>
+  <Map v-if="mounted && done" :postalCode="postalCode" :customerPostalcode="customerPostalcode" :center="center"/>
   <el-container>
     <el-main><ClinicsView :clinics="filterClinics"/></el-main> 
   </el-container>
-  <ClinicsForm @categoryFilter="filteredByCategory($event)" @clinicName="filteredBySearch($event)" @postal="postal" />
+  <ClinicsForm @categoryFilter="filteredByCategory($event)" @clinicName="filteredBySearch($event)" @postal="newcenter($event)" />
 </template>
 
 <script>
@@ -75,11 +75,18 @@ export default {
       mounted: false,
       done: false,
       clinicName: "",
-      postal: "",
+      center: "",
       checkedCats: ['accupuncture', 'tunia', 'herbal medication', 'gua sha', 'cupping', 'device therapy'],
     }
   },
   methods: {
+    newcenter(center) {
+      if (center != null) {
+        this.center = center
+      }
+      console.log(`inside Form, center is ${this.center}`)
+    },
+
     filteredBySearch(searchResult) {
       if (searchResult != null) {
         this.clinicName = searchResult;
