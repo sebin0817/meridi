@@ -1,5 +1,5 @@
 <template>
-  <Map v-if="mounted && done" :postalCode="postalCode" :customerPostalcode="customerPostalcode" :center="center"/>
+  <Map v-if="mounted && done" :postalCodes="filterPostalCodes" :customerPostalcode="customerPostalcode" :center="center"/>
   <el-container>
     <el-main><ClinicsView :clinics="filterClinics"/></el-main> 
   </el-container>
@@ -54,13 +54,10 @@ export default {
     fetchClinics().then((x) => {
       x.forEach((y) => {
         this.clinics.push(y)
-        this.postalCode.push(y.postalcode)
-      })
-    })
-    this.filterClinics.forEach((y) => {
-        this.postalCode.push(y.postalcode)
       })
       this.mounted = true
+    })
+
     getCustomerPostalCode().then((x) => {
       this.customerPostalcode = x
       this.done = true
@@ -69,8 +66,6 @@ export default {
   data() {
     return {
       clinics: [],
-      filteredClinics: [],
-      postalCode: [],
       customerPostalcode: "",
       mounted: false,
       done: false,
@@ -137,6 +132,13 @@ export default {
       }
       
     },
+    filterPostalCodes() {
+      let tmp = []
+      this.filterClinics.forEach((c) => {
+        tmp.push(c.postalcode)
+      })
+      return tmp
+    }
   },
 };
 </script>

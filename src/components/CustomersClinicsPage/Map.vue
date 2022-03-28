@@ -8,9 +8,9 @@
     <Marker 
       :key="marker"
       v-for="(m, marker) in markers"
-      :id="m.id"
       :options="m.options"
       @click="showCard()"/>
+    <Marker :options="customerMarker"/>
   </GoogleMap>
 </template>
 
@@ -45,7 +45,7 @@ export default {
   name: "Map",
   components: { Marker, GoogleMap },
   props: {
-		postalCode: {
+		postalCodes: {
 			type: Array
 		},
     customerPostalcode: {
@@ -57,7 +57,8 @@ export default {
 	},
   data() {
     return {
-      centerlatlng: { lat: 1.339987, lng: 103.810128 },
+      centerlatlng: {},
+      customerlatlng: {},
       markers: [],
       customerMarker: {},
       chosen: {},
@@ -78,20 +79,42 @@ export default {
     center: function(newVal, oldVal) { // watch it
       console.log('Prop changed: ', newVal, ' | was: ', oldVal)
       if (newVal == null || newVal == "") {
-        this.centerlatlng = { lat: 1.339987, lng: 103.810128 }
+        this.centerlatlng = this.customerlatlng
       } else {
         getLatLngFromPostal([newVal])
         .then((y) => {
           this.centerlatlng = y[0]
         })
       }
-  }
+    },
+    postalCodes: function(newVal, oldVal) { // watch it
+        console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+        this.markers = []
+        getLatLngFromPostal(this.postalCodes)
+        .then((y) => {    
+        for (var i = 0; i < y.length; i++) {
+          this.markers.push({
+            id: i,
+            options: { position: y[i], label: "" + i }
+          })
+        }
+      })
+    },
   },
   created() {
-    // Place Markers on ALL Clinics and Customer
-    var codes = this.postalCode
-    codes.push(this.customerPostalcode)
-      getLatLngFromPostal(codes)
+    // Place marker and center map at customer
+    getLatLngFromPostal([this.customerPostalcode])
+        .then((y) => {
+          this.customerMarker = {
+            options: { position: y[0], icon: {
+              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+            }}
+          }
+          this.centerlatlng = y[0]
+          this.customerlatlng = y[0]
+        })
+      // Place Markers on ALL Clinics
+      getLatLngFromPostal(this.postalCodes)
       .then((y) => {    
       for (var i = 0; i < y.length; i++) {
         this.markers.push({
@@ -99,12 +122,6 @@ export default {
           options: { position: y[i], label: "" + i }
         })
       }
-      // y.forEach((latlng) => {
-      //   this.markers.push({
-      //   id: this.id,
-      //   options: { position: latlng }
-      //   })
-      // })
       })
     },
 }
