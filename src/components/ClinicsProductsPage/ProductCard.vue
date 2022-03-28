@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <el-card shadow="hover">
-      <img :src="`${product.image}`" alt="product img" class="image" />
+      <img :src="product.image" alt="product img" class="image" />
       <div class="cardContent">
         <p style="line-height: 20px" v-show="available">
           <el-icon class="el-input__icon" :size="20" color="#cde0c1"

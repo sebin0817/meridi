@@ -2,8 +2,16 @@
   <div class="form" @submit.prevent="add">
     <form>
       <el-row>
-        <img :src="imageUrl" id="image" />
-        <input type="file" @change="preview" />
+        <img :src="image" id="image" />
+        <el-input
+          id="image"
+          v-model="image"
+          type="text"
+          placeholder="Product Image Link"
+          required="true"
+          ><template #prefix>
+            <el-icon class="el-input__icon"><Camera /></el-icon> </template
+        ></el-input>
       </el-row>
       <el-row>
         <el-input
@@ -77,7 +85,7 @@
 </template>
 
 <script>
-import { Coin, Sell } from "@element-plus/icons-vue";
+import { Coin, Sell, Camera } from "@element-plus/icons-vue";
 import firebaseApp from "@/firebase.js";
 import { getFirestore } from "firebase/firestore";
 import {
@@ -90,10 +98,10 @@ import {
 const db = getFirestore(firebaseApp);
 export default {
   name: "Add ProductForm",
-  components: { Coin, Sell },
+  components: { Coin, Sell, Camera },
   data() {
     return {
-      imageUrl: "",
+      image: "",
       name: "",
       price: "",
       desc: "",
@@ -110,42 +118,13 @@ export default {
   },
 
   methods: {
-    preview(e) {
-      let imageUrl = URL.createObjectURL(e.target.files[0]);
-      this.imageUrl = imageUrl;
-    },
-    upload() {
-      console.log(this.imageUrl);
-    },
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-      console.log(this.imageUrl);
-    },
-    beforeAvatarUpload(file) {
-      const isImage =
-        file.type === "image/jpeg" ||
-        file.type === "image/png" ||
-        file.raw.type === "image/gif";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isImage) {
-        this.$message.error("Please upload an image.");
-      }
-      if (!isLt2M) {
-        this.$message.error(
-          " The size of the uploaded image cannot exceed 2MB."
-        );
-      }
-      console.log(this.imageUrl);
-      return isImage && isLt2M;
-    },
     //store the information
     async add() {
       var user = sessionStorage.getItem("useremail");
       try {
         //store in Products collection
         const docRef = await addDoc(collection(db, "Products"), {
-          image: this.imageUrl,
+          image: this.image,
           name: this.name,
           price: this.price,
           description: this.desc,
