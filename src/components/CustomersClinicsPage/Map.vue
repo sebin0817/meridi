@@ -1,6 +1,5 @@
 <template>
   <GoogleMap
-
   class="map"
   api-key= AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78
   :center="centerlatlng"
@@ -22,18 +21,18 @@ import { GoogleMap, Marker } from 'vue3-google-map'
 import axios from "axios"
 
 async function getLatLngFromPostal(codes) {
-  var LatLng = [];
+  var LatLng = []
   for (let i = 0; i < codes.length; i++) {
     try {
       var { data } = await axios.get(
-        "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+          "https://maps.googleapis.com/maps/api/geocode/json?address=" +
           codes[i] +
           "&key=AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78"
       );
       if (data.error_message) {
-        console.log(data.error_message);
+          console.log(data.error_message)
       } else {
-        LatLng.push(data.results[0].geometry.location);
+          LatLng.push(data.results[0].geometry.location);
       }
     } catch (error) {
       console.log(error.message);
@@ -42,11 +41,11 @@ async function getLatLngFromPostal(codes) {
   return LatLng;
 }
 
+
 export default {
   name: "Map",
   components: { Marker, GoogleMap },
   props: {
-
 		postalCodes: {
 			type: Array
 		},
@@ -57,7 +56,6 @@ export default {
       type: String
     }
 	},
-
   data() {
     return {
       centerlatlng: {},
@@ -65,9 +63,7 @@ export default {
       markers: [],
       customerMarker: {},
       chosen: {},
-
     }
-
 
   },
 
@@ -105,7 +101,6 @@ export default {
     },
   },
   created() {
-
     // Place marker and center map at customer
     getLatLngFromPostal([this.customerPostalcode])
         .then((y) => {
@@ -120,19 +115,17 @@ export default {
       // Place Markers on ALL Clinics
       getLatLngFromPostal(this.postalCodes)
       .then((y) => {    
-
       for (var i = 0; i < y.length; i++) {
         this.markers.push({
           code: i,
           options: { position: y[i], label: "" + i }
         })
       }
-
       })
     },
-  }
 }
 </script>
+
 
 <style scoped>
 .map {
