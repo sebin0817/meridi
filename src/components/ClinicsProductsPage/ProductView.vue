@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import AddProductBtn from "@/components/ClinicsProductPage/AddProductBtn.vue";
+import AddProductBtn from "@/components/ClinicsProductsPage/AddProductBtn.vue";
 import ProductCard from "./ProductCard.vue";
 export default {
   name: "ProductsView",
