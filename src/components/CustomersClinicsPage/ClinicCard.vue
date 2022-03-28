@@ -4,7 +4,6 @@
 			<div class="cardContent">
 				<span class="text block" id="title">{{clinic.name}}</span>
 				<p class="text block" id="description">{{clinic.description}}</p>
-				<p class="text block" id="postalcode">{{postalcode}}</p>
 			</div>
 		</el-card>
 	</div>

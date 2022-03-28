@@ -1,16 +1,16 @@
 <template>
-  <Map v-if="mounted" :postalCode="postalCode"/>
+  <Map v-if="mounted && done" :postalCode="postalCode" :customerPostalcode="customerPostalcode"/>
   <el-container>
-    <el-header><ClinicsForm/></el-header>
-    <el-main><ClinicsView :clinics="clinics"/></el-main> 
+    <el-main><ClinicsView :clinics="filterClinics"/></el-main> 
   </el-container>
+  <ClinicsForm @categoryFilter="filteredByCategory($event)" @clinicName="filteredBySearch($event)" @postal="postal" />
 </template>
 
 <script>
 import Map from '@/components/CustomersClinicsPage/Map.vue'
 import ClinicsForm from '@/components/CustomersClinicsPage/Form.vue'
 import ClinicsView from '@/components/CustomersClinicsPage/ClinicsView.vue'
-import { getDocs, collection, getFirestore } from 'firebase/firestore'
+import { getDocs, collection, getFirestore, query, where } from 'firebase/firestore'
 import firebaseApp from '@/firebase.js'
 
 const db = getFirestore(firebaseApp);
@@ -36,6 +36,18 @@ const db = getFirestore(firebaseApp);
       return clinics;
     }
 
+    async function getCustomerPostalCode() {
+      let code;
+      let email = sessionStorage.getItem("useremail")
+      const q = query(collection(db, "Customers"), where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((docs) => {
+          let y = docs.data()
+          code = y.postalcode
+            })
+      return code;
+    }
+
 export default {
   components: {
     ClinicsForm,
@@ -49,7 +61,15 @@ export default {
         this.clinics.push(y)
         this.postalCode.push(y.postalcode)
       })
+    })
+    this.filterClinics.forEach((y) => {
+        this.postalCode.push(y.postalcode)
+      })
       this.mounted = true
+
+    getCustomerPostalCode().then((x) => {
+      this.customerPostalcode = x
+      this.done = true
     })
 
   },
@@ -58,46 +78,47 @@ export default {
       clinics: [],
       filteredClinics: [],
       postalCode: [],
+      customerPostalcode: "",
       mounted: false,
-      search: "",
-      checkedCats: ['pain', 'treatments', 'wellness', 'kids'],
-      sortBy: 0 /*sorted = 1 means high -> low, sorted = 0 means low -> high */
+      done: false,
+      clinicName: "",
+      postal: "",
+      checkedCats: ['accupuncture', 'tunia', 'herbal medication', 'gua sha', 'cupping', 'device therapy'],
     }
   },
   methods: {
     filteredBySearch(searchResult) {
-      this.search = searchResult;
+      if (searchResult != null) {
+        this.clinicName = searchResult;
+      }
+      console.log(`inside Form, name search is ${this.clinicName}`)
     },
+
     filteredByCategory(checkedCats) {
-      this.checkedCats = checkedCats;
-      console.log(`inside parentl, value is ${this.checkedCats}`)
+      if (checkedCats != null) {
+        this.checkedCats = checkedCats;
+      }
+      console.log(`inside Form, services chosen are ${this.checkedCats}`)
     },
-    filteredProductsByCategory(product) {
-      let catNames = this.checkedCats.map(cat => {
-        return cat.toLowerCase();
-      });
-      return catNames.indexOf(product.description.toLowerCase()) >= 0;
+
+    filteredClinicsByCategory(clinic) {
+      let catNames = this.checkedCats;
+      for (const cat of clinic.services) {
+        if (catNames.indexOf(cat.toLowerCase()) >=0) {
+          return true;
+        }
+      }
+      return false;
     },
-    filteredProductsBySearch(product) {
-        return product.name.toLowerCase().includes(this.search.toLowerCase());
-    },
-    sortByPrice(sort) {
-      this.sortBy = sort;
+
+    filteredClinicsBySearch(clinic) {
+        return clinic.name.toLowerCase().includes(this.clinicName.toLowerCase());
     }
   },
   computed: {
-    filterProducts() {
-      return this.products.filter(product => {
-        return this.filteredProductsBySearch(product) && this.filteredProductsByCategory(product);       
-      }).sort((p1, p2) => {
-        if (this.sortBy == 0) {
-          let x = (p1.name > p2.name) ? 1 : -1;
-          return x;
-        } else if (this.sortBy == 1) {
-          return p2.price - p1.price;
-        } else if (this.sortBy == 2) {
-          return p1.price - p2.price;
-        }
+    filterClinics() {
+      return this.clinics.filter((clinic) => {
+        return this.filteredClinicsBySearch(clinic) && this.filteredClinicsByCategory(clinic);       
       })
     },
   }

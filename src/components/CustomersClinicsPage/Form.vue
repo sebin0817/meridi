@@ -28,7 +28,14 @@
             <el-col :span="15">
               <el-input
                 v-model="formInline.code"
-                placeholder="Postal Code"
+                placeholder="Search by nearby Postal Code"
+                style="width: 100%"
+              ></el-input>
+            </el-col>
+            <el-col :span="15">
+              <el-input
+                v-model="formInline.name"
+                placeholder="Search by name"
                 style="width: 100%"
               ></el-input>
             </el-col>
@@ -49,33 +56,6 @@
 <script>
 import { reactive, ref } from "vue";
 import { Search } from "@element-plus/icons-vue";
-import firebaseApp from '@/firebase.js'
-import { getFirestore } from "firebase/firestore"
-import { collection, query, where, getDocs } from "firebase/firestore";
-
-const db = getFirestore(firebaseApp);
-
-async function searchClinics(services) {
-  let clinics = []
-  const q = query(collection(db, "Clinics"), where("services", "array-contains-any", services));
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((docs) => {
-      let y = docs.data()
-      clinics.push(y)
-        })
-    return clinics;
-}
-
-async function getCustomerPostalCode(email) {
-  let code;
-  const q = query(collection(db, "Customers"), where("email", "==", email));
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((docs) => {
-      let y = docs.data()
-      code = y.postalcode
-        })
-    return code;
-}
 
 export default {
   name: 'ClinicsForm',
@@ -83,7 +63,7 @@ export default {
   data() {
     return {
       formSize: ref(""),
-      formInline: reactive({input: "",}),
+      formInline: reactive({input: "", }),
       search: Search,
       options: [
         {
@@ -113,17 +93,18 @@ export default {
       ],
     }
   },
+
+  emits:["categoryFilter", "postal", "clinicName"],
+
+
   methods: {
     onSubmit() {
-      console.log(this.formInline.services)
-      console.log(this.formInline.code)
-      searchClinics(this.formInline.services).then((l) => {console.log(l)})
+      this.$emit("categoryFilter", this.formInline.services);
+      this.$emit("postal", this.formInline.code)
+      this.$emit("clinicName", this.formInline.name)
     }
   },
   created() {
-    getCustomerPostalCode("test1@gmail.com").then((x) => {
-      this.emitter.emit('customerPostalCode', {'code': x})
-    })
   }
 }
 </script>
