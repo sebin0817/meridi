@@ -114,8 +114,14 @@ export default {
       return "Sold at: " + this.product.clinic;
     },
 
+    price() {
+      return "$" + this.product.price;
+    },
+  },
+
     methods: {
       addToCart() {
+        console.log("hi")
         let addQty = this.qty;
         let price = Number(this.product.price);
         let product = this.product.name.toLowerCase();
@@ -129,8 +135,8 @@ export default {
           this.cart[product].unitprice = price;
           this.cart[product].quantity = addQty;
         }
-        // console.log(this.qty);
-        // console.log(this.price)
+        console.log(this.qty);
+        console.log(this.price)
         this.totalPrice += addQty * price;
         this.updateCartToFb();
       },
@@ -152,7 +158,7 @@ export default {
     }
 
 }
-}
+
 
 </script>
 
