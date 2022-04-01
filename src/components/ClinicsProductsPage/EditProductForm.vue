@@ -195,4 +195,9 @@ button:focus {
   justify-content: center;
   align-items: center;
 }
+#image {
+  margin-bottom: 10px;
+  height: 200px;
+  width: 200px;
+}
 </style>

@@ -128,7 +128,7 @@ button {
   padding: 10px;
   border-radius: 4px;
   font-weight: bold;
-  width: 30%;
+  font-family: "Nunito Sans", sans-serif;
 }
 button:hover {
   background: #ffc400;

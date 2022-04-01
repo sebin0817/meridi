@@ -7,7 +7,7 @@
             :src="`${clinic.imgURL}`"
             alt="clinic img"
             class="image"
-            style="height: 100%; width: 100%"
+            style="height: 400px; width: 400px"
           />
         </div>
         <div id="main" class="text">
@@ -126,7 +126,6 @@ html {
 
 #clinic {
   display: flex;
-  margin-top: 15rem;
   margin-left: auto;
   margin-right: auto;
   width: 70rem;

@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h3>Categories</h3>
-
     <el-card>
       <el-checkbox
         v-model="checkAll"
@@ -24,23 +23,25 @@
       </el-checkbox-group>
     </el-card>
   </div>
-
+  <br />
   <div class="container price">
     <h3>Sort by Price</h3>
-    <el-select
-      v-model="sortBy"
-      placeholder="Select"
-      size="large"
-      @change="handleSortChange"
-    >
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
+    <el-card>
+      <el-select
+        v-model="sortBy"
+        placeholder="Select"
+        size="large"
+        @change="handleSortChange"
       >
-      </el-option>
-    </el-select>
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+    </el-card>
   </div>
 </template>
 
@@ -48,8 +49,8 @@
 export default {
   data() {
     return {
-      checkAll: false,
-      isIndeterminate: true,
+      checkAll: true,
+      isIndeterminate: false,
       cats: [],
       productCats: [
         { name: "For Pain" },
@@ -57,7 +58,7 @@ export default {
         { name: "For Wellness" },
         { name: "For Kids" },
       ],
-      checkedCats: [],
+      checkedCats: ["For Pain", "For Treatments", "For Wellness", "For Kids"],
       options: [
         { value: 1, label: "Descending" },
         { value: 2, label: "Ascending" },
@@ -123,12 +124,11 @@ h3 {
   font-size: 16px;
 }
 
-el-card {
-  padding: 0px;
+.el-card {
+  margin: 10px;
 }
 
-.text {
-  font-family: "Georgia", Times, serif;
-  line-height: 1.6;
+.el-checkbox {
+  margin-right: 50px;
 }
 </style>

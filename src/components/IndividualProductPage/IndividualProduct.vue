@@ -7,13 +7,13 @@
             :src="`${product.imgURL}`"
             alt="product img"
             class="image"
-            style="height: 100%; width: 100%"
+            style="height: 500px; width: 500px"
           />
         </div>
         <div id="main" class="text">
           <div>
             <h2 id="name">{{ product.name }}</h2>
-            <h3 id="clinic">{{ clinic }}</h3>
+            <h3 id="clinic" @click="checkClinic">{{ clinic }}</h3>
             <h2 id="price">{{ price }}</h2>
           </div>
 
@@ -52,6 +52,7 @@ export default {
       user: {},
       cart: {},
       totalPrice: 0,
+      clinicName: "",
     };
   },
 
@@ -64,6 +65,7 @@ export default {
 
     // console.log(this.email);
     async function fetchProducts() {
+      
       let productsDb = await getDocs(collection(db, "Products"));
       try {
         productsDb.forEach((docs) => {
@@ -82,6 +84,14 @@ export default {
             self.product = product;
           }
         });
+      } catch (e) {
+        console.log(`error when getting db ${e}`);
+      }
+
+      let clinicDb = await getDoc(doc(db, "Clinics", self.product.clinic));
+      try {
+        let clinicData = clinicDb.data();
+        self.clinicName = clinicData.name;
       } catch (e) {
         console.log(`error when getting db ${e}`);
       }
@@ -111,7 +121,8 @@ export default {
     },
 
     clinic() {
-      return "Sold at: " + this.product.clinic;
+      //return "Sold at: " + this.product.clinic;
+      return "@" + this.clinicName;
     },
 
     price() {
@@ -119,47 +130,52 @@ export default {
     },
   },
 
-    methods: {
-      addToCart() {
-        console.log("hi")
-        let addQty = this.qty;
-        let price = Number(this.product.price);
-        let product = this.product.name.toLowerCase();
+  methods: {
+    checkClinic() {
+      this.$router.push({
+        name: "IndividualClinic",
+        params: {
+          id: this.product.clinic,
+        },
+      });
+    },
+    addToCart() {
+      console.log("hi");
+      let addQty = this.qty;
+      let price = Number(this.product.price);
+      let product = this.product.name.toLowerCase();
 
-        if (this.isExist()) {
-          this.cart[product].quantity += addQty;
-          console.log(this.cart[product].quantity);
-        } else {
-          this.cart[product] = {};
-          this.cart[product].clinic = this.product.clinic;
-          this.cart[product].unitprice = price;
-          this.cart[product].quantity = addQty;
-        }
-        console.log(this.qty);
-        console.log(this.price)
-        this.totalPrice += addQty * price;
-        this.updateCartToFb();
-      },
-      isExist() {
-        let currProduct = this.product.name.toLowerCase();
-        let currCart = this.jsonify(this.cart);
-        return !(currCart[currProduct] === undefined);
-      },
-      jsonify(data) {
-        return JSON.parse(JSON.stringify(data));
-      },
-      async updateCartToFb() {
-        const cartDoc = doc(db, "Customers", this.email);
-        let updateCart = { products: this.cart, total: this.totalPrice };
-        await updateDoc(cartDoc, {
-          "cart": updateCart
-        })
+      if (this.isExist()) {
+        this.cart[product].quantity += addQty;
+        console.log(this.cart[product].quantity);
+      } else {
+        this.cart[product] = {};
+        this.cart[product].clinic = this.product.clinic;
+        this.cart[product].unitprice = price;
+        this.cart[product].quantity = addQty;
       }
-    }
-
-}
-
-
+      console.log(this.qty);
+      console.log(this.price);
+      this.totalPrice += addQty * price;
+      this.updateCartToFb();
+    },
+    isExist() {
+      let currProduct = this.product.name.toLowerCase();
+      let currCart = this.jsonify(this.cart);
+      return !(currCart[currProduct] === undefined);
+    },
+    jsonify(data) {
+      return JSON.parse(JSON.stringify(data));
+    },
+    async updateCartToFb() {
+      const cartDoc = doc(db, "Customers", this.email);
+      let updateCart = { products: this.cart, total: this.totalPrice };
+      await updateDoc(cartDoc, {
+        cart: updateCart,
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -213,6 +229,10 @@ html {
 
 #clinic {
   font-weight: 600;
+}
+#clinic:hover {
+  cursor: pointer;
+  color: #ffcc00;
 }
 
 #price {

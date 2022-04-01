@@ -192,6 +192,8 @@ button:focus {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 500px;
+  margin-bottom: 10px;
+  height: 200px;
+  width: 200px;
 }
 </style>

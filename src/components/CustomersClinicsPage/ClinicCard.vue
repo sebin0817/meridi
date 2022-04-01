@@ -72,6 +72,9 @@ el-card {
   width: 200px;
   margin-bottom: 10px;
 }
+.cardContent {
+  text-align: center;
+}
 #name {
   font-weight: bold;
 }
@@ -81,7 +84,7 @@ button {
   background-color: #ffcc00;
   border: none;
   color: black;
-  padding: 2px;
+  padding: 5px;
   border-radius: 4px;
   font-family: "Nunito Sans", sans-serif;
 }

@@ -228,6 +228,8 @@ h4:hover {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 100px;
+  margin-bottom: 10px;
+  height: 200px;
+  width: 200px;
 }
 </style>

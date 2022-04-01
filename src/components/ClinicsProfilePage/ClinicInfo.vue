@@ -5,7 +5,7 @@
       <h3 class="profile-info">{{ name }}</h3>
       <h3 class="profile-info">{{ email }}</h3>
       <h3 class="profile-info">{{ postalcode }}</h3>
-      <h3 class="profile-info">{{ desc }}</h3>
+      <h3 class="profile-info" id="desc">{{ desc }}</h3>
       <h3 id="services" v-for="service in services" :key="service">
         <el-icon><circle-check-filled /></el-icon>
         {{ service }}
@@ -78,6 +78,9 @@ export default {
   margin-right: auto;
   width: 60%;
 }
+#desc {
+  text-align: justify;
+}
 #services {
   display: inline;
   margin-left: 15px;
@@ -106,6 +109,6 @@ button:focus {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 100px;
+  height: 200px;
 }
 </style>

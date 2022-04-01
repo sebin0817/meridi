@@ -21,11 +21,7 @@
           <el-icon class="el-input__icon"><lock /></el-icon>
         </template>
       </el-input>
-      <el-input
-        id="name"
-        v-model="name"
-        type="text"
-        placeholder="Name"
+      <el-input id="name" v-model="name" type="text" placeholder="Name"
         ><template #prefix>
           <el-icon class="el-input__icon"><avatar /></el-icon> </template
       ></el-input>
@@ -80,21 +76,25 @@ export default {
         .catch((error) => {
           alert(error.message);
         });
-        async function addUsertoFs(email,name,postalcode,type) {
-          try {
-            const docRef = await setDoc(doc(db,type,email), {
-            email: email, name: name, postalcode: postalcode, cart: {total: 0, products: {}}, purchasehistory: {}
-            })
-            console.log(docRef)
-          } catch (error) {
-            console.error("Error adding document: ", error);
-          }
+      async function addUsertoFs(email, name, postalcode, type) {
+        try {
+          const docRef = await setDoc(doc(db, type, email), {
+            email: email,
+            name: name,
+            postalcode: postalcode,
+            cart: { total: 0, products: {} },
+            purchasehistory: {},
+          });
+          console.log(docRef);
+        } catch (error) {
+          console.error("Error adding document: ", error);
         }
       }
     },
     goToLogin() {
       this.$router.replace("./Login");
     },
+  },
 };
 </script>
 
