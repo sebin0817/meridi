@@ -1,13 +1,13 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <ProductView :products="clinicProducts" @delete="update"/>
+      <ProductView :products="clinicProducts" @delete="update" />
     </div>
   </section>
 </template>
 
 <script>
-import ProductView from "@/components/ClinicsProductPage/ProductView.vue";
+import ProductView from "@/components/ClinicsProductsPage/ProductView.vue";
 import {
   doc,
   getDoc,
