@@ -1,7 +1,7 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <ProductView :products="clinicProducts" @delete="update"/>
+      <ProductView :products="clinicProducts" @delete="update" />
     </div>
   </section>
 </template>
