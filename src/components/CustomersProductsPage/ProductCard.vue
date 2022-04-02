@@ -37,11 +37,10 @@ export default {
       this.$router.push({
         name: "IndividualProduct",
         params: {
-
-          id: this.product.id
-        }
-      })
-    }
+          id: this.product.id,
+        },
+      });
+    },
   },
 
   computed: {
@@ -68,9 +67,8 @@ export default {
 </script>
 
 <style scoped>
-el-card {
+.el-card {
   padding: 0px;
-  height: 200px;
 }
 
 button {
@@ -105,8 +103,8 @@ button:focus {
 }
 
 .cardContent {
-	padding: 14px;
-	text-align: center;
+  padding: 14px;
+  text-align: center;
   height: 200px;
 }
 

@@ -12,6 +12,7 @@
             <button type="submit">RESET</button>
           </div>
         </form>
+        <h4 id="login" @click="goToLogin()">BACK TO LOGIN</h4>
       </div>
     </div>
   </section>
@@ -23,37 +24,40 @@ import { Message } from "@element-plus/icons-vue";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import firebaseApp from "../../firebase.js";
 
-const db = getFirestore(firebaseApp)
+const db = getFirestore(firebaseApp);
 export default {
-    name: 'ForgotPasswordForm',
-    components: { Message },
-    data() { 
-      return { 
-        email: '', 
-        password: '',
-      }; 
-    },
-    methods: {
-      async forgotpassword() {
-        const userDoc = doc(db,"Customers",this.email);
-        const docSnap = await getDoc(userDoc);
+  name: "ForgotPasswordForm",
+  components: { Message },
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    async forgotpassword() {
+      const userDoc = doc(db, "Customers", this.email);
+      const docSnap = await getDoc(userDoc);
 
-        if (docSnap.exists()) {
-          const auth = getAuth();
-          sendPasswordResetEmail(auth,this.email)
-          .then(() => {
-            alert("A password reset link has been sent to your email.")
-            this.$router.push('/');
-          })
-        } else {
-          alert("This email is not registered with meridi. Please try with another email.")
-          document.getElementById('forgot-password-form').reset();
-        } 
-      },
+      if (docSnap.exists()) {
+        const auth = getAuth();
+        sendPasswordResetEmail(auth, this.email).then(() => {
+          alert("A password reset link has been sent to your email.");
+          this.$router.push("/");
+        });
+      } else {
+        alert(
+          "This email is not registered with meridi. Please try with another email."
+        );
+        document.getElementById("forgot-password-form").reset();
+      }
     },
+    goToLogin() {
+      this.$router.replace("./Login");
+    },
+  },
 };
 </script>
-
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
@@ -66,7 +70,7 @@ export default {
 }
 .el-input,
 .el-row {
-  margin-top: 10px;
+  margin-bottom: 10px;
   justify-content: center;
 }
 .el-select {
@@ -98,5 +102,13 @@ button:focus {
 }
 h4 {
   font-family: "Nunito Sans", sans-serif;
+}
+#login {
+  font-weight: bold;
+  margin-top: 10px;
+  font-family: "Nunito Sans", sans-serif;
+}
+#login:hover {
+  cursor: pointer;
 }
 </style>

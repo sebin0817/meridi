@@ -1,8 +1,18 @@
 <template>
-  <img id="logo" src="../../assets/user.png" alt="" />
   <div class="form">
-    <!--h4>Edit Particulars</h4-->
     <el-form :model="form" @submit.prevent="update">
+      <img :src="img" id="image" />
+      <el-row>
+        <el-input
+          id="image"
+          v-model="img"
+          type="text"
+          placeholder="Company Logo Link"
+          required="true"
+          ><template #prefix>
+            <el-icon class="el-input__icon"><Camera /></el-icon> </template
+        ></el-input>
+      </el-row>
       <el-row>
         <el-input
           id="name"
@@ -61,19 +71,20 @@
 </template>
 
 <script>
-import { OfficeBuilding, MapLocation } from "@element-plus/icons-vue";
+import { OfficeBuilding, MapLocation, Camera } from "@element-plus/icons-vue";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import firebaseApp from "../../firebase.js";
 const db = getFirestore(firebaseApp);
 export default {
   name: "EditParticularsForm",
-  components: { OfficeBuilding, MapLocation },
+  components: { OfficeBuilding, MapLocation, Camera },
 
   data() {
     return {
       name: "",
       email: "",
       postalcode: "",
+      img: "",
       desc: "",
       services: [],
       options: [
@@ -86,18 +97,19 @@ export default {
       ],
     };
   },
-    methods: {
-      async update() {
-        await setDoc(doc(db, "Clinics", this.email), {
-          name: this.name,
-          email: this.email,
-          postalcode: this.postalcode,
-          desc: this.desc,
-          services: this.services
-        });   
-        alert("Profile successfully updated");
-        this.$router.push('./ClinicProfile')
-      },
+  methods: {
+    async update() {
+      await setDoc(doc(db, "Clinics", this.email), {
+        name: this.name,
+        email: this.email,
+        postalcode: this.postalcode,
+        image: this.img,
+        desc: this.desc,
+        services: this.services,
+      });
+      alert("Profile successfully updated");
+      this.$router.push("./ClinicProfile");
+    },
     goToProfile() {
       this.$router.push("./ClinicProfile");
     },
@@ -110,6 +122,7 @@ export default {
       const data = docSnap.data();
       this.name = data.name;
       this.postalcode = data.postalcode;
+      this.img = data.image;
       this.desc = data.desc;
       this.services = data.services;
     }
@@ -161,10 +174,12 @@ h4 {
 h4:hover {
   cursor: pointer;
 }
-#logo {
+#image {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 20%;
+  margin-bottom: 10px;
+  height: 200px;
+  width: 200px;
 }
 </style>

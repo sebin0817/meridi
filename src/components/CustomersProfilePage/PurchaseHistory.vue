@@ -18,7 +18,7 @@
           >
             <tr>
               <td>{{ name }}</td>
-              <td>{{ item.price }}</td>
+              <td>{{ item.unitprice }}</td>
               <td>{{ item.quantity }}</td>
             </tr>
           </tbody>

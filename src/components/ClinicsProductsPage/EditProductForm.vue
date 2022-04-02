@@ -2,6 +2,18 @@
   <div class="form" @submit.prevent="edit">
     <form>
       <el-row>
+        <img :src="image" id="image" />
+        <el-input
+          id="image"
+          v-model="image"
+          type="text"
+          placeholder="Product Image Link"
+          required="true"
+          ><template #prefix>
+            <el-icon class="el-input__icon"><Camera /></el-icon> </template
+        ></el-input>
+      </el-row>
+      <el-row>
         <el-input
           id="name"
           v-model="name"
@@ -73,16 +85,17 @@
 </template>
 
 <script>
-import { Coin, Sell } from "@element-plus/icons-vue";
+import { Coin, Sell, Camera } from "@element-plus/icons-vue";
 import firebaseApp from "@/firebase.js";
 import { getFirestore } from "firebase/firestore";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
 export default {
   name: "Add ProductForm",
-  components: { Coin, Sell },
+  components: { Coin, Sell, Camera },
   data() {
     return {
+      image: "",
       name: "",
       price: "",
       desc: "",
@@ -105,6 +118,7 @@ export default {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
         const data = docSnap.data();
+        self.image = data.image,
         self.name = data.name;
         self.price = data.price;
         self.desc = data.description;
@@ -122,6 +136,7 @@ export default {
     async edit() {
       try {
         await updateDoc(doc(db, "Products", sessionStorage.getItem("productid")), {
+          image: this.image,
           name: this.name,
           price: this.price,
           description: this.desc,
@@ -143,7 +158,8 @@ export default {
 .form {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20px;
+  margin-top: 100px;
+  margin-bottom: 50px;
   text-align: center;
   width: 30%;
 }
@@ -178,5 +194,10 @@ button:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+#image {
+  margin-bottom: 10px;
+  height: 200px;
+  width: 200px;
 }
 </style>

@@ -19,7 +19,6 @@ export default {
 .hero {
   background-attachment: fixed;
   position: relative;
-  height: 100vh;
 }
 .hero-text {
   height: 100%;

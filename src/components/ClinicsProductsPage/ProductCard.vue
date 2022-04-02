@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <el-card shadow="hover">
-      <img :src="`${product.image}`" alt="product img" class="image" />
+      <div class="image">
+        <img :src="product.image" alt="product img" class="img" />
+      </div>
       <div class="cardContent">
         <p style="line-height: 20px" v-show="available">
           <el-icon class="el-input__icon" :size="20" color="#cde0c1"
@@ -15,11 +17,15 @@
           /></el-icon>
           Unavailable
         </p>
-        <span class="text block" id="title">{{ product.name }}</span>
-        <p class="text block" id="description">{{ product.description }}</p>
-        <p class="text block" id="price">{{ price }}</p>
-        <button @click="editProduct">EDIT</button>
-        <button @click="deleteProduct">DELETE</button>
+        <div class="header">
+          <span class="text block" id="title">{{ product.name }}</span>
+          <p class="text block" id="description">{{ product.description }}</p>
+        </div>
+        <div class="mid">
+          <p class="text block" id="price">{{ price }}</p>
+          <button @click="editProduct">EDIT</button>
+          <button @click="deleteProduct">DELETE</button>
+        </div>
       </div>
     </el-card>
   </div>
@@ -48,20 +54,20 @@ export default {
   emits: ["delete"],
   methods: {
     editProduct() {
-      this.$router.push('./EditProduct')
+      this.$router.push("./EditProduct");
       sessionStorage.setItem("productid", this.product.id);
     },
     async deleteProduct() {
       try {
         var conf = confirm("Are you sure you want to delete this product?");
         if (conf == true) {
-        await deleteDoc(doc(db, "Products", this.product.id));
-        await updateDoc(doc(db, "Clinics", this.product.clinic), {
-          products: arrayRemove(this.product.id),
-        });
-        alert("Product successfullly deleted");
-        location.reload(); //reload to show changes
-        this.$emit("delete");
+          await deleteDoc(doc(db, "Products", this.product.id));
+          await updateDoc(doc(db, "Clinics", this.product.clinic), {
+            products: arrayRemove(this.product.id),
+          });
+          alert("Product successfullly deleted");
+          location.reload(); //reload to show changes
+          this.$emit("delete");
         }
       } catch (error) {
         console.error("Error updating document: ", error);
@@ -78,7 +84,7 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
-el-card {
+.el-card {
   padding: 0px;
 }
 .container {
@@ -90,8 +96,13 @@ el-card {
   text-align: center;
 }
 .image {
+  width: 200px;
+  height: 200px;
+  text-align: center;
+}
+.img {
   width: 100%;
-  display: block;
+  height: 100%;
 }
 .text {
   font-family: "Georgia", Times, serif;
@@ -99,6 +110,9 @@ el-card {
 }
 .block {
   display: block;
+}
+.header {
+  height: 220px;
 }
 #title {
   margin-top: 10px;
@@ -108,6 +122,10 @@ el-card {
 #description {
   width: 100%;
   font-size: 13px;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 #price {
   font-size: 16px;

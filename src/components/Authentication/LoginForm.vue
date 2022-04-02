@@ -1,33 +1,29 @@
 <template>
   <div class="form">
     <el-form :model="form" @submit.prevent="login">
-      <el-form-item>
-        <el-input
-          id="email"
-          v-model="email"
-          type="email"
-          placeholder="Email"
-          required="true"
-          ><template #prefix>
-            <el-icon class="el-input__icon"><message /></el-icon> </template
-        ></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-input
-          id="password"
-          v-model="password"
-          type="password"
-          placeholder="Password"
-          required="true"
-          show-password
-          ><template #prefix>
-            <el-icon class="el-input__icon"><lock /></el-icon>
-          </template>
-        </el-input>
-      </el-form-item>
-      <el-form-item>
+      <el-input
+        id="email"
+        v-model="email"
+        type="email"
+        placeholder="Email"
+        required="true"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><message /></el-icon> </template
+      ></el-input>
+      <el-input
+        id="password"
+        v-model="password"
+        type="password"
+        placeholder="Password"
+        required="true"
+        show-password
+        ><template #prefix>
+          <el-icon class="el-input__icon"><lock /></el-icon>
+        </template>
+      </el-input>
+      <div id="centre">
         <button type="submit">LOGIN</button>
-      </el-form-item>
+      </div>
     </el-form>
     <h4 @click="goToSignup()">CREATE NEW ACCOUNT</h4>
     <h4 @click="goToReset()">FORGOT PASSWORD</h4>
@@ -99,16 +95,26 @@ export default {
 .form {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 36px;
+  margin-top: 20px;
   text-align: center;
   width: 30%;
+}
+#centre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.el-input,
+.el-row {
+  margin-bottom: 10px;
+  justify-content: center;
 }
 button {
   margin: auto;
   margin-top: 10px;
   background-color: #ffcc00;
   border: none;
-  color: lack;
+  color: black;
   padding: 10px;
   border-radius: 4px;
   font-weight: bold;

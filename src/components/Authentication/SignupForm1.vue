@@ -1,6 +1,16 @@
 <template>
   <div class="form">
     <el-form :model="form" @submit.prevent="register">
+        <img :src="img" id="image" />
+        <el-input
+          id="image"
+          v-model="img"
+          type="text"
+          placeholder="Company Logo Link"
+          required="true"
+          ><template #prefix>
+            <el-icon class="el-input__icon"><Camera /></el-icon> </template
+        ></el-input>
       <el-input
         id="email"
         v-model="email"
@@ -82,6 +92,7 @@ import {
   Lock,
   OfficeBuilding,
   MapLocation,
+  Camera,
 } from "@element-plus/icons-vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from "../../firebase.js";
@@ -89,7 +100,7 @@ import { getFirestore, doc, setDoc } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
 export default {
   name: "SignupForm",
-  components: { Message, Lock, OfficeBuilding, MapLocation },
+  components: { Message, Lock, OfficeBuilding, MapLocation, Camera },
   data() {
     return {
       tempType: sessionStorage.getItem("tempType"),
@@ -147,7 +158,7 @@ export default {
             email: email,
             name: name,
             postalcode: postalcode,
-            img: img,
+            image: img,
             desc: desc,
             services: services,
           });
@@ -212,5 +223,13 @@ h4 {
 }
 h4:hover {
   cursor: pointer;
+}
+#image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  height: 200px;
+  width: 200px;
 }
 </style>

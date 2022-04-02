@@ -29,15 +29,5 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.card-wrap {
-  flex: 0 0 33.333%;
-  display: flex;
-  padding: 10px; /* gutter width */
-}
+<style scoped> 
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside width="600px">Aside</el-aside>
+      <!-- <el-aside width="600px">Aside</el-aside> -->
       <el-container>
-        <el-header>Header</el-header>
+        <!-- <el-header>Header</el-header> -->
         <el-main
           ><div class="form">
             <el-form :model="form" @submit.prevent="login">
@@ -128,7 +128,7 @@ button {
   padding: 10px;
   border-radius: 4px;
   font-weight: bold;
-  width: 30%;
+  font-family: "Nunito Sans", sans-serif;
 }
 button:hover {
   background: #ffc400;

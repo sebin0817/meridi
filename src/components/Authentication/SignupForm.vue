@@ -21,11 +21,7 @@
           <el-icon class="el-input__icon"><lock /></el-icon>
         </template>
       </el-input>
-      <el-input
-        id="name"
-        v-model="name"
-        type="text"
-        placeholder="Name"
+      <el-input id="name" v-model="name" type="text" placeholder="Name"
         ><template #prefix>
           <el-icon class="el-input__icon"><avatar /></el-icon> </template
       ></el-input>
@@ -86,23 +82,8 @@ export default {
             email: email,
             name: name,
             postalcode: postalcode,
+            cart: { total: 0, products: {} },
             purchasehistory: {},
-            // purchasehistory: {
-            //   1: {
-            //     items: {
-            //       item1: ["item1",1,50],
-            //       item2: ["item2",1,50]
-            //     },
-            //     total: 100
-            //   },
-            //   2: {
-            //     items: {
-            //       item3: ["item3",1,60],
-            //       item4: ["item4",1,50]
-            //     },
-            //     total: 110
-            //   },
-            // }
           });
           console.log(docRef);
         } catch (error) {

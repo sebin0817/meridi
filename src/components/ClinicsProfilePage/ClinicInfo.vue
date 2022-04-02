@@ -1,11 +1,11 @@
 <template>
   <section class="hero">
     <div id="profile-div">
-      <img id="logo" src="../../assets/user.png" alt="" />
+      <img :src="img" id="image" />
       <h3 class="profile-info">{{ name }}</h3>
       <h3 class="profile-info">{{ email }}</h3>
       <h3 class="profile-info">{{ postalcode }}</h3>
-      <h3 class="profile-info">{{ desc }}</h3>
+      <h3 class="profile-info" id="desc">{{ desc }}</h3>
       <h3 id="services" v-for="service in services" :key="service">
         <el-icon><circle-check-filled /></el-icon>
         {{ service }}
@@ -37,6 +37,7 @@ export default {
       name: "",
       email: "",
       postalcode: "",
+      img: "",
       desc: "",
       services: [],
     };
@@ -55,6 +56,7 @@ export default {
       const data = docSnap.data();
       this.name = data.name;
       this.postalcode = data.postalcode;
+      this.img = data.image;
       this.desc = data.desc;
       this.services = data.services;
     }
@@ -69,18 +71,15 @@ export default {
 #profile-div {
   text-align: center;
 }
-#logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 10%;
-}
 .profile-info {
   margin-top: 15px;
   margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
   width: 60%;
+}
+#desc {
+  text-align: justify;
 }
 #services {
   display: inline;
@@ -105,5 +104,11 @@ button:hover {
 }
 button:focus {
   outline: none;
+}
+#image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 200px;
 }
 </style>
