@@ -109,20 +109,25 @@ export default {
   computed: {
     filterProducts() {
       // console.log("change everytime filter cate changes")
-      return this.products.filter(product => {
-        return this.filteredProductsBySearch(product) && this.filteredProductsByCategory(product);       
-      }).sort((p1, p2) => {
-        if (this.sortBy == 0) {
-          let x = (p1.name > p2.name) ? 1 : -1;
-          return x;
-        } else if (this.sortBy == 1) {
-          return p2.price - p1.price;
-        } else if (this.sortBy == 2) {
-          return p1.price - p2.price;
-        }
-      })
-    }
-  }
+      return this.products
+        .filter((product) => {
+          return (
+            this.filteredProductsBySearch(product) &&
+            this.filteredProductsByCategory(product)
+          );
+        })
+        .sort((p1, p2) => {
+          if (this.sortBy == 0) {
+            let x = p1.name > p2.name ? 1 : -1;
+            return x;
+          } else if (this.sortBy == 1) {
+            return p2.price - p1.price;
+          } else if (this.sortBy == 2) {
+            return p1.price - p2.price;
+          }
+        });
+    },
+  },
 };
 </script>
 
@@ -142,7 +147,7 @@ html {
   color: black;
 }
 #products {
-  margin-top: 10rem;
+  margin-top: 9rem;
   margin-left: auto;
   margin-right: auto;
   width: 70rem;
