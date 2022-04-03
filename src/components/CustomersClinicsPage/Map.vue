@@ -3,14 +3,13 @@
     class="map"
     api-key="AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78"
     :center="centerlatlng"
-    :zoom="13"
+    :zoom="11.3"
   >
     <Marker
       :key="marker"
       v-for="(m, marker) in markers"
       :code="m.code"
       :options="m.options"
-      @click="showCard($event)"
     />
     <Marker :options="customerMarker" />
   </GoogleMap>
@@ -62,16 +61,9 @@ export default {
       customerlatlng: {},
       markers: [],
       customerMarker: {},
-      chosen: {},
     };
   },
-
-  emits: ["chosen"],
   methods: {
-    showCard(event) {
-      let targetCode = event.currentTarget.code;
-      console.log(targetCode);
-    },
   },
   watch: {
     center: function (newVal, oldVal) {
@@ -93,7 +85,7 @@ export default {
         for (var i = 0; i < y.length; i++) {
           this.markers.push({
             id: i,
-            options: { position: y[i], label: "" + i },
+            options: { position: y[i], label: "" + (i+1) },
           });
         }
       });
@@ -118,7 +110,7 @@ export default {
       for (var i = 0; i < y.length; i++) {
         this.markers.push({
           code: i,
-          options: { position: y[i], label: "" + i },
+          options: { position: y[i], label: "" + (i+1) },
         });
       }
     });

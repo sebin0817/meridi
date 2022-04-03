@@ -1,8 +1,8 @@
 <template>
   <main>
-    <el-row v-for="clinic in clinics" :key="clinic" :span="3">
+    <el-row v-for="(clinic, index) in clinics" :key="clinic" :span="3">
       <!-- <el-col v-for="clinic in clinics" :key="clinic" :span="3"> -->
-      <ClinicCard :clinic="clinic" :key="clinic.id" />
+      <ClinicCard :clinic="clinic" :index="index + 1" :key="clinic.id" />
       <!-- </el-col> -->
     </el-row>
   </main>

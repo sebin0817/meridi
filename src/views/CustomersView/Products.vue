@@ -149,7 +149,7 @@ html {
   color: black;
 }
 #products {
-  margin-top: 10rem;
+  margin-top: 9rem;
   margin-left: auto;
   margin-right: auto;
   width: 70rem;

@@ -1,4 +1,7 @@
 <template>
+  <h4 id="heading">
+    Search For Services & Book Appointments At Your Desired Clinics
+  </h4>
   <div class="hero">
     <div id="formcard2">
       <div class="clinicform">
@@ -175,12 +178,20 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 .hero {
   display: flex;
   position: absolute;
   background-attachment: fixed;
   position: absolute;
   height: 100vh;
+}
+#heading {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 20px;
+  position: absolute;
+  margin-top: 100px;
+  margin-left: 30%;
 }
 .clinicform {
   margin-left: 120px;
