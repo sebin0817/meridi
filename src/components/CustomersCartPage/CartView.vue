@@ -61,8 +61,7 @@ export default {
       var product = value;
       product.number = index;
       product.name = key;
-      product.totalprice =
-        "$" + (product.unitprice * product.quantity).toFixed();
+      product.totalprice = "$" + (product.unitprice * product.quantity).toFixed();
       product.unitprice = "$" + product.unitprice.toFixed(2);
       this.tableData.push(product);
       index++;
