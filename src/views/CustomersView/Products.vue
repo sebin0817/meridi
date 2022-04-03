@@ -55,7 +55,9 @@ export default {
             clinic: productData.clinic,
             imgURL: productData.image,
           };
-          self.products.push(product);
+          if (product.avail == "Available") {
+            self.products.push(product);
+          }
         });
       } catch (e) {
         console.log(`error when getting db ${e}`);
@@ -109,20 +111,25 @@ export default {
   computed: {
     filterProducts() {
       // console.log("change everytime filter cate changes")
-      return this.products.filter(product => {
-        return this.filteredProductsBySearch(product) && this.filteredProductsByCategory(product);       
-      }).sort((p1, p2) => {
-        if (this.sortBy == 0) {
-          let x = (p1.name > p2.name) ? 1 : -1;
-          return x;
-        } else if (this.sortBy == 1) {
-          return p2.price - p1.price;
-        } else if (this.sortBy == 2) {
-          return p1.price - p2.price;
-        }
-      })
-    }
-  }
+      return this.products
+        .filter((product) => {
+          return (
+            this.filteredProductsBySearch(product) &&
+            this.filteredProductsByCategory(product)
+          );
+        })
+        .sort((p1, p2) => {
+          if (this.sortBy == 0) {
+            let x = p1.name > p2.name ? 1 : -1;
+            return x;
+          } else if (this.sortBy == 1) {
+            return p2.price - p1.price;
+          } else if (this.sortBy == 2) {
+            return p1.price - p2.price;
+          }
+        });
+    },
+  },
 };
 </script>
 

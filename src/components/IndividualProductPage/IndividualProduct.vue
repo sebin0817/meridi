@@ -132,8 +132,14 @@ export default {
 
   methods: {
     checkClinic() {
-      this.$router.push({
+      /*this.$router.push({
         name: "IndividualClinic",
+        params: {
+          id: this.product.clinic,
+        },
+      });*/
+      this.$router.push({
+        name: "CheckClinic",
         params: {
           id: this.product.clinic,
         },
@@ -229,6 +235,7 @@ html {
 
 #clinic {
   font-weight: 600;
+  text-decoration: underline;
 }
 #clinic:hover {
   cursor: pointer;

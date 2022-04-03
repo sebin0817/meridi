@@ -17,7 +17,15 @@
             :key="item"
           >
             <tr>
-              <td>{{ name }}</td>
+              <!--td>{{ name }}</td-->
+              <td>
+                <router-link
+                  id="product"
+                  :to="{ name: 'IndividualProduct', params: { id: item.id } }"
+                >
+                  {{ name }}
+                </router-link>
+              </td>
               <td>{{ item.unitprice }}</td>
               <td>{{ item.quantity }}</td>
             </tr>
@@ -74,5 +82,11 @@ table tr:first-child th:last-child {
 }
 .table tbody tr {
   border-bottom: 2px solid #bebebe;
+}
+#product {
+  color:black;
+}
+#product:hover {
+  color: #ffcc00;
 }
 </style>

@@ -18,6 +18,7 @@ import ClinicProfile from "../views/ClinicsView/ClinicProfile.vue";
 import ClinicOrderHistory from "../views/ClinicsView/ClinicOrderHistory.vue";
 import IndividualProduct from "../components/IndividualProductPage/IndividualProduct.vue";
 import IndividualClinic from "../components/IndividualClinicPage/IndividualClinic.vue";
+import CheckClinic from "../components/IndividualClinicPage/CheckClinic.vue"
 
 const routes = [
   {
@@ -127,6 +128,14 @@ const routes = [
     path: "/Clinics/book/:id",
     name: "IndividualClinic",
     component: IndividualClinic,
+    props: {
+      myProperty: { id: String },
+    },
+  },
+  {
+    path: "/Clinics/show/:id",
+    name: "CheckClinic",
+    component: CheckClinic,
     props: {
       myProperty: { id: String },
     },

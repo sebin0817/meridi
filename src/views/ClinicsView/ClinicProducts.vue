@@ -49,7 +49,7 @@ export default {
       const querySnapshot = await getDocs(collection(db, "Products"));
       querySnapshot.forEach((doc) => {
         let productData = doc.data();
-        if (productList.includes(doc.id)) {
+        if (productList != null && productList.includes(doc.id)) {
           let product = {
             id: doc.id,
             name: productData.name,
