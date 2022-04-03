@@ -12,14 +12,13 @@
         </div>
         <div id="main" class="text">
           <div>
-            <h2 id="name">{{ clinic.name }}</h2>
-            <h3 style="font-size: 20px; font-weight: bold">{{address}}</h3>
+            <h2 id="name" @click="checkClinic">{{ clinic.name }}</h2>
+            <h3 style="font-size: 20px; font-weight: bold">{{ address }}</h3>
           </div>
           <div>
             <h2 style="font-size: 20px; font-weight: bold">Appointment Form</h2>
             <AppointmentForm />
           </div>
-          
         </div>
       </section>
     </div>
@@ -27,27 +26,36 @@
 </template>
 
 <script>
-import AppointmentForm from './AppointmentForm.vue';
+import AppointmentForm from "./AppointmentForm.vue";
 
-import { getFirestore, getDocs, collection } from "firebase/firestore"; 
+import { getFirestore, getDocs, collection } from "firebase/firestore";
 import firebaseApp from "../../firebase.js";
 
 import axios from "axios";
 
-const db = getFirestore(firebaseApp)
+const db = getFirestore(firebaseApp);
 
 export default {
   components: {
-    AppointmentForm
+    AppointmentForm,
   },
   data() {
     return {
       clinic: {},
       address: "",
-      postalcode: ""
-    }
+      postalcode: "",
+    };
   },
-
+  methods: {
+    checkClinic() {
+      this.$router.push({
+        name: "CheckClinic",
+        params: {
+          id: this.clinic.id,
+        },
+      });
+    },
+  },
   mounted() {
     this.id = this.$route.params.id;
   },
@@ -56,7 +64,7 @@ export default {
     var self = this;
     async function fetchClinics() {
       let clinicsDb = await getDocs(collection(db, "Clinics"));
-      let postalcode = '119081';
+      let postalcode = "119081";
       try {
         clinicsDb.forEach((docs) => {
           let clinicData = docs.data();
@@ -72,7 +80,7 @@ export default {
           };
           if (clinic.id === self.id) {
             self.clinic = clinic;
-            postalcode = clinic.postalcode; 
+            postalcode = clinic.postalcode;
           }
         });
       } catch (e) {
@@ -84,19 +92,16 @@ export default {
     async function geo(postalcode) {
       // console.log(postalcode);
       let geo = await axios.get(
-              `https://developers.onemap.sg/commonapi/search?searchVal=${postalcode}
+        `https://developers.onemap.sg/commonapi/search?searchVal=${postalcode}
               &returnGeom=Y&getAddrDetails=Y&pageNum=1`
-            );
-            self.address = geo['data']['results'][0]['ADDRESS'];
-            console.log(self.address);
+      );
+      self.address = geo["data"]["results"][0]["ADDRESS"];
+      console.log(self.address);
     }
-    
-    fetchClinics().then((x) => geo(x));
-  }
 
-}
-  
-  
+    fetchClinics().then((x) => geo(x));
+  },
+};
 </script>
 
 <style scoped>
@@ -145,6 +150,10 @@ html {
 #name {
   font-size: 30px;
   font-weight: bold;
+  text-decoration: underline;
 }
-
+#name:hover {
+  cursor: pointer;
+  color: #ffcc00;
+}
 </style>

@@ -14,7 +14,7 @@ export default {
             this.emitter.emit('loginas', {'userType': "undefined"})
             sessionStorage.setItem("useremail", "");
             sessionStorage.setItem("usertype","")
-            this.$router.push('./');
+            this.$router.push({ name: 'Home'});
           }).catch((error) => {
               console.log(error);
           })

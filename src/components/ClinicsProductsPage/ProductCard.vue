@@ -65,9 +65,9 @@ export default {
           await updateDoc(doc(db, "Clinics", this.product.clinic), {
             products: arrayRemove(this.product.id),
           });
-          alert("Product successfullly deleted");
-          location.reload(); //reload to show changes
+          //location.reload(); //reload to show changes
           this.$emit("delete");
+          alert("Product successfullly deleted");
         }
       } catch (error) {
         console.error("Error updating document: ", error);

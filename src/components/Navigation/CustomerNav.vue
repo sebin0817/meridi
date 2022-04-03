@@ -44,16 +44,16 @@
             >
           </li>
           <li>
-            <router-link class="link" :to="{ name: '' }">Clinics</router-link>
+            <router-link class="link" :to="{ name: 'Clinics' }">Clinics</router-link>
           </li>
           <li>
-            <router-link class="link" :to="{ name: '' }">Products</router-link>
+            <router-link class="link" :to="{ name: 'Products' }">Products</router-link>
           </li>
           <li>
-            <router-link class="link" :to="{ name: '' }">Cart</router-link>
+            <router-link class="link" :to="{ name: 'Cart' }">Cart</router-link>
           </li>
           <li>
-            <router-link class="link" :to="{ name: '' }">Profile</router-link>
+            <router-link class="link" :to="{ name: 'Profile' }">Profile</router-link>
           </li>
           <Signout/>
         </ul>

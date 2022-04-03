@@ -38,10 +38,10 @@
             >
           </li>
           <li>
-            <router-link class="link" :to="{ name: '' }">Products</router-link>
+            <router-link class="link" :to="{ name: 'ClinicProducts' }">Products</router-link>
           </li>
           <li>
-            <router-link class="link" :to="{ name: '' }"
+            <router-link class="link" :to="{ name: 'ClinicOrderHistory' }"
               >Order History</router-link
             >
           </li>

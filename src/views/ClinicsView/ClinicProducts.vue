@@ -1,7 +1,11 @@
 <template>
   <section class="hero">
     <div class="hero-text container">
-      <ProductView :products="clinicProducts" @delete="update" />
+      <ProductView
+        :products="clinicProducts"
+        @delete="update"
+        :show="showEmpty"
+      />
     </div>
   </section>
 </template>
@@ -26,15 +30,46 @@ export default {
     return {
       email: "",
       products: [],
-      updateCount: 0,
+      show: false,
     };
   },
   methods: {
     update() {
-      this.updateCount += 1;
+      var self = this;
+      this.products = [];
+      self.email = sessionStorage.getItem("useremail");
+      async function fetchProducts() {
+        //get product list from Clinics collection
+        const docRef = doc(db, "Clinics", self.email);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists) {
+          const data = docSnap.data();
+          var productList = data.products;
+        }
+        //get products from Products collection
+        const querySnapshot = await getDocs(collection(db, "Products"));
+        querySnapshot.forEach((doc) => {
+          let productData = doc.data();
+          if (productList != null && productList.includes(doc.id)) {
+            let product = {
+              id: doc.id,
+              name: productData.name,
+              description: productData.description,
+              price: productData.price,
+              categories: productData.categories,
+              avail: productData.avail,
+              clinic: productData.clinic,
+              image: productData.image,
+            };
+            self.products.push(product);
+          }
+        });
+        self.show = self.products.length===0;
+      }
+      fetchProducts();
     },
   },
-  mounted() {
+  created() {
     var self = this;
     self.email = sessionStorage.getItem("useremail");
     async function fetchProducts() {
@@ -63,12 +98,16 @@ export default {
           self.products.push(product);
         }
       });
+      self.show = self.products.length===0;
     }
     fetchProducts();
   },
   computed: {
     clinicProducts() {
       return this.products;
+    },
+    showEmpty() {
+      return this.show;
     },
   },
 };
