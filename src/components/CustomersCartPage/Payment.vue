@@ -1,7 +1,24 @@
 <template>
   <section>
     <img id="qrcode" src="@/assets/qrcode.jpg" alt="" />
-    <button @click="purchase()">CONFIRM PAYMENT</button>
+    <el-form :model="form" v-on:submit.prevent="purchase">
+      <el-row>
+        <el-col :offset="11" :span="10">
+          <el-form-item type="submit" size="large">
+            <el-input
+              v-model="code"
+              placeholder="Transaction Code"
+              clearable
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :offset="1" :span="2">
+          <el-form-item>
+            <button size="large">CONFIRM PAYMENT</button>
+          </el-form-item>
+        </el-col>
+      </el-row>
+    </el-form>
     <div class="center">
       <PaymentDiag />
     </div>
@@ -13,12 +30,28 @@ import PaymentDiag from "@/components/CustomersCartPage/PaymentDialogue.vue";
 
 export default {
   name: "Payment",
+  data() {
+    return {
+      code: '',
+    }
+  },
   props: {
     cart: Object,
   },
   methods: {
     purchase() {
-      this.$emit("commitpurchase");
+      if (this.cart.total == 0) {
+        alert("Your cart is empty!")
+      } else {
+        if (this.code != "") {
+        this.$emit("commitpurchase");
+        this.code = "";
+        } else {
+          alert("Please key in your transaction code!")
+        }
+      }
+      
+      
     },
   },
   components: { PaymentDiag },

@@ -69,6 +69,7 @@ export default {
     async commitpurchase() {
       //update customer purchase history
       const len = Object.keys(this.purchasehistory).length;
+      this.cart.dop = new Date().toISOString().slice(0, 10)
       this.purchasehistory[len + 1] = this.cart;
       const custRef = doc(db, "Customers", this.email);
       await updateDoc(custRef, {
@@ -109,7 +110,7 @@ export default {
         cart: { products: {}, total: 0 },
       });
       this.cart = { products: {}, total: 0 };
-      alert("purchase is successful");
+      alert("Your purchase is successful!");
     },
   },
 };

@@ -25,6 +25,7 @@
             <el-input-number v-model="qty" :step="1" />
           </div>
           <button @click="addToCart">Add to Cart</button>
+          <a href='../'>Back to products page</a> 
         </div>
       </section>
     </div>
@@ -164,6 +165,7 @@ export default {
       console.log(this.price);
       this.totalPrice += addQty * price;
       this.updateCartToFb();
+      alert("Successfully added to cart!")
     },
     isExist() {
       let currProduct = this.product.name.toLowerCase();

@@ -32,7 +32,7 @@
             >
               <div class="text item">
                 <p v-show="hv2">
-                  <b> Tuina </b> involves applying pressure on acupoints,
+                  <b> Tunia </b> involves applying pressure on acupoints,
                   meridians and various muscle groups to regulate the body’s
                   physiological and pathological condition, thus achieving
                   positive treatment results.

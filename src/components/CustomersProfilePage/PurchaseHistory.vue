@@ -5,6 +5,7 @@
       <el-main>
         <el-scrollbar>
           <div class="order" v-for="order in purchasehistory" :key="order">
+            <h4>Ordered on {{ order.dop }}</h4>
             <el-table :data="obtoarr(order)">
               <el-table-column prop="no" label="No." width="80px" />
               <el-table-column prop="name" label="Product" width="450px" />

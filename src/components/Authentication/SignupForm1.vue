@@ -161,6 +161,7 @@ export default {
             image: img,
             desc: desc,
             services: services,
+            orderhistory: {}
           });
           console.log(docRef);
         } catch (error) {
