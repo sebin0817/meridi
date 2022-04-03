@@ -19,6 +19,7 @@
             <h2 style="font-size: 20px; font-weight: bold">Appointment Form</h2>
             <AppointmentForm />
           </div>
+          <a href='../'>Back to Clinics Page</a> 
         </div>
       </section>
     </div>
