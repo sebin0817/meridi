@@ -2,6 +2,7 @@
   <section class="hero">
     <el-container id="container">
       <el-header id="historyheader">Purchase History</el-header>
+      <h4 v-if='len==undefined'>You do not have any past orders</h4>
       <el-main>
         <el-scrollbar>
           <div class="order" v-for="order in purchasehistory" :key="order">
@@ -70,6 +71,11 @@ export default {
   },
   props: {
     user: Object,
+  },
+  computed: {
+    len() {
+      return this.purchasehistory.length
+    }
   },
   created() {
     this.purchasehistory = this.user.purchasehistory;

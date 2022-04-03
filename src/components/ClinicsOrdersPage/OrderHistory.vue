@@ -1,6 +1,7 @@
 <template>
   <el-container id="container">
     <el-header id="historyheader">Order History</el-header>
+    <h4 v-if='len==undefined'>You do not have any past orders</h4>
     <el-main>
       <el-scrollbar>
         <div class="order" v-for="order in orderhistory" :key="order">
@@ -22,8 +23,15 @@ export default {
   props: {
     orderhistory: Object
   },
+  computed: {
+    len() {
+      console.log(this.orderhistory.length)
+      return this.orderhistory.length
+    }
+  },
   methods: {
     obtoarr(order) {
+      console.log(this.orderhistory.length)
       var prodsobj = order.products
       var prodsarr = []
       var index = 1
