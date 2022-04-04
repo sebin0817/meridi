@@ -41,7 +41,7 @@ export default {
 }
 .dialogue {
   font-family: "Nunito Sans", sans-serif;
-  padding-top: 8px;
+  padding-top: 1px;
   font-size: 12px;
   padding-left: 1.2rem;
 }

@@ -2,7 +2,9 @@
   <div class="container">
     <el-card class="box-card">
       <div class="cardContent">
-        <span class="text block" id="name">{{ index + " " + clinic.name }}</span>
+        <span class="text block" id="name">{{
+          index + " " + clinic.name
+        }}</span>
         <span class="text block" id="postal">{{ clinic.postalcode }}</span>
         <span class="text block" id="services">{{ services }}</span>
         <div id="centre">
@@ -37,18 +39,18 @@ export default {
       this.$router.push({
         name: "IndividualClinic",
         params: {
-          id: this.clinic.id
-        }
-      })
-    }
-  }
+          id: this.clinic.id,
+        },
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 el-card {
-	padding: 0px;
+  padding: 0px;
 }
 .container {
   margin-left: 195px;
@@ -56,7 +58,7 @@ el-card {
 }
 .container2 {
   overflow: scroll;
-  height: 200px;
+  height: 100px;
 }
 .text {
   font-size: 14px;
