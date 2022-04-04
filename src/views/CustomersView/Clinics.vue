@@ -190,7 +190,7 @@ export default {
   font-family: "Nunito Sans", sans-serif;
   font-size: 20px;
   position: absolute;
-  margin-top: 100px;
+  margin-top: 110px;
   margin-left: 30%;
 }
 .clinicform {

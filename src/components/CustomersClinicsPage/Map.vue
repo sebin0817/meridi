@@ -63,8 +63,7 @@ export default {
       customerMarker: {},
     };
   },
-  methods: {
-  },
+  methods: {},
   watch: {
     center: function (newVal, oldVal) {
       // watch it
@@ -85,7 +84,7 @@ export default {
         for (var i = 0; i < y.length; i++) {
           this.markers.push({
             id: i,
-            options: { position: y[i], label: "" + (i+1) },
+            options: { position: y[i], label: "" + (i + 1) },
           });
         }
       });
@@ -110,7 +109,7 @@ export default {
       for (var i = 0; i < y.length; i++) {
         this.markers.push({
           code: i,
-          options: { position: y[i], label: "" + (i+1) },
+          options: { position: y[i], label: "" + (i + 1) },
         });
       }
     });
@@ -121,8 +120,8 @@ export default {
 <style scoped>
 .map {
   position: relative;
-  width: 700px;
-  height: 525px;
-  margin-top: 160px;
+  width: 720px;
+  height: 530px;
+  margin-top: 170px;
 }
 </style>

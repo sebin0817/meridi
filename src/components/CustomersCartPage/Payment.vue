@@ -2,22 +2,12 @@
   <section>
     <img id="qrcode" src="@/assets/qrcode.jpg" alt="" />
     <el-form :model="form" v-on:submit.prevent="purchase">
-      <el-row>
-        <el-col :offset="11" :span="10">
-          <el-form-item type="submit" size="large">
-            <el-input
-              v-model="code"
-              placeholder="Transaction Code"
-              clearable
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :offset="1" :span="2">
-          <el-form-item>
-            <button size="large">CONFIRM PAYMENT</button>
-          </el-form-item>
-        </el-col>
-      </el-row>
+      <el-form-item id="formitem" type="submit">
+        <el-input v-model="code" placeholder="Transaction Code" clearable />
+      </el-form-item>
+      <el-form-item id="formitem">
+        <button>CONFIRM PAYMENT</button>
+      </el-form-item>
     </el-form>
     <div class="center">
       <PaymentDiag />
@@ -32,8 +22,8 @@ export default {
   name: "Payment",
   data() {
     return {
-      code: '',
-    }
+      code: "",
+    };
   },
   props: {
     cart: Object,
@@ -41,17 +31,15 @@ export default {
   methods: {
     purchase() {
       if (this.cart.total == 0) {
-        alert("Your cart is empty!")
+        alert("Your cart is empty!");
       } else {
         if (this.code != "") {
-        this.$emit("commitpurchase");
-        this.code = "";
+          this.$emit("commitpurchase");
+          this.code = "";
         } else {
-          alert("Please key in your transaction code!")
+          alert("Please key in your transaction code!");
         }
       }
-      
-      
     },
   },
   components: { PaymentDiag },
@@ -59,17 +47,19 @@ export default {
 </script>
 
 <style scoped>
+#qrcode {
+  width: 110%;
+}
+#formitem {
+  width: 110%;
+  margin-top: 10px;
+}
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#qrcode {
-  width: 110%;
-}
 button {
-  margin-left: auto;
-  margin-top: 5px;
   background-color: #ffcc00;
   border: none;
   color: black;

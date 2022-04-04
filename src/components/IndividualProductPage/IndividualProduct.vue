@@ -20,12 +20,17 @@
           <div>
             <p id="description">{{ product.description }}</p>
           </div>
-
+          <br />
           <div class="cart">
             <el-input-number v-model="qty" :step="1" />
           </div>
+          <br />
+
           <button @click="addToCart">Add to Cart</button>
-          <a href='../'>Back to products page</a> 
+          <br />
+          <br />
+
+          <h4 class="back" @click="goBack()">Back to Products Page</h4>
         </div>
       </section>
     </div>
@@ -66,7 +71,6 @@ export default {
 
     // console.log(this.email);
     async function fetchProducts() {
-      
       let productsDb = await getDocs(collection(db, "Products"));
       try {
         productsDb.forEach((docs) => {
@@ -165,7 +169,7 @@ export default {
       console.log(this.price);
       this.totalPrice += addQty * price;
       this.updateCartToFb();
-      alert("Successfully added to cart!")
+      alert("Successfully added to cart!");
     },
     isExist() {
       let currProduct = this.product.name.toLowerCase();
@@ -182,12 +186,18 @@ export default {
         cart: updateCart,
       });
     },
+    goBack() {
+      this.$router.push("../");
+    },
   },
 };
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
 html {
   font-size: 62.5%;
 }
@@ -273,5 +283,12 @@ button:hover {
 }
 button:focus {
   outline: none;
+}
+.back {
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+.back:hover {
+  cursor: pointer;
 }
 </style>

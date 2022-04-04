@@ -109,7 +109,7 @@ export default {
 }
 .form {
   text-align: center;
-  margin-top: 150px;
+  margin-top: 160px;
 }
 .el-input {
   margin-bottom: 10px;
