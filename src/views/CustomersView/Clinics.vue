@@ -1,7 +1,4 @@
 <template>
-  <h4 id="heading">
-    Search For Services & Book Appointments At Your Desired Clinics
-  </h4>
   <div class="hero">
     <div id="formcard2">
       <div class="clinicform">

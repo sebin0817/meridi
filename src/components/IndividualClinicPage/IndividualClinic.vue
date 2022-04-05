@@ -19,7 +19,7 @@
             <h2 style="font-size: 20px; font-weight: bold">Appointment Form</h2>
             <AppointmentForm />
           </div>
-          <a href='../'>Back to Clinics Page</a> 
+          <h4 class="back" @click="goBack()">Back to Clinics Page</h4>
         </div>
       </section>
     </div>
@@ -55,6 +55,9 @@ export default {
           id: this.clinic.id,
         },
       });
+    },
+    goBack() {
+      this.$router.push("../");
     },
   },
   mounted() {
@@ -156,5 +159,13 @@ html {
 #name:hover {
   cursor: pointer;
   color: #ffcc00;
+}
+
+.back {
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+.back:hover {
+  cursor: pointer;
 }
 </style>
