@@ -85,10 +85,10 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 200px;
+  width: 60%;
 }
 #desc {
-  text-align: left;
+  text-align: justify;
 }
 .profile-info {
   margin-top: 15px;
