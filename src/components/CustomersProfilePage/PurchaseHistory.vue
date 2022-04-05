@@ -14,9 +14,21 @@
             <h4 id="orderdate">Ordered on {{ order.dop }}</h4>
             <el-table :data="obtoarr(order)">
               <el-table-column prop="no" label="No." width="80px" />
-              <el-table-column prop="name" label="Product" width="350px" />
+              <el-table-column prop="name" label="Product" width="320px" />
               <el-table-column prop="unitprice" label="Unit Price" />
               <el-table-column prop="quantity" label="Quantity" />
+              <el-table-column width="80">
+              <template v-slot="scope">
+                
+                <el-button
+                  @click="viewProduct(scope.$index, obtoarr(order))"
+                  type="text"
+                  size="small"
+                >
+                  VIEW
+                </el-button>
+              </template>
+              </el-table-column>
             </el-table>
             <h4 id="total">Total: ${{ order.total }}</h4>
           </div>
@@ -61,13 +73,23 @@ export default {
       var index = 1;
       for (const [key, value] of Object.entries(prodsobj)) {
         var product = value;
-        product.name = key;
+        product.id = key;
+        product.name = value.name;
         product.no = index;
         prodsarr.push(product);
         index++;
       }
       return prodsarr;
     },
+
+    viewProduct(index, tableData) {
+      this.$router.push({
+        name: "IndividualProduct",
+        params: {
+          id: tableData[index].id,
+        },
+      });
+    }
   },
 };
 </script>
@@ -76,6 +98,27 @@ export default {
 * {
   font-family: "Nunito Sans", sans-serif;
 }
+button {
+  margin-left: auto;
+  margin-bottom: 10px;
+  background-color: #ffcc00;
+  border: none;
+  color: black;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+button:hover {
+  background: #ffc400;
+  color: black;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+
 #historyheader {
   font-size: 20px;
   height: 30px;
