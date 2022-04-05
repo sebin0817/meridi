@@ -2,10 +2,12 @@
   <section class="profile">
     <ClinicInfo id="info" v-if="mounted" :useremail="useremail" />
     <section id="products">
-    <el-container>
-      <el-header><SearchForm @search="filteredBySearch($event)" /></el-header>
-      <el-main><ProductsView :products="filterProducts" /></el-main>
-    </el-container>
+      <el-container>
+        <el-header><SearchForm @search="filteredBySearch($event)" /></el-header>
+        <el-main
+          ><ProductsView :products="filterProducts" :show="showEmpty"
+        /></el-main>
+      </el-container>
     </section>
   </section>
 </template>
@@ -14,7 +16,13 @@
 import ClinicInfo from "../../components/IndividualClinicPage/CheckClinicInfo.vue";
 import SearchForm from "@/components/CustomersProductsPage/SearchForm.vue";
 import ProductsView from "@/components/CustomersProductsPage/ProductsView.vue";
-import { getDocs, collection, getFirestore, getDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  getFirestore,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 import firebaseApp from "@/firebase.js";
 
 const db = getFirestore(firebaseApp);
@@ -32,9 +40,10 @@ export default {
       products: [],
       filteredProducts: [],
       search: "",
+      show: false,
     };
   },
-  async created() {
+  created() {
     this.useremail = this.$route.params.id;
     this.mounted = true;
 
@@ -56,13 +65,18 @@ export default {
             clinic: productData.clinic,
             imgURL: productData.image,
           };
-          if (productList != null && productList.includes(product.id) && product.avail == "Available") {
-              self.products.push(product);
+          if (
+            productList != null &&
+            productList.includes(product.id) &&
+            product.avail == "Available"
+          ) {
+            self.products.push(product);
           }
         });
       } catch (e) {
         console.log(`error when getting db ${e}`);
       }
+      self.show = self.products.length === 0;
     }
     fetchProducts();
   },
@@ -78,11 +92,15 @@ export default {
   computed: {
     filterProducts() {
       // console.log("change everytime filter cate changes")
-      return this.products.filter(product => {
-        return this.filteredProductsBySearch(product)       
-      })
-    }
-  }
+      return this.products.filter((product) => {
+        return this.filteredProductsBySearch(product);
+      });
+    },
+    showEmpty() {
+      console.log(this.show);
+      return this.show;
+    },
+  },
 };
 </script>
 

@@ -6,10 +6,12 @@
       <h3 class="profile-info">{{ email }}</h3>
       <h3 class="profile-info">{{ postalcode }}</h3>
       <h3 class="profile-info" id="desc">{{ desc }}</h3>
-      <h3 id="services" v-for="service in services" :key="service">
+      <div id="services" v-for="service in services" :key="service">
+         <p>
         <el-icon><circle-check-filled /></el-icon>
         {{ service }}
-      </h3>
+      </p>
+      </div>
       <br />
       <button @click="goToEdit()">EDIT PROFILE</button>
     </div>
@@ -79,12 +81,7 @@ export default {
   width: 60%;
 }
 #desc {
-  text-align: justify;
-}
-#services {
-  display: inline;
-  margin-left: 15px;
-  margin-right: 15px;
+  text-align: left;
 }
 button {
   margin: auto;

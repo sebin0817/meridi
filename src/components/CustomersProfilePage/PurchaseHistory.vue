@@ -2,7 +2,12 @@
   <section class="hero">
     <el-container id="container">
       <el-header id="historyheader">Purchase History</el-header>
-      <h4 v-if='len==undefined'>You do not have any past orders</h4>
+      <el-row v-if="len == 0">
+        <el-icon class="el-input__icon"><ShoppingCart /></el-icon>
+      </el-row>
+      <el-row v-if="len == 0">
+        <h1 id="empty">You do not have any past orders</h1>
+      </el-row>
       <el-main>
         <el-scrollbar>
           <div class="order" v-for="order in purchasehistory" :key="order">
@@ -22,46 +27,11 @@
         </el-scrollbar>
       </el-main>
     </el-container>
-
-    <!--div id="purchase-history-div">
-      <div class="order" v-for="order in purchasehistory" :key="order">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Product Name</th>
-              <th>Unit Price</th>
-              <th>Purchased Quantity</th>
-            </tr>
-          </thead>
-          <tbody
-            class="item"
-            v-for="(item, name) in order.products"
-            :key="item"
-          >
-            <tr>
-              <td>{{ name }}</td>
-              <td>
-                <router-link
-                  id="product"
-                  :to="{ name: 'IndividualProduct', params: { id: item.id } }"
-                >
-                  {{ name }}
-                </router-link>
-              </td>
-              <td>{{ item.unitprice }}</td>
-              <td>{{ item.quantity }}</td>
-            </tr>
-          </tbody>
-          <tr>
-            <td colspan="3">Total: ${{ order.total }}</td>
-          </tr>
-        </table>
-      </div>
-    </div-->
   </section>
 </template>
 
 <script>
+import { ShoppingCart } from "@element-plus/icons-vue";
 export default {
   name: "PurchaseHistory",
   data() {
@@ -69,13 +39,21 @@ export default {
       purchasehistory: {},
     };
   },
+  components: {
+    ShoppingCart,
+  },
   props: {
     user: Object,
   },
   computed: {
     len() {
-      return this.purchasehistory.length
-    }
+      var count = 0;
+      for (const key of Object.keys(this.purchasehistory)) {
+        console.log(key);
+        count += 1;
+      }
+      return count;
+    },
   },
   created() {
     this.purchasehistory = this.user.purchasehistory;
@@ -104,38 +82,6 @@ export default {
   font-size: 20px;
   height: 30px;
 }
-/*.table {
-  border-collapse: collapse;
-  margin: 25px 0;
-  font-family: "Nunito Sans", sans-serif;
-  width: 80%;
-  border-radius: 5px;
-  box-shadow: 0 0 0 2px #bebebe;
-}
-table tr:first-child th:first-child {
-  border-top-left-radius: 6px;
-}
-
-table tr:first-child th:last-child {
-  border-top-right-radius: 6px;
-}
-.table thead tr {
-  background-color: #d7d7d7;
-  text-align: left;
-}
-.table th,
-.table td {
-  padding: 12px 15px;
-}
-.table tbody tr {
-  border-bottom: 2px solid #bebebe;
-}
-#product {
-  color:black;
-}
-#product:hover {
-  color: #ffcc00;
-}*/
 #container {
   width: 80%;
   font-family: "Nunito Sans", sans-serif;
@@ -145,5 +91,21 @@ h4 {
 }
 .order {
   margin-bottom: 10px;
+}
+h1 {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 20px;
+  height: 30px;
+}
+#empty {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+.el-input__icon {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 5rem;
+  margin-top: 100px;
 }
 </style>
