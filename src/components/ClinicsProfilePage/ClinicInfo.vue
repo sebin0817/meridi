@@ -5,12 +5,13 @@
       <h3 class="profile-info">{{ name }}</h3>
       <h3 class="profile-info">{{ email }}</h3>
       <h3 class="profile-info">{{ postalcode }}</h3>
-      <h4 class="profile-desc" id="desc">{{ desc }}</h4>
-      <h4 id="services" v-for="service in services" :key="service">
-        <el-icon color="#ffc400"><circle-check-filled /></el-icon>
+      <h3 class="profile-info" id="desc">{{ desc }}</h3>
+      <div id="services" v-for="service in services" :key="service">
+         <p>
+        <el-icon><circle-check-filled /></el-icon>
         {{ service }}
-        <br />
-      </h4>
+      </p>
+      </div>
       <br />
       <button @click="goToEdit()">EDIT PROFILE</button>
     </div>
@@ -89,12 +90,7 @@ export default {
 }
 
 #desc {
-  text-align: justify;
-}
-#services {
-  display: inline;
-  margin-left: 15px;
-  margin-right: 15px;
+  text-align: left;
 }
 button {
   margin: auto;

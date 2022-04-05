@@ -37,12 +37,14 @@ export default {
 
 <style scoped>
 .hero {
-  background-size: cover;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  height: 100vh;
+  background-attachment: fixed;
+  position: relative;
+}
+.hero-text {
+  justify-content: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: black;
 }
 </style>
