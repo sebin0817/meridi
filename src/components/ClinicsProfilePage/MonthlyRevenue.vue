@@ -11,7 +11,7 @@
         </el-scrollbar>
       </el-main>
       <el-header class="chartheader">Revenue Visualization</el-header>
-      <line-chart class="user" width="500px" :data="chartdata()"> </line-chart>
+      <line-chart class="user" width="750px" :data="chartdata()"> </line-chart>
     </el-container>
   </section>
 </template>
@@ -123,5 +123,8 @@ h4 {
 }
 .order {
   margin-bottom: 10px;
+}
+.hero {
+  margin-top: 50px;
 }
 </style>

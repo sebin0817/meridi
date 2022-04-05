@@ -108,7 +108,7 @@ export default {
 .profile {
   display: flex;
   height: 100%;
-  width: 75%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   padding-top: 100px;
@@ -117,7 +117,6 @@ export default {
   width: 35%;
 }
 #products {
-  margin-top: 1rem;
-  width: 70rem;
+  width: 55%;
 }
 </style>
