@@ -2,7 +2,8 @@
   <section>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="number" label="No." width="80"> </el-table-column>
-      <el-table-column prop="name" label="Product"> </el-table-column>
+      <el-table-column prop="name" @click="deleteRow(scope.$index, tableData)" label="Product"> 
+      </el-table-column>
       <el-table-column prop="unitprice" label="Unit Price" width="120">
       </el-table-column>
       <el-table-column prop="quantity" label="Quantity" width="120">
@@ -11,13 +12,25 @@
       </el-table-column>
       <el-table-column width="120">
         <template v-slot="scope">
+          
           <el-button
             @click="deleteRow(scope.$index, tableData)"
             type="text"
             size="small"
+            id="delete"
           >
             DELETE
           </el-button>
+
+          <el-button
+            @click="viewProduct(scope.$index, tableData)"
+            type="text"
+            size="small"
+            id="view"
+          >
+            VIEW
+          </el-button>
+          
         </template>
       </el-table-column>
     </el-table>
@@ -53,14 +66,24 @@ export default {
       var dprod = tableData[index].name;
       this.$emit("delprod", dprod);
     },
+
+    viewProduct(index, tableData) {
+      this.$router.push({
+        name: "IndividualProduct",
+        params: {
+          id: tableData[index].id,
+        },
+      });
+    }
   },
   created() {
     var index = 1;
     var products = JSON.parse(JSON.stringify(this.cart.products));
     for (const [key, value] of Object.entries(products)) {
       var product = value;
+      product.id = key;
       product.number = index;
-      product.name = key;
+      product.name = value.name;
       product.totalprice = "$" + (product.unitprice * product.quantity).toFixed();
       product.unitprice = "$" + product.unitprice.toFixed(2);
       this.tableData.push(product);
@@ -93,6 +116,7 @@ button {
   font-weight: bold;
   font-family: "Nunito Sans", sans-serif;
 }
+
 button:hover {
   background: #ffc400;
   color: black;
@@ -100,5 +124,13 @@ button:hover {
 }
 button:focus {
   outline: none;
+}
+
+#delete {
+  background-color: #ffcc00;
+}
+
+#view {
+  background-color: #ADFF2F;
 }
 </style>
