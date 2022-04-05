@@ -1,6 +1,6 @@
 <template>
-  <div id="container">
-    <h1>Order History</h1>
+  <el-container id="container">
+    <el-header id="historyheader">Order History</el-header>
     <el-row v-if="len == 0">
       <el-icon class="el-input__icon"><ShoppingCart /></el-icon>
     </el-row>
@@ -20,7 +20,7 @@
         </div>
       </el-scrollbar>
     </el-main>
-  </div>
+  </el-container >
 </template>
 
 <script>
@@ -40,7 +40,7 @@ export default {
         count += 1;
       }
       return count;
-    },
+      },
   },
   methods: {
     obtoarr(order) {
@@ -63,8 +63,10 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
-#historyheader {
+* {
   font-family: "Nunito Sans", sans-serif;
+}
+#historyheader {
   font-size: 20px;
   height: 30px;
 }
@@ -73,7 +75,9 @@ export default {
   margin-top: 120px;
   margin-left: auto;
   margin-right: auto;
-  font-family: "Nunito Sans", sans-serif;
+}
+h4 {
+  margin-bottom: 8px;
 }
 h1 {
   font-family: "Nunito Sans", sans-serif;

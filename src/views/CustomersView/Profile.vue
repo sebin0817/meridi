@@ -1,7 +1,11 @@
 <template>
-  <section class="profile">
-    <CustInfo id="info" v-if="mounted" :user="user" />
-    <PurchaseHistory id="ph" v-if="mounted" :user="user" />
+  <section class="hero">
+    <el-container class="hero-text">
+      <section class="profile">
+        <CustInfo id="info" v-if="mounted" :user="user" />
+        <PurchaseHistory id="ph" v-if="mounted" :user="user" />
+      </section>
+    </el-container>
   </section>
 </template>
 
@@ -37,15 +41,28 @@ export default {
 </script>
 
 <style scoped>
+.hero {
+  background-attachment: fixed;
+  position: relative;
+}
+.hero-text {
+  justify-content: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
 .profile {
   display: flex;
   height: 100%;
   padding-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 #info {
-  width: 35%;
+  width: 40%;
 }
 #ph {
-  width: 65%;
+  width: 90%;
 }
 </style>

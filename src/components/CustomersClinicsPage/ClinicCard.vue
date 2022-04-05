@@ -52,7 +52,7 @@ el-card {
   padding: 0px;
 }
 .container {
-  margin-left: 195px;
+  /* margin-left: 719rem; */
   background-attachment: fixed;
 }
 .container2 {

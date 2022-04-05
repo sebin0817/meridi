@@ -1,28 +1,34 @@
 <template>
-  <div class="hero">
-    <div id="formcard2">
-      <div class="clinicform">
-        <ClinicsForm
-          @categoryFilter="filteredByCategory($event)"
-          @clinicName="filteredBySearch($event)"
-          @postal="newcenter($event)"
-        />
-      </div>
-
-      <div class="container1">
-        <ClinicsView :clinics="filterClinics" />
-      </div>
-    </div>
-    <div id="map">
-      <Map
-        v-if="mounted && done"
-        :postalCodes="filterPostalCodes"
-        :customerPostalcode="customerPostalcode"
-        :center="center"
-      />
-    </div>
-  </div>
+  <section class="hero">
+    <el-container class="hero-text">
+      <class class="outermost">
+        <div class="outer">
+          <div class="formclinic">
+            <div class="top">
+              <ClinicsForm
+                @categoryFilter="filteredByCategory($event)"
+                @clinicName="filteredBySearch($event)"
+                @postal="newcenter($event)"
+              />
+            </div>
+            <div class="below">
+              <ClinicsView :clinics="filterClinics" />
+            </div>
+          </div>
+        </div>
+        <div class="map">
+          <Map
+            v-if="mounted && done"
+            :postalCodes="filterPostalCodes"
+            :customerPostalcode="customerPostalcode"
+            :center="center"
+          />
+        </div>
+      </class>
+    </el-container>
+  </section>
 </template>
+
 <script>
 import Map from "@/components/CustomersClinicsPage/Map.vue";
 import ClinicsForm from "@/components/CustomersClinicsPage/Form.vue";
@@ -174,34 +180,51 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 .hero {
-  display: flex;
-  position: absolute;
   background-attachment: fixed;
+  position: relative;
+}
+.hero-text {
+  justify-content: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+.outer {
+  margin-top: 9rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80rem;
+  background: black;
+}
+.formclinic {
+  display: grid;
+  grid-template: 1fr 1fr;
+}
+.outer > * {
   position: absolute;
-  height: 100vh;
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
 }
-#heading {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 20px;
-  position: absolute;
-  margin-top: 110px;
-  margin-left: 30%;
-}
-.clinicform {
-  margin-left: 120px;
-}
-.container1 {
-  height: 55vh;
+.outer .below {
+  z-index: 2;
+  height: 50vh;
   overflow: scroll;
-  float: left;
-  position: absolute;
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
-#map {
-  flex-grow: 1;
-  margin-left: 500px;
-  position: absolute;
+.outer .top {
+  z-index: 1;
+}
+.outermost {
+  margin-left: auto;
+  margin-right: auto;
+}
+.map {
+  margin-left: 11rem;
+  height: 68vh;
 }
 </style>

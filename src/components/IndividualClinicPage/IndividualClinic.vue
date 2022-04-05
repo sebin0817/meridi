@@ -13,13 +13,28 @@
         <div id="main" class="text">
           <div>
             <h2 id="name" @click="checkClinic">{{ clinic.name }}</h2>
-            <h3 style="font-size: 20px; font-weight: bold">{{ address }}</h3>
+            <h4 style="font-size: 15px; font-weight: bold">{{ address }}</h4>
           </div>
-          <div>
-            <h2 style="font-size: 20px; font-weight: bold">Appointment Form</h2>
+          <br />
+
+          <div class="form">
+            <h2
+              id="centre"
+              style="
+                font-size: 20px;
+                font-weight: bold;
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+              "
+            >
+              Appointment Form
+            </h2>
             <AppointmentForm />
           </div>
-          <h4 class="back" @click="goBack()">Back to Clinics Page</h4>
+          <br />
+          <div id="centre">
+            <h4 class="back" @click="goBack()">Back to Clinics Page</h4>
+          </div>
         </div>
       </section>
     </div>
@@ -109,6 +124,10 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
 html {
   font-size: 62.5%;
 }
@@ -117,7 +136,6 @@ html {
   background-attachment: fixed;
   position: relative;
   height: 100vh;
-  background-color: white;
 }
 
 .hero-text {
@@ -129,7 +147,6 @@ html {
 }
 
 .text {
-  font-family: "Georgia", Times, serif;
   line-height: 1.6;
 }
 
@@ -160,6 +177,11 @@ html {
   cursor: pointer;
   color: #ffcc00;
 }
+#centre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .back {
   font-weight: bold;
@@ -167,5 +189,11 @@ html {
 }
 .back:hover {
   cursor: pointer;
+}
+
+.form {
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8);
+  border-radius: 6px;
 }
 </style>

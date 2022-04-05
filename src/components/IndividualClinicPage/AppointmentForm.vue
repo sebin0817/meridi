@@ -113,15 +113,11 @@ export default {
 <style scoped>
 .form,
 #common-layout {
-  /* margin-left: auto;
-  margin-right: auto;
-  margin-top: 36px; */
+  margin-top: 11px;
   text-align: center;
-  /* width: 30%; */
 }
 button {
   margin: auto;
-  margin-top: 10px;
   background-color: #ffcc00;
   border: none;
   color: black;
