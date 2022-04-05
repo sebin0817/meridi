@@ -71,24 +71,18 @@ export default {
   font-family: "Nunito Sans", sans-serif;
 }
 .hero {
-  margin-top: 130px;
-}
-.profile-info {
-  margin-top: 10px;
-  margin-bottom: 10;
-  font-weight: bold;
+  margin-top: 100px;
 }
 #profile-div {
   text-align: center;
 }
-.profile-desc {
+.profile-info {
   margin-top: 15px;
   margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
+  width: 60%;
 }
-
 #desc {
   text-align: left;
 }

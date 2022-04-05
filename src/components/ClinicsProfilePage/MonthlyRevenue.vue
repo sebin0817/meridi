@@ -5,7 +5,7 @@
       <el-main>
         <el-scrollbar>
           <el-table :data="produce()">
-            <el-table-column prop="period" label="Period" width="200px" />
+            <el-table-column prop="period" label="Period" width="400px" />
             <el-table-column prop="revenue" label="Revenue" width="400px" />
           </el-table>
         </el-scrollbar>

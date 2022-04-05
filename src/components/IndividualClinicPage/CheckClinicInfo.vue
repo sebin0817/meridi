@@ -72,6 +72,9 @@ export default {
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
 .hero {
   margin-top: 100px;
 }
