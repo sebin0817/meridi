@@ -182,6 +182,7 @@ html {
   justify-content: center;
   align-items: center;
 }
+
 .back {
   font-weight: bold;
   font-family: "Nunito Sans", sans-serif;
@@ -189,6 +190,7 @@ html {
 .back:hover {
   cursor: pointer;
 }
+
 .form {
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.8);

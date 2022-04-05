@@ -1,7 +1,12 @@
 <template>
   <el-container id="container">
     <el-header id="historyheader">Order History</el-header>
-    <h4 v-if="len == undefined">You do not have any past orders</h4>
+    <el-row v-if="len == 0">
+      <el-icon class="el-input__icon"><ShoppingCart /></el-icon>
+    </el-row>
+    <el-row v-if="len == 0">
+      <h1 id="empty">You do not have any past orders</h1>
+    </el-row>
     <el-main>
       <el-scrollbar>
         <div class="order" v-for="order in orderhistory" :key="order">
@@ -15,19 +20,27 @@
         </div>
       </el-scrollbar>
     </el-main>
-  </el-container>
+  </el-container >
 </template>
 
 <script>
+import { ShoppingCart } from "@element-plus/icons-vue";
 export default {
   props: {
     orderhistory: Object,
   },
+  components: {
+    ShoppingCart,
+  },
   computed: {
     len() {
-      console.log(this.orderhistory.length);
-      return this.orderhistory.length;
-    },
+      var count = 0;
+      for (const key of Object.keys(this.orderhistory)) {
+        console.log(key);
+        count += 1;
+      }
+      return count;
+      },
   },
   methods: {
     obtoarr(order) {
@@ -58,12 +71,28 @@ export default {
   height: 30px;
 }
 #container {
-  width: 80%;
+  width: 100%;
   margin-top: 120px;
   margin-left: auto;
   margin-right: auto;
 }
 h4 {
   margin-bottom: 8px;
+}
+h1 {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 20px;
+  height: 30px;
+}
+#empty {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+.el-input__icon {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 5rem;
+  margin-top: 100px;
 }
 </style>

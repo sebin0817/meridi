@@ -5,12 +5,13 @@
       <h3 class="profile-info">{{ name }}</h3>
       <h3 class="profile-info">{{ email }}</h3>
       <h3 class="profile-info">{{ postalcode }}</h3>
-      <h4 class="profile-desc" id="desc">{{ desc }}</h4>
-      <h4 id="services" v-for="service in services" :key="service">
-        <el-icon color="#ffc400"><circle-check-filled /></el-icon>
+      <h3 class="profile-info" id="desc">{{ desc }}</h3>
+      <div id="services" v-for="service in services" :key="service">
+         <p>
+        <el-icon><circle-check-filled /></el-icon>
         {{ service }}
-        <br />
-      </h4>
+      </p>
+      </div>
       <br />
       <button @click="goToEdit()">EDIT PROFILE</button>
     </div>
@@ -70,31 +71,20 @@ export default {
   font-family: "Nunito Sans", sans-serif;
 }
 .hero {
-  margin-top: 130px;
-}
-.profile-info {
-  margin-top: 10px;
-  margin-bottom: 10;
-  font-weight: bold;
+  margin-top: 50px;
 }
 #profile-div {
   text-align: center;
 }
-.profile-desc {
+.profile-info {
   margin-top: 15px;
   margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
+  width: 60%;
 }
-
 #desc {
   text-align: justify;
-}
-#services {
-  display: inline;
-  margin-left: 15px;
-  margin-right: 15px;
 }
 button {
   margin: auto;
@@ -119,6 +109,6 @@ button:focus {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 200px;
+  width: 60%;
 }
 </style>

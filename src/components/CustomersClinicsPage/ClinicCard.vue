@@ -2,9 +2,8 @@
   <div class="container">
     <el-card class="box-card">
       <div class="cardContent">
-        <span class="text block" id="name">{{
-          index + " " + clinic.name
-        }}</span>
+        <span class="text block" id="index">{{ index }}</span>
+        <span class="text block" id="name">{{ clinic.name }}</span>
         <span class="text block" id="postal">{{ clinic.postalcode }}</span>
         <span class="text block" id="services">{{ services }}</span>
         <div id="centre">
@@ -77,6 +76,9 @@ el-card {
 }
 .cardContent {
   text-align: center;
+}
+#index {
+  font-weight: bold;
 }
 #name {
   font-weight: bold;

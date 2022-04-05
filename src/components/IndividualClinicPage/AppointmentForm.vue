@@ -15,7 +15,7 @@
                   placeholder="Name"
                   ><template #prefix>
                     <el-icon class="el-input__icon"
-                      ><message
+                      ><avatar
                     /></el-icon> </template
                 ></el-input>
               </el-form-item>
@@ -89,11 +89,11 @@
 </template>
 
 <script>
-import { Message, Phone } from "@element-plus/icons-vue";
+import { Avatar, Phone } from "@element-plus/icons-vue";
 
 export default {
   name: "LoginForm",
-  components: { Message, Phone },
+  components: { Avatar, Phone },
   data() {
     return {
       id: "Undefined User",

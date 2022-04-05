@@ -72,6 +72,9 @@ export default {
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
 .hero {
   margin-top: 100px;
 }
@@ -82,10 +85,10 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 200px;
+  width: 60%;
 }
 #desc {
-  text-align: left;
+  text-align: justify;
 }
 .profile-info {
   margin-top: 15px;

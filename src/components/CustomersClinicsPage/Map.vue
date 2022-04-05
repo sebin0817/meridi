@@ -24,7 +24,7 @@ async function getLatLngFromPostal(codes) {
   for (let i = 0; i < codes.length; i++) {
     try {
       var { data } = await axios.get(
-        "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+        "https://maps.googleapis.com/maps/api/geocode/json?address=singapore " +
           codes[i] +
           "&key=AIzaSyAAiAGnm168EvVi1bXhL8X_RMx4k7QBd78"
       );
