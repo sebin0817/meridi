@@ -50,7 +50,7 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 20%;
+  width: 30%;
 }
 .profile-info {
   margin-top: 15px;

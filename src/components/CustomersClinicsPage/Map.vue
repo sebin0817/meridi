@@ -119,9 +119,7 @@ export default {
 
 <style scoped>
 .map {
-  position: relative;
-  width: 720px;
-  height: 530px;
-  margin-top: 170px;
+  width: 50rem;
+  height: 40rem;
 }
 </style>

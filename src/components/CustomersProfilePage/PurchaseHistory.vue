@@ -68,7 +68,7 @@ export default {
   margin-top: 40px;
 }
 #container {
-  width: 80%;
+  width: 90%;
 }
 h4 {
   text-align: right;
