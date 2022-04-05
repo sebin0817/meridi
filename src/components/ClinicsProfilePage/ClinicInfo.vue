@@ -7,10 +7,10 @@
       <h3 class="profile-info">{{ postalcode }}</h3>
       <h3 class="profile-info" id="desc">{{ desc }}</h3>
       <div id="services" v-for="service in services" :key="service">
-         <p>
-        <el-icon><circle-check-filled /></el-icon>
-        {{ service }}
-      </p>
+        <p>
+          <el-icon><circle-check-filled /></el-icon>
+          {{ service }}
+        </p>
       </div>
       <br />
       <button @click="goToEdit()">EDIT PROFILE</button>
@@ -74,7 +74,9 @@ export default {
   margin-top: 50px;
 }
 #profile-div {
+  margin-left: auto;
   text-align: center;
+  width: 80%;
 }
 .profile-info {
   margin-top: 15px;

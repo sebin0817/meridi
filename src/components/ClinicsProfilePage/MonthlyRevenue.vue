@@ -10,6 +10,7 @@
           </el-table>
         </el-scrollbar>
       </el-main>
+      <br />
       <el-header class="chartheader">Revenue Visualization</el-header>
       <line-chart class="user" width="750px" :data="chartdata()"> </line-chart>
     </el-container>

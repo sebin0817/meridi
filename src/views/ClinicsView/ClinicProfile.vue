@@ -1,7 +1,11 @@
 <template>
-  <section class="profile">
-    <ClinicInfo id="info" :useremail="useremail" />
-    <MonthlyRevenue id="mr" :useremail="useremail" />
+  <section class="hero">
+    <el-container class="hero-text">
+      <section class="profile">
+        <ClinicInfo id="info" :useremail="useremail" />
+        <MonthlyRevenue id="mr" :useremail="useremail" />
+      </section>
+    </el-container>
   </section>
 </template>
 
@@ -24,15 +28,33 @@ export default {
 </script>
 
 <style scoped>
+/*.profile {
+  display: flex;
+  height: 100%;
+  padding-top: 100px;
+}*/
+.hero {
+  background-attachment: fixed;
+  position: relative;
+}
+.hero-text {
+  justify-content: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
 .profile {
   display: flex;
   height: 100%;
   padding-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 #info {
-  width: 35%;
+  width: 40%;
 }
 #mr {
-  width: 65%;
+  width: 90%;
 }
 </style>

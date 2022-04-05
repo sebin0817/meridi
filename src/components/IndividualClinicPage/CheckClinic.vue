@@ -112,6 +112,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
   padding-top: 100px;
+  padding-bottom: 100px;
 }
 #info {
   width: 35%;

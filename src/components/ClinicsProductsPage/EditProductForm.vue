@@ -80,6 +80,7 @@
       <div id="centre">
         <button type="submit">EDIT PRODUCT</button>
       </div>
+      <h4 @click="goToProduct()">BACK TO PRODUCT LIST</h4>
     </form>
   </div>
 </template>
@@ -118,8 +119,7 @@ export default {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
         const data = docSnap.data();
-        self.image = data.image,
-        self.name = data.name;
+        (self.image = data.image), (self.name = data.name);
         self.price = data.price;
         self.desc = data.description;
         self.categories = data.categories;
@@ -129,20 +129,26 @@ export default {
     fetchProduct();
   },
   methods: {
+    goToProduct() {
+      this.$router.push("./ClinicProducts");
+    },
     click() {
       this.$refs.image.click();
     },
     //edit product information
     async edit() {
       try {
-        await updateDoc(doc(db, "Products", sessionStorage.getItem("productid")), {
-          image: this.image,
-          name: this.name,
-          price: this.price,
-          description: this.desc,
-          categories: this.categories,
-          avail: this.avail,
-        });
+        await updateDoc(
+          doc(db, "Products", sessionStorage.getItem("productid")),
+          {
+            image: this.image,
+            name: this.name,
+            price: this.price,
+            description: this.desc,
+            categories: this.categories,
+            avail: this.avail,
+          }
+        );
         alert("Product successfully updated");
       } catch (error) {
         console.error("Error updating document: ", error);
@@ -199,5 +205,13 @@ button:focus {
   margin-bottom: 10px;
   height: 200px;
   width: 200px;
+}
+h4 {
+  font-weight: bold;
+  margin-top: 10px;
+  font-family: "Nunito Sans", sans-serif;
+}
+h4:hover {
+  cursor: pointer;
 }
 </style>
