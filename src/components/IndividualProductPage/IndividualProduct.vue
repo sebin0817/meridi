@@ -154,7 +154,8 @@ export default {
       console.log("hi");
       let addQty = this.qty;
       let price = Number(this.product.price);
-      let product = this.product.name.toLowerCase();
+      let name = this.product.name.toLowerCase();
+      let product = this.product.id;
 
       if (this.isExist()) {
         this.cart[product].quantity += addQty;
@@ -164,6 +165,7 @@ export default {
         this.cart[product].clinic = this.product.clinic;
         this.cart[product].unitprice = price;
         this.cart[product].quantity = addQty;
+        this.cart[product].name = name;
       }
       console.log(this.qty);
       console.log(this.price);

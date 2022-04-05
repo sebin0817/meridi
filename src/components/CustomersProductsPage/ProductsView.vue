@@ -1,10 +1,10 @@
 <template>
   <main>
     <div class="container">
-      <el-row v-show="empty">
+      <el-row v-if="len == 0">
         <el-icon class="el-input__icon"><TakeawayBox /></el-icon>
       </el-row>
-      <el-row v-show="empty">
+      <el-row v-if="len == 0">
         <h1 id="empty">No Product is Available</h1>
       </el-row>
       <el-row>
@@ -44,6 +44,13 @@ export default {
       this.empty = this.show;
     },
   },
+
+  computed: {
+    len() {
+      console.log(this.products.length)
+      return this.products.length;
+    }
+  }
 };
 </script>
 

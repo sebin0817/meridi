@@ -32,7 +32,7 @@ export default {
     },
   },
 
-  methods: {
+    methods: {
     sendData() {
       this.$router.push({
         name: "IndividualProduct",
