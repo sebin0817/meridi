@@ -224,7 +224,7 @@ export default {
   margin-right: auto;
 }
 .map {
-  margin-left: 11rem;
+  margin-left: 12rem;
   height: 68vh;
 }
 </style>
