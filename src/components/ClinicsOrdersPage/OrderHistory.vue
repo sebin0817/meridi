@@ -95,4 +95,7 @@ h1 {
   font-size: 5rem;
   margin-top: 100px;
 }
+.order {
+  margin-bottom: 30px;
+}
 </style>

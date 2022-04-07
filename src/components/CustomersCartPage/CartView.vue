@@ -131,6 +131,6 @@ button:focus {
 }
 
 #view {
-  background-color: #ADFF2F;
+  background-color: #ffcc00;
 }
 </style>

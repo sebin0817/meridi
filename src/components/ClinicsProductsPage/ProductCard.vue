@@ -112,7 +112,7 @@ export default {
   display: block;
 }
 .header {
-  height: 220px;
+  height: 120px;
 }
 #title {
   margin-top: 10px;
