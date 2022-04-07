@@ -151,16 +151,17 @@ export default {
       });
     },
     addToCart() {
-      console.log("hi");
       let addQty = this.qty;
       let price = Number(this.product.price);
       let name = this.product.name.toLowerCase();
       let product = this.product.id;
 
       if (this.isExist()) {
+        console.log('alr in cart');
         this.cart[product].quantity += addQty;
         console.log(this.cart[product].quantity);
       } else {
+        console.log('new to cart')
         this.cart[product] = {};
         this.cart[product].clinic = this.product.clinic;
         this.cart[product].unitprice = price;
@@ -174,7 +175,7 @@ export default {
       alert("Successfully added to cart!");
     },
     isExist() {
-      let currProduct = this.product.name.toLowerCase();
+      let currProduct = this.product.id;
       let currCart = this.jsonify(this.cart);
       return !(currCart[currProduct] === undefined);
     },

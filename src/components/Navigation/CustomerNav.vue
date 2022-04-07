@@ -2,7 +2,7 @@
   <header :class="{ 'scrolled-nav': scrolledNav }">
     <nav>
       <div class="branding">
-        <img src="@/assets/meridi.png" alt="" />
+        <a href="./Products" ><img src="@/assets/meridi.png" alt="" /></a>
       </div>
       <ul v-show="!mobile" class="navigation">
         <li>
