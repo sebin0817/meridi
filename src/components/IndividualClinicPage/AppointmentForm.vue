@@ -6,13 +6,14 @@
         <!-- <el-header>Header</el-header> -->
         <el-main
           ><div class="form">
-            <el-form :model="form" @submit.prevent="login">
+            <el-form :model="form" @submit.prevent="book">
               <el-form-item>
                 <el-input
                   id="name"
                   v-model="name"
                   type="name"
                   placeholder="Name"
+                  required="true"
                   ><template #prefix>
                     <el-icon class="el-input__icon"
                       ><avatar
@@ -25,6 +26,7 @@
                   v-model="phone"
                   type="phone"
                   placeholder="Contact Number"
+                  required="true"
                   ><template #prefix>
                     <el-icon class="el-input__icon"
                       ><phone
@@ -39,6 +41,7 @@
                     v-model="date"
                     type="date"
                     placeholder="Select Date"
+                    required="true"
                     ><template #prefix>
                       <el-icon class="el-input__icon"
                         ><message
@@ -55,6 +58,7 @@
                     end="18:30"
                     placeholder="Select time"
                     format="hh:mm A"
+                    required="true"
                   />
                 </el-col>
               </el-form-item>
@@ -75,6 +79,7 @@
                   type="textarea"
                   placeholder="Description of pain / discomfort"
                   v-model="desc"
+                  required="true"
                 />
               </el-form-item>
               <el-form-item>
@@ -92,7 +97,7 @@
 import { Avatar, Phone } from "@element-plus/icons-vue";
 
 export default {
-  name: "LoginForm",
+  name: "AppointmentForm",
   components: { Avatar, Phone },
   data() {
     return {
@@ -107,6 +112,12 @@ export default {
   created() {
     this.id = this.$route.params.id;
   },
+  methods: {
+    book() {
+      alert("Thank you for booking. A confirmation email will be sent to you soon.")
+      this.$router.push("../");
+    }
+  }
 };
 </script>
 
