@@ -1,7 +1,9 @@
 <template>
   <div class="form">
     <el-form :model="form" @submit.prevent="update">
-      <img :src="img" id="image" />
+      <el-row>
+        <img :src="img" id="image" />
+      </el-row>
       <el-row>
         <el-input
           id="image"
@@ -175,11 +177,6 @@ h4:hover {
   cursor: pointer;
 }
 #image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 10px;
   height: 200px;
-  width: 200px;
 }
 </style>
