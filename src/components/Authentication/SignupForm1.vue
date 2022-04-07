@@ -1,16 +1,16 @@
 <template>
   <div class="form">
     <el-form :model="form" @submit.prevent="register">
-        <img :src="img" id="image" />
-        <el-input
-          id="image"
-          v-model="img"
-          type="text"
-          placeholder="Company Logo Link"
-          required="true"
-          ><template #prefix>
-            <el-icon class="el-input__icon"><Camera /></el-icon> </template
-        ></el-input>
+      <img :src="img" id="image" alt="YOUR LOGO" />
+      <el-input
+        id="image"
+        v-model="img"
+        type="text"
+        placeholder="Company Logo Link"
+        required="true"
+        ><template #prefix>
+          <el-icon class="el-input__icon"><Camera /></el-icon> </template
+      ></el-input>
       <el-input
         id="email"
         v-model="email"
@@ -161,7 +161,7 @@ export default {
             image: img,
             desc: desc,
             services: services,
-            orderhistory: {}
+            orderhistory: {},
           });
           console.log(docRef);
         } catch (error) {
@@ -178,6 +178,9 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
 .form {
   margin-left: auto;
   margin-right: auto;
@@ -202,7 +205,6 @@ button {
   padding: 10px;
   border-radius: 4px;
   font-weight: bold;
-  font-family: "Nunito Sans", sans-serif;
 }
 button:hover {
   background: #ffc400;
@@ -220,7 +222,6 @@ button:focus {
 h4 {
   font-weight: bold;
   margin-top: 10px;
-  font-family: "Nunito Sans", sans-serif;
 }
 h4:hover {
   cursor: pointer;
@@ -231,6 +232,5 @@ h4:hover {
   margin-right: auto;
   margin-bottom: 10px;
   height: 200px;
-  width: 200px;
 }
 </style>
