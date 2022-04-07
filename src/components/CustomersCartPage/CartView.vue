@@ -28,7 +28,7 @@
             size="small"
             id="view"
           >
-            VIEW
+            EDIT
           </el-button>
           
         </template>
