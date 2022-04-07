@@ -87,6 +87,10 @@ export default {
 }
 #desc {
   text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 button {
   margin: auto;
