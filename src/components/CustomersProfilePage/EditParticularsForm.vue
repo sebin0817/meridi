@@ -48,6 +48,8 @@ export default {
       name: "",
       email: "",
       postalcode: "",
+      cart: "",
+      purchasehistory: "",
     };
   },
   methods: {
@@ -56,6 +58,8 @@ export default {
         name: this.name,
         email: this.email,
         postalcode: this.postalcode,
+        cart: this.cart,
+        purchasehistory: this.purchasehistory,
       });
       alert("Profile successfully updated");
       this.$router.push("./Profile");
@@ -72,6 +76,8 @@ export default {
       const data = docSnap.data();
       this.name = data.name;
       this.postalcode = data.postalcode;
+      this.cart = data.cart;
+      this.purchasehistory = data.purchasehistory;
     }
   },
 };
