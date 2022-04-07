@@ -97,6 +97,7 @@ export default {
         { value: "Cupping" },
         { value: "Device Therapy" },
       ],
+      orderhistory: "",
     };
   },
   methods: {
@@ -108,6 +109,7 @@ export default {
         image: this.img,
         desc: this.desc,
         services: this.services,
+        orderhistory: this.orderhistory
       });
       alert("Profile successfully updated");
       this.$router.push("./ClinicProfile");
@@ -127,6 +129,7 @@ export default {
       this.img = data.image;
       this.desc = data.desc;
       this.services = data.services;
+      this.orderhistory = data.orderhistory
     }
   },
 };
