@@ -3,6 +3,8 @@
     <form>
       <el-row>
         <img :src="image" id="image" />
+      </el-row>
+      <el-row>
         <el-input
           id="image"
           v-model="image"
@@ -204,7 +206,6 @@ button:focus {
 #image {
   margin-bottom: 10px;
   height: 200px;
-  width: 200px;
 }
 h4 {
   font-weight: bold;
