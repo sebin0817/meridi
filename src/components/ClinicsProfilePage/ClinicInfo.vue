@@ -4,7 +4,7 @@
       <img :src="img" id="image" />
       <h3 class="profile-info">{{ name }}</h3>
       <h3 class="profile-info">{{ email }}</h3>
-      <h3 class="profile-info">{{ postalcode }}</h3>
+      <h3 class="profile-info">Singapore {{ postalcode }}</h3>
       <h3 class="profile-info" id="desc">{{ desc }}</h3>
       <div id="services" v-for="service in services" :key="service">
         <p>

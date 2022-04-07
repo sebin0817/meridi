@@ -28,11 +28,6 @@ export default {
 </script>
 
 <style scoped>
-/*.profile {
-  display: flex;
-  height: 100%;
-  padding-top: 100px;
-}*/
 .hero {
   background-attachment: fixed;
   position: relative;
@@ -50,6 +45,7 @@ export default {
   padding-top: 100px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
 }
 #info {
   width: 40%;

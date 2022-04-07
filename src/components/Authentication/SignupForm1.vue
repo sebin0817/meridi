@@ -231,6 +231,6 @@ h4:hover {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
-  height: 200px;
+  height: 100px;
 }
 </style>
