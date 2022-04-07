@@ -31,6 +31,7 @@
           id="product"
           v-model="price"
           type="number"
+          step="0.01"
           placeholder="Product Price"
           required="true"
           ><template #prefix>
