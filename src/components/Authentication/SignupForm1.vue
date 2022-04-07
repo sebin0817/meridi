@@ -1,7 +1,7 @@
 <template>
   <div class="form">
     <el-form :model="form" @submit.prevent="register">
-        <img :src="img" id="image" />
+        <img :src="img" id="image" alt="Upload Your Logo"/>
         <el-input
           id="image"
           v-model="img"
@@ -178,6 +178,9 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
 .form {
   margin-left: auto;
   margin-right: auto;
@@ -230,7 +233,6 @@ h4:hover {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
-  height: 200px;
-  width: 200px;
+  height: 100px;
 }
 </style>
