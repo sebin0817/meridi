@@ -63,8 +63,8 @@ export default {
   },
   methods: {
     async deleteRow(index, tableData) {
-      var dprod = tableData[index].name;
-      this.$emit("delprod", dprod);
+      // var dprod = tableData[index].name;
+      this.$emit("delprod", tableData[index]);
     },
 
     viewProduct(index, tableData) {

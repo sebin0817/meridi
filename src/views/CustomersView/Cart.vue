@@ -56,10 +56,11 @@ export default {
   },
   methods: {
     async delprod(dprod) {
-      var prod = this.cart.products[dprod];
-      console.log(prod);
+      var prod = this.cart.products[dprod.id];
+      console.log(dprod)
+      console.log(this.cart.products);
       this.cart.total -= prod.unitprice * prod.quantity;
-      delete this.cart.products[dprod];
+      delete this.cart.products[dprod.id];
       const custRef = doc(db, "Customers", this.email);
       await updateDoc(custRef, {
         cart: this.cart,
