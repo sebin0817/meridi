@@ -63,21 +63,33 @@ export default {
   },
   methods: {
     register() {
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth, this.email, this.password)
-        .then(() => {
-          addUsertoFs(this.email, this.name, this.postalcode, this.tempType);
-          alert("Successfully registered!");
-          sessionStorage.setItem("useremail", this.email);
-          sessionStorage.setItem("usertype", this.tempType);
-          this.$router.push("/Products");
-          this.emitter.emit("loginas", { userType: this.tempType });
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+      if (validpassword(this.password)) {
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, this.email, this.password)
+          .then(() => {
+            addUsertoFs(this.email, this.name, this.postalcode, this.tempType);
+            alert("Successfully registered!");
+            sessionStorage.setItem("useremail", this.email);
+            sessionStorage.setItem("usertype", this.tempType);
+            this.$router.push("/Products");
+            this.emitter.emit("loginas", { userType: this.tempType });
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      } else {
+        alert("Your password should contain 8-20 characters, as well as a mix of letters and numbers")
+      }
+
+      function validpassword(password) {
+        if (password.length > 8 && password.length < 20 && /\d/.test(password) && /[A-Za-z]/.test(password)) {
+          return true
+        }
+        return false
+      }
+
       async function addUsertoFs(email, name, postalcode, type) {
-        try {
+          try {
           const docRef = await setDoc(doc(db, type, email), {
             email: email,
             name: name,
