@@ -45,7 +45,7 @@ export default {
   padding-top: 100px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 }
 #info {
   width: 40%;

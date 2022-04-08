@@ -1,14 +1,16 @@
 <template>
   <section class="profile">
-    <ClinicInfo id="info" v-if="mounted" :useremail="useremail" />
-    <section id="products">
+    <el-container>
+      <el-aside width="400px"
+        ><ClinicInfo id="info" v-if="mounted" :useremail="useremail"
+      /></el-aside>
       <el-container>
         <el-header><SearchForm @search="filteredBySearch($event)" /></el-header>
         <el-main
           ><ProductsView :products="filterProducts" :show="showEmpty"
         /></el-main>
       </el-container>
-    </section>
+    </el-container>
   </section>
 </template>
 
@@ -108,16 +110,10 @@ export default {
 .profile {
   display: flex;
   height: 100%;
-  width: 90%;
+  width: 70rem;
   margin-left: auto;
   margin-right: auto;
   padding-top: 100px;
   padding-bottom: 100px;
-}
-#info {
-  width: 35%;
-}
-#products {
-  width: 55%;
 }
 </style>

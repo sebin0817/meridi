@@ -86,6 +86,11 @@ button {
   font-family: "Nunito Sans", sans-serif;
 }
 
+.image {
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .image img {
   width: 100%;
   height: 100%;
