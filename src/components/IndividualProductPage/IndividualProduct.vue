@@ -7,7 +7,7 @@
             :src="`${product.imgURL}`"
             alt="product img"
             class="image"
-            style="height: 500px; width: 500px"
+            style="width: 500px"
           />
         </div>
         <div id="main" class="text">

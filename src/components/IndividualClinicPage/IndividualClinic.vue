@@ -7,7 +7,7 @@
             :src="`${clinic.imgURL}`"
             alt="clinic img"
             class="image"
-            style="height: 400px; width: 400px"
+            style="width: 400px"
           />
         </div>
         <div id="main" class="text">
