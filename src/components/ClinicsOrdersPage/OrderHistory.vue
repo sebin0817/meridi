@@ -49,8 +49,9 @@ export default {
       var prodsarr = [];
       var index = 1;
       for (const [key, value] of Object.entries(prodsobj)) {
+        console.log(key)
         var product = value;
-        product.name = key;
+        product.name = value.name;
         product.no = index;
         prodsarr.push(product);
         index++;
