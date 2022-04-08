@@ -22,11 +22,11 @@
           </div>
           <br />
           <div class="cart">
-            <el-input-number v-model="qty" :step="1" />
+            <el-input-number v-model="qty" :step="1" :min="1"/>
           </div>
           <br />
 
-          <button @click="addToCart">Add to Cart</button>
+          <button @click="addToCart">Update Cart</button>
           <br />
           <br />
 
@@ -115,7 +115,11 @@ export default {
         self.cart = self.jsonify(data.cart).products;
         self.totalPrice = self.jsonify(data.cart).total;
       }
-      console.log(self.cart);
+      try {
+        self.qty = self.cart[self.product.id].quantity
+      } catch {
+        self.qty = 1;
+      }
     }
     fetchCart();
   },
@@ -151,28 +155,32 @@ export default {
       });
     },
     addToCart() {
-      let addQty = this.qty;
+      let newQty = this.qty;
+      let oldQty;
+      
       let price = Number(this.product.price);
       let name = this.product.name.toLowerCase();
       let product = this.product.id;
 
-      if (this.isExist()) {
+        if (this.isExist()) {
         console.log('alr in cart');
-        this.cart[product].quantity += addQty;
+        oldQty = this.cart[product].quantity;
+        this.cart[product].quantity = newQty;
         console.log(this.cart[product].quantity);
       } else {
         console.log('new to cart')
+        oldQty = 0;
         this.cart[product] = {};
         this.cart[product].clinic = this.product.clinic;
         this.cart[product].unitprice = price;
-        this.cart[product].quantity = addQty;
+        this.cart[product].quantity = newQty;
         this.cart[product].name = name;
       }
-      console.log(this.qty);
-      console.log(this.price);
-      this.totalPrice += addQty * price;
+      console.log(newQty);
+      console.log(oldQty);
+      this.totalPrice += (newQty - oldQty) * price;
       this.updateCartToFb();
-      alert("Successfully added to cart!");
+      alert("Successfully update cart!");
     },
     isExist() {
       let currProduct = this.product.id;
