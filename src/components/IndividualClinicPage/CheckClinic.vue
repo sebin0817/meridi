@@ -1,8 +1,8 @@
 <template>
   <section class="profile">
     <el-container>
-      <el-aside width="400px"
-        ><ClinicInfo id="info" v-if="mounted" :useremail="useremail"
+      <el-aside width="300px"
+        ><ClinicInfo v-if="mounted" :useremail="useremail"
       /></el-aside>
       <el-container>
         <el-header><SearchForm @search="filteredBySearch($event)" /></el-header>

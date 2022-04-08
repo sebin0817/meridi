@@ -76,7 +76,7 @@ export default {
   font-family: "Nunito Sans", sans-serif;
 }
 .hero {
-  margin-top: 100px;
+  margin-top: 80px;
 }
 #profile-div {
   text-align: center;
@@ -95,7 +95,7 @@ export default {
   margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  width: 80%;
 }
 button {
   margin: auto;
