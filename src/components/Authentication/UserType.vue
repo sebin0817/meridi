@@ -22,12 +22,12 @@ export default {
   methods: {
     toCustomerLogin() {
       this.$router.push('./Login');
-      console.log("user is a Customer");
+      // console.log("user is a Customer");
       sessionStorage.setItem("tempType","Customers");
     },
     toClinicLogin() {
       this.$router.push('./Login');
-      console.log("user is a Clinic");
+      // console.log("user is a Clinic");
       sessionStorage.setItem("tempType","Clinics");
     },
   },

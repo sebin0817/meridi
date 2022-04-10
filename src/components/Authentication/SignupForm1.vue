@@ -150,7 +150,7 @@ export default {
       }
 
       function validpassword(password) {
-        if (password.length > 8 && password.length < 20 && /\d/.test(password) && /[A-Za-z]/.test(password)) {
+        if (password.length >= 8 && password.length <= 20 && /\d/.test(password) && /[A-Za-z]/.test(password)) {
           return true
         }
         return false
@@ -166,7 +166,7 @@ export default {
         services
       ) {
         try {
-          const docRef = await setDoc(doc(db, type, email), {
+          await setDoc(doc(db, type, email), {
             email: email,
             name: name,
             postalcode: postalcode,
@@ -175,7 +175,7 @@ export default {
             services: services,
             orderhistory: {},
           });
-          console.log(docRef);
+          // console.log(docRef);
         } catch (error) {
           console.error("Error adding document: ", error);
         }
