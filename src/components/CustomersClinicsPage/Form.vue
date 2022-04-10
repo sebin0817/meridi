@@ -95,7 +95,7 @@ export default {
 
       this.$emit("postal", this.formInline.code);
       this.$emit("clinicName", this.formInline.name);
-      console.log(`inside submit clinic, ${this.formInline}`);
+      // console.log(`inside submit clinic, ${this.formInline}`);
       // console.log('hehe submit again here')
     },
   },

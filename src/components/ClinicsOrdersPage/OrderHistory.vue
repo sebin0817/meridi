@@ -34,22 +34,17 @@ export default {
   },
   computed: {
     len() {
-      var count = 0;
-      for (const key of Object.keys(this.orderhistory)) {
-        console.log(key);
-        count += 1;
-      }
+      var count = Object.keys(this.orderhistory).length;
       return count;
       },
   },
   methods: {
     obtoarr(order) {
-      console.log(this.orderhistory.length);
+      // console.log(this.orderhistory.length);
       var prodsobj = order.products;
       var prodsarr = [];
       var index = 1;
-      for (const [key, value] of Object.entries(prodsobj)) {
-        console.log(key)
+      for (const value of Object.values(prodsobj)) {
         var product = value;
         product.name = value.name;
         product.no = index;

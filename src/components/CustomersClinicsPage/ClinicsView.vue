@@ -15,10 +15,6 @@ export default {
     ClinicCard,
   },
 
-  created() {
-    console.log(this.clinics);
-  },
-
   props: {
     clinics: {
       type: Array,

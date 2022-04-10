@@ -115,7 +115,7 @@ export default {
               &returnGeom=Y&getAddrDetails=Y&pageNum=1`
       );
       self.address = geo["data"]["results"][0]["ADDRESS"];
-      console.log(self.address);
+      // console.log(self.address);
     }
 
     fetchClinics().then((x) => geo(x));

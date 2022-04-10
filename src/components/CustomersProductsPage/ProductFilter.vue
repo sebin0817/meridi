@@ -95,8 +95,8 @@ export default {
             return item.name;
           })
         : [];
-      console.log(this.productCats);
-      console.log(`checked cats = ${this.checkedCats}`);
+      // console.log(this.productCats);
+      // console.log(`checked cats = ${this.checkedCats}`);
       this.isIndeterminate = false;
       this.$emit("categoryFilter", this.preprocessCats(this.checkedCats));
     },
@@ -111,7 +111,7 @@ export default {
 
     handleSortChange(val) {
       this.sortBy = val;
-      console.log(`sortby = ${this.sortBy}`);
+      // console.log(`sortby = ${this.sortBy}`);
       this.$emit("sortBy", this.sortBy);
     },
   },

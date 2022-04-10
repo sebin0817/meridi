@@ -55,11 +55,11 @@ export default {
   },
   computed: {
     len() {
-      var count = 0;
-      for (const key of Object.keys(this.purchasehistory)) {
-        console.log(key);
-        count += 1;
-      }
+      var count = Object.keys(this.purchasehistory);
+      // for (const key of Object.keys(this.purchasehistory)) {
+      //   console.log(key);
+      //   count += 1;
+      // }
       return count;
     },
   },

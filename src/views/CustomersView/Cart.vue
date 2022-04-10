@@ -57,8 +57,8 @@ export default {
   methods: {
     async delprod(dprod) {
       var prod = this.cart.products[dprod.id];
-      console.log(dprod)
-      console.log(this.cart.products);
+      // console.log(dprod)
+      // console.log(this.cart.products);
       this.cart.total -= prod.unitprice * prod.quantity;
       delete this.cart.products[dprod.id];
       const custRef = doc(db, "Customers", this.email);

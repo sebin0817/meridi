@@ -47,7 +47,6 @@ export default {
 
   computed: {
     len() {
-      console.log(this.products.length)
       return this.products.length;
     }
   }

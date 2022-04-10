@@ -38,7 +38,7 @@ export default {
   },
   async created() {
     this.email = this.useremail;
-    console.log(this.email);
+    // console.log(this.email);
     const docRef = doc(db, "Clinics", this.useremail);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists) {
@@ -102,7 +102,7 @@ export default {
       if (month.length < 2) {
         month = "0" + month;
       }
-      console.log(year, month);
+      // console.log(year, month);
       return [year, month].join("--");
     },
   },

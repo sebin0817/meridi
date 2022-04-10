@@ -115,20 +115,20 @@ export default {
       if (center != null) {
         this.center = center;
       }
-      console.log(`inside Form, center is ${this.center}`);
+      // console.log(`inside Form, center is ${this.center}`);
     },
 
     filteredBySearch(searchResult) {
       if (searchResult != null) {
         this.clinicName = searchResult;
       }
-      console.log(`inside Form, name search is ${this.clinicName}`);
+      // console.log(`inside Form, name search is ${this.clinicName}`);
     },
     filteredByCategory(checkedCats) {
       if (checkedCats != null) {
         this.checkedCats = checkedCats;
       }
-      console.log(`inside Form, services chosen are ${this.checkedCats}`);
+      // console.log(`inside Form, services chosen are ${this.checkedCats}`);
     },
     filteredClinicsByCategory(clinic) {
       let catNames = this.checkedCats.map((cat) => {
@@ -157,7 +157,7 @@ export default {
       let catNames = this.checkedCats.map((cat) => {
         return cat.toLowerCase();
       });
-      console.log("submit form");
+      // console.log("submit form");
       if (catNames.length == 0 && this.clinicName == "") {
         return this.clinics;
       } else {

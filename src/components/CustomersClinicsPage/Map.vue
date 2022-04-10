@@ -74,7 +74,7 @@ export default {
         getLatLngFromPostal([newVal]).then((y) => {
           this.centerlatlng = y[0];
         });
-      }
+        }
     },
     postalCodes: function (newVal, oldVal) {
       // watch it

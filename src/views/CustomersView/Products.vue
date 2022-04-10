@@ -83,7 +83,7 @@ export default {
 
     filteredByCategory(checkedCats) {
       this.checkedCats = checkedCats;
-      console.log(`inside parentl, value is ${this.checkedCats}`);
+      // console.log(`inside parentl, value is ${this.checkedCats}`);
     },
 
     filteredProductsByCategory(product) {
@@ -92,7 +92,7 @@ export default {
       });
       for (const cat of product.categories) {
         if (catNames.indexOf(cat.toLowerCase()) >= 0) {
-          console.log(`hi ${cat.toLowerCase()}`);
+          // console.log(`hi ${cat.toLowerCase()}`);
           return true;
         }
       }

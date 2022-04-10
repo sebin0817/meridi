@@ -56,7 +56,7 @@ export default {
   },
   async created() {
     this.email = this.useremail;
-    console.log(this.email);
+    // console.log(this.email);
     const docRef = doc(db, "Clinics", this.useremail);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists) {

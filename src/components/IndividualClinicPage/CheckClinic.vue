@@ -99,7 +99,6 @@ export default {
       });
     },
     showEmpty() {
-      console.log(this.show);
       return this.show;
     },
   },

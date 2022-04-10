@@ -104,10 +104,10 @@ export default {
     fetchProducts();
 
     async function fetchCart() {
-      console.log("fetch cart");
+      // console.log("fetch cart");
       self.email = sessionStorage.getItem("useremail");
 
-      console.log(self.email);
+      // console.log(self.email);
       const docRef = doc(db, "Customers", self.email);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
@@ -163,12 +163,12 @@ export default {
       let product = this.product.id;
 
         if (this.isExist()) {
-        console.log('alr in cart');
+        // console.log('alr in cart');
         oldQty = this.cart[product].quantity;
         this.cart[product].quantity = newQty;
-        console.log(this.cart[product].quantity);
+        // console.log(this.cart[product].quantity);
       } else {
-        console.log('new to cart')
+        // console.log('new to cart')
         oldQty = 0;
         this.cart[product] = {};
         this.cart[product].clinic = this.product.clinic;
@@ -176,8 +176,6 @@ export default {
         this.cart[product].quantity = newQty;
         this.cart[product].name = name;
       }
-      console.log(newQty);
-      console.log(oldQty);
       this.totalPrice += (newQty - oldQty) * price;
       this.updateCartToFb();
       alert("Successfully update cart!");
