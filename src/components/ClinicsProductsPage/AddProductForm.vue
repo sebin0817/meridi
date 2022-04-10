@@ -2,7 +2,7 @@
   <div class="form" @submit.prevent="add">
     <form>
       <el-row>
-        <img :src="image" id="image" />
+        <img :src="image" id="image" alt="YOUR PRODUCT IMAGE"/>
       </el-row>
       <el-row>
         <el-input
@@ -83,6 +83,7 @@
       <div id="centre">
         <button type="submit">ADD PRODUCT</button>
       </div>
+      <h4 @click="goToProduct()">BACK TO PRODUCT LIST</h4>
     </form>
   </div>
 </template>
@@ -146,12 +147,18 @@ export default {
       }
       this.$router.replace("/ClinicProducts");
     },
+    goToProduct() {
+      this.$router.push("./ClinicProducts");
+    },
   },
 };
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
 .form {
   margin-left: auto;
   margin-right: auto;
@@ -197,5 +204,13 @@ button:focus {
   margin-right: auto;
   margin-bottom: 10px;
   height: 200px;
+}
+h4 {
+  font-weight: bold;
+  margin-top: 10px;
+  font-family: "Nunito Sans", sans-serif;
+}
+h4:hover {
+  cursor: pointer;
 }
 </style>

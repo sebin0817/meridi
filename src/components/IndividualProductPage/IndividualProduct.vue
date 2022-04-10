@@ -130,7 +130,6 @@ export default {
     },
 
     clinic() {
-      //return "Sold at: " + this.product.clinic;
       return "@" + this.clinicName;
     },
 
@@ -141,12 +140,6 @@ export default {
 
   methods: {
     checkClinic() {
-      /*this.$router.push({
-        name: "IndividualClinic",
-        params: {
-          id: this.product.clinic,
-        },
-      });*/
       this.$router.push({
         name: "CheckClinic",
         params: {
@@ -215,7 +208,6 @@ html {
   background-attachment: fixed;
   position: relative;
   height: 100vh;
-  background-color: white;
 }
 
 .hero-text {
