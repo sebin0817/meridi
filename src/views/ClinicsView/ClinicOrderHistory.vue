@@ -29,6 +29,8 @@ export default {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
         this.orderhistory = docSnap.data().orderhistory;
+        // console.log('inside parent')
+        // console.log(this.orderhistory)
         this.mounted = true;
         }
   },
