@@ -98,6 +98,7 @@ export default {
         { value: "Device Therapy" },
       ],
       orderhistory: "",
+      products: ""
     };
   },
   methods: {
@@ -109,7 +110,8 @@ export default {
         image: this.img,
         desc: this.desc,
         services: this.services,
-        orderhistory: this.orderhistory
+        orderhistory: this.orderhistory,
+        products: this.products
       });
       alert("Profile successfully updated");
       this.$router.push("./ClinicProfile");
@@ -130,6 +132,7 @@ export default {
       this.desc = data.desc;
       this.services = data.services;
       this.orderhistory = data.orderhistory
+      this.products = data.products
     }
   },
 };
