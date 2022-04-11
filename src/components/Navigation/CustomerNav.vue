@@ -242,4 +242,7 @@ header {
     }
   }
 }
+a:hover {
+  cursor: pointer;
+}
 </style>
