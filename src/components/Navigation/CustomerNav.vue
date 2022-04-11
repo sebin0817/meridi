@@ -2,7 +2,7 @@
   <header :class="{ 'scrolled-nav': scrolledNav }">
     <nav>
       <div class="branding">
-        <a href="./Products" ><img src="@/assets/meridi.png" alt="" /></a>
+        <a @click="goBack()" ><img src="@/assets/meridi.png" alt="" /></a>
       </div>
       <ul v-show="!mobile" class="navigation">
         <li>
@@ -104,6 +104,9 @@ export default {
       }
       this.mobile = false;
       this.mobileNav = false;
+    },
+    goBack() {
+      this.$router.push("/Products");
     },
   },
 };
